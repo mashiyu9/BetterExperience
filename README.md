@@ -1,0 +1,82 @@
+
+## README
+
+# BetterExperience
+
+## 概要
+
+一緒にゲームを遊ぶプレイヤーを募集することのできるアプリ
+
+## コンセプト
+
+簡単に条件つけて募集を行うことができる
+
+現状、似たようなアプリはたくさんあるのですが、問題点として
+ゲーム毎にアプリを変える必要がある。
+そもそも機能としてあまり充実していない。
+あまり流行っていないゲームだとそもそもアプリ自体がない。
+
+そのため、充実した機能のアプリを作り、一緒に遊ぶプレイヤーを探す人を一箇所に集めることができれば、よりよいゲーム体験をできる人が増えるのではないか
+
+##　バージョン
+
+ruby 2.6.5 rails 2.5.3
+
+## 機能一覧
+
+* ログイン機能
+* ユーザー登録機能
+  メールアドレス 名前 パスワードは必須
+* プレイヤー募集一覧機能
+* 募集の絞り込み
+* プレイヤーを募集をすることができる
+* 募集するとき条件を設定することができる
+* 募集編集機能
+* 募集取り消し機能
+* ブラックリスト機能
+* 自動ツイート機能
+* 自動メール機能
+* ユーザー間でメッセージのやり取りをすることができる
+
+## カタログ設計
+[https://docs.google.com/spreadsheets/d/15-XLGuEqWu93lxXG8fRfVomv2uYzUNcQ1HW1Ns8UN_Q/edit?usp=sharing]
+
+## テーブル定義
+[https://docs.google.com/spreadsheets/d/13TLXv_iWKUGne9PrUGLO7CS2Z2c4dpRPBIEnNuR-z-w/edit?usp=sharing]
+
+## 画面遷移図
+[https://docs.google.com/spreadsheets/d/151nHie5nyWMsEmWepeAaUbhFljGNzt4QRJ6dMkFUph8/edit?usp=sharing]
+
+## ER図
+[https://docs.google.com/spreadsheets/d/10ii_1vyLIu6T-s4MmfUgnrVbz7GqqUiJmSMCJXasFTE/edit?usp=sharing]
+
+## ラフ画
+[https://docs.google.com/spreadsheets/d/1ztr8OBD9sL7bU5GkpFUlQOFSeF0JWYLK9cPFfK5sehM/edit?usp=sharing]
+
+## 使用GEM
+### ログイン関係
+* device
+* omniauth
+* omniauth-facebook
+* omniauth-twitter
+
+### 画像編集機能
+* carrierwave
+* mini_magic
+
+### cssフレームワーク
+* bootstrap
+
+###　デバッグ
+* better_errors
+
+### テスト
+* rspec-rails
+* spring-commands-rspec
+* factory_bot_rails
+* capybara
+* selenium-webdriver
+* launchy
+
+###　辞書機能
+* i18n
