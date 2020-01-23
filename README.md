@@ -71,6 +71,9 @@ https://docs.google.com/spreadsheets/d/1ztr8OBD9sL7bU5GkpFUlQOFSeF0JWYLK9cPFfK5s
 ### デバッグ
 * better_errors
 
+### 検索
+* ransack
+
 ### テスト
 * rspec-rails
 * spring-commands-rspec
