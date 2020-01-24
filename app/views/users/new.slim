@@ -1,2 +1,37 @@
-h1 test
-= t('users.index.title')
+h1 = t('users.new.title')
+
+- if @user.errors.any?
+  #error_explanation
+    h2 = "#{pluralize(micropost.errors.count, "error")} t('users.new.title')"
+    ul
+      - @user.errors.full_messages.each do |message|
+        li = message
+
+
+= form_with(model: @user, local: true) do |f|
+  = f.label t('users.new.name')
+  = f.text_field :name
+
+  = f.label t('users.new.email')
+  = f.email_field :email_address
+
+  = f.label t('users.new.profile')
+  = f.text_field :profile
+
+  = f.label t('users.new.twitter_address')
+  = f.text_field :twitter_address
+
+  = f.label t('users.new.skype_id')
+  = f.text_field :skype_id
+
+  = f.label t('users.new.discord_id')
+  = f.text_field :discord_id
+
+  = f.fields_for :game_machines do |machine|
+    = machine.label t('users.new.game_device')
+    = machine.text_field :game_device
+
+    = machine.label t('users.new.device_account')
+    = machine.text_field :device_id
+
+  = f.submit t('users.new.submit')
