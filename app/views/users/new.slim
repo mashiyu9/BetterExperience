@@ -27,11 +27,14 @@ h1 = t('users.new.title')
   = f.label t('users.new.discord_id')
   = f.text_field :discord_id
 
-  = f.fields_for :game_machines do |machine|
-    = machine.label t('users.new.game_device')
-    = machine.text_field :game_device
+  = f.fields_for :game_machines do |gm|
+    p test
 
-    = machine.label t('users.new.device_account')
-    = machine.text_field :device_id
+    = gm.label t('users.new.game_device')
+    = gm.text_field :game_device, :disabled => :disabled, :class => :device_field
+    = gm.hidden_field :game_device
+
+    = gm.label t('users.new.device_account')
+    = gm.text_field :device_id
 
   = f.submit t('users.new.submit')

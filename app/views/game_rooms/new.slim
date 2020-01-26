@@ -1,0 +1,58 @@
+h1 = t('game_rooms.new.title')
+
+- if @game_room.errors.any?
+  #error_explanatsion
+    h2 = "#{pluralize(micropost.errors.count, "error")} t('users.new.title')"
+    ul
+      - @game_roosm.errors.full_messages.each do |message|
+        li = message
+
+
+= form_with(model: @game_room, local: true) do |f|
+  = f.label t('game_rooms.new.room_name')
+  = f.label t('users.new.name')
+  = f.text_field :room_name
+
+  = f.label t('game_rooms.new.game_title')
+  = f.text_field :game_title
+
+  = f.label t('game_rooms.new.comment')
+  = f.email_field :comment
+
+  = f.label t('game_rooms.new.vc')
+  = f.text_field :vc_possible
+
+  = f.label t('game_rooms.new.skype')
+  = f.text_field :available_skype
+
+  = f.label t('game_rooms.new.discord')
+  = f.text_field :available_discord
+
+  = f.label t('game_rooms.new.ingame')
+  = f.text_field :available_ingame_vc
+
+  = f.label t('game_rooms.new.twitter')
+  = f.text_field :abailable_twitter
+
+  = f.label t('game_rooms.new.start_time')
+  = f.text_field :start_time
+
+  = f.label t('game_rooms.new.play_time')
+  = f.text_field :play_time
+
+  = f.label t('game_rooms.new.start_time')
+  = f.text_field :start_time
+
+  = f.label t('game_rooms.new.play_device')
+  = f.text_field :play_device
+
+  = f.label t('game_rooms.new.open_info')
+  = f.text_field :open_info
+
+  = f.label t('game_rooms.new.close_info')
+  = f.text_field :close_info
+
+  = f.label t('game_rooms.new.close_message')
+  = f.text_field :close_message
+
+  = f.submit t('game_rooms.new.submit')

@@ -1,9 +1,9 @@
 class GameMachine < ApplicationRecord
   belongs_to :user
 
-  enum device:{
-    playstationID: 0,
-    nintendoID: 1,
-    stermID: 2,
+  enum game_device:{
+    playstation: 0,
+    nintendo: 1,
+    steam: 2,
   }
 end

@@ -1,0 +1,22 @@
+ja:
+  users:
+    new:
+      name: 名前
+  game_rooms:
+    new:
+      room_name: 募集目的
+      title: 一緒にプレイする人を募集します
+      game_title: ゲームタイトル
+      comment: 募集要項
+      vc: ボイスチャットは利用可能か
+      skype: スカイプのアカウントの公開を要求するか
+      discord: ディスコードのアカウントの公開を要求するか
+      ingame: ゲーム内ボイスチャットを利用するか
+      twitter: ツイッターアカウントの公開を要求するか
+      start_time: 始める時間
+      play_time: 遊ぶ予定時間
+      play_device: 遊ぶ機種
+      open_info: 誰でもみることができる情報
+      close_info: 参加することが確定した人が確認できる情報
+      close_message: 参加することが確定した人に伝えたいこと。参加することを承認された人に対してしてほしい動きを書いておくとスムーズにマッチングできるかもしれません。
+      submit: 送信

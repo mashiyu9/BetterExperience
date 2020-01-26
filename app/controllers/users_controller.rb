@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   def new
     @user = User.new
-    3.times do
-      @user.game_machines.build
-    end
+    @user.game_machines.build(game_device: "playstation")
+    @user.game_machines.build(game_device: "nintendo")
+    @user.game_machines.build(game_device: "steam")
   end
 
   def create
@@ -18,7 +18,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-
 
   private
 
