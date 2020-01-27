@@ -10,7 +10,7 @@ ja:
       skype_id: 'スカイプのアカウント'
       game_device: '利用できるゲーム機種'
       device_account: 'ゲームの機種ごとのアカウント'
-      playstation: 'テストですよ'
+      playstation: 'プレイステーションのID'
       nintendo: 'ニンテンドーのID'
       sterm: 'stermのID'
     show:

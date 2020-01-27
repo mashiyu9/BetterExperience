@@ -11,8 +11,7 @@ class CreateGameRooms < ActiveRecord::Migration[5.2]
       t.datetime :start_time, null: false, default: -> { 'NOW()' }
       t.integer :play_time, null: false
       t.integer :play_device, null: false
-      t.integer :open_info, null: false
-      t.integer :close_info, null: false
+      t.boolean :open_twitter, null: false, default: false
       t.string :close_message
       t.string :room_name, null: false, default: "誰でも歓迎"
 

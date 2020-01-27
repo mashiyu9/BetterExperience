@@ -77,8 +77,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_062131) do
     t.datetime "start_time", default: -> { "now()" }, null: false
     t.integer "play_time", null: false
     t.integer "play_device", null: false
-    t.integer "open_info", null: false
-    t.integer "close_info", null: false
+    t.boolean "open_twitter", default: false, null: false
     t.string "close_message"
     t.string "room_name", default: "誰でも歓迎", null: false
     t.datetime "created_at", null: false

@@ -31,7 +31,7 @@ h1 = t('users.new.title')
     p test
 
     = gm.label t('users.new.game_device')
-    = gm.text_field :game_device, :disabled => :disabled, :class => :device_field
+    = gm.text_field :game_device, disabled: :disabled, class: :device_field
     = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
