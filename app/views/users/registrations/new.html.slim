@@ -1,0 +1,65 @@
+h2 Sign up
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = render "devise/shared/error_messages", resource: resource
+
+  .field
+    = f.label t('users.new.name')
+    = f.text_field :name
+
+  .field
+    = f.label t('users.new.profile')
+    = f.text_field :profile
+
+  .field
+    = f.label t('users.new.email')
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+
+  .field
+    = f.label :password
+    = f.password_field :password, autocomplete: "new-password"
+
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+
+  .field
+    = f.label t('users.new.twitter_address')
+    = f.text_field :twitter_address
+
+  .field
+    = f.label t('users.new.skype_id')
+    = f.text_field :skype_id
+
+  .field
+    = f.label t('users.new.discord_id')
+    = f.text_field :discord_id
+
+  = f.fields_for :game_machines do |gm|
+    = gm.label t('users.new.game_device')
+    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+
+    = gm.hidden_field :game_device
+    = gm.label t('users.new.device_account')
+    = gm.text_field :device_id
+
+  / = f.fields_for :game_machine, resource.game_machines.build(game_device: "nintendo") do |gm|
+  /   = gm.label t('users.new.game_device')
+  /   = gm.text_field :game_device, disabled: :disabled, class: :device_field
+
+  /   = gm.hidden_field :game_device
+  /   = gm.label t('users.new.device_account')
+  /   = gm.text_field :device_id
+
+  / = f.fields_for :game_machine , resource.game_machines.build(game_device: "steam") do |gm|
+  /   = gm.label t('users.new.game_device')
+  /   = gm.text_field :game_device, disabled: :disabled, class: :device_field
+
+  /   = gm.hidden_field :game_device
+  /   = gm.label t('users.new.device_account')
+  /   = gm.text_field :device_id
+
+  .actions
+    = f.submit t('users.new.submit')
+
+= render "users/shared/links"
