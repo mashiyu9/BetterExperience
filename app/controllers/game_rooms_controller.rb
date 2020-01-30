@@ -1,11 +1,19 @@
 class GameRoomsController < ApplicationController
+
+  def index
+    @game_rooms = GameRoom.all
+    binding.irb
+  end
+
   def new
     @game_room = GameRoom.new
   end
 
   def create
-    binding.irb
     @game_room = GameRoom.new(game_room_params)
+    @game_room.participants.build(id: @game_room.id, participant_id: current_user.id, state: 0)
+    binding.irb
+
 
     if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_skype])
       @game_room.update_attributes(available_skype: true)
@@ -45,7 +53,7 @@ class GameRoomsController < ApplicationController
 
 
     if @game_room.save
-      redirect_to new_game_room_path
+      redirect_to game_rooms_path
     else
       render "new"
     end
