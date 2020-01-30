@@ -48,7 +48,6 @@ h2 Sign up
   = f.fields_for :game_machines, resource.game_machines.build(game_device: "nintendo") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
-    = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
@@ -57,7 +56,6 @@ h2 Sign up
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
 
-    = gm.hidden_field :game_device
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
 
@@ -65,7 +63,6 @@ h2 Sign up
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
 
-    = gm.hidden_field :game_device
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
 
@@ -74,4 +71,3 @@ h2 Sign up
 
 = render "users/shared/links"
 
-= link_to "ログアウト", destroy_user_session_path

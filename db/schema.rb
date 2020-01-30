@@ -109,11 +109,13 @@ ActiveRecord::Schema.define(version: 2020_01_23_062131) do
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
-    t.string "name", null: false
+    t.string "name"
     t.string "profile"
     t.string "twitter_address"
     t.string "skype_id"
     t.string "discord_id"
+    t.string "uid"
+    t.string "provider"
     t.datetime "remember_created_at"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
