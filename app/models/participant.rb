@@ -3,7 +3,7 @@ class Participant < ApplicationRecord
   belongs_to :participant, class_name: "User"
   has_many :game_room_messages, dependent: :destroy
 
-  enum game_device:{
+  enum state:{
     "募集主": 0,
     "参加希望者": 1,
     "参加確定者": 2,

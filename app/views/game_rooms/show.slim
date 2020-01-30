@@ -2,9 +2,25 @@
 
 h1 = t('game_rooms.show.title')
 
-- if current_user.id == @owner.participant_id
-  - @participants.each do |participant|
-    p = participant.state
+/ - if current_user.id == @owner.participant_id
+- @participants.each do |user|
+  p = user.participant.name
+
+  - if current_user.id == @owner.participant_id
+    p = user.state
+    / = link_to t('game_rooms.show.承認承認する'), participant_path(user, method: :patch)
+    / = link_to “削除”, member_path(params[:id]), method: :delete
+    = link_to t('game_rooms.show.submit'), participant_path(user), method: :delete
+    h2 "オーナー限定"
+
+  - else
+    p = user.state
+
+  - if @game_room.available_twitter == true
+    h2 "aaaaaaa"
+    = user.participant.twitter_address
+    h2 "ツイッターアカウントが表示されます"
+
 
 
 .show_game_room
