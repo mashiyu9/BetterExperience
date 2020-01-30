@@ -2,7 +2,7 @@
 
 class AddDeviseToUsers < ActiveRecord::Migration[5.2]
   def self.up
-    change_table :users do |t|
+    create_table :users do |t|
       ## Database authenticatable
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
@@ -10,6 +10,11 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
       ## Recoverable
       t.string   :reset_password_token
       t.datetime :reset_password_sent_at
+      t.string :name, :null => false
+      t.string :profile
+      t.string :twitter_address
+      t.string :skype_id
+      t.string :discord_id
 
       ## Rememberable
       t.datetime :remember_created_at
@@ -48,4 +53,5 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
     # model already existed. Please edit below which fields you would like to remove in this migration.
     raise ActiveRecord::IrreversibleMigration
   end
+
 end

@@ -35,7 +35,25 @@ h2 Sign up
     = f.label t('users.new.discord_id')
     = f.text_field :discord_id
 
-  = f.fields_for :game_machines do |gm|
+  / - @game_devices.each do |game_device|
+  /   - f.fields_for :game_machines, game_device do |gm|
+  /     = gm.label t('users.new.game_device')
+  /     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+
+  /     = gm.hidden_field :game_device
+  /     = gm.label t('users.new.device_account')
+  /     = gm.text_field :device_id
+
+
+  = f.fields_for :game_machines, resource.game_machines.build(game_device: "nintendo") do |gm|
+    = gm.label t('users.new.game_device')
+    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
+
+    = gm.label t('users.new.device_account')
+    = gm.text_field :device_id
+
+  = f.fields_for :game_machines , resource.game_machines.build(game_device: "playstation") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
 
@@ -43,23 +61,17 @@ h2 Sign up
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
 
-  / = f.fields_for :game_machine, resource.game_machines.build(game_device: "nintendo") do |gm|
-  /   = gm.label t('users.new.game_device')
-  /   = gm.text_field :game_device, disabled: :disabled, class: :device_field
+  = f.fields_for :game_machines , resource.game_machines.build(game_device: "steam") do |gm|
+    = gm.label t('users.new.game_device')
+    = gm.text_field :game_device, disabled: :disabled, class: :device_field
 
-  /   = gm.hidden_field :game_device
-  /   = gm.label t('users.new.device_account')
-  /   = gm.text_field :device_id
-
-  / = f.fields_for :game_machine , resource.game_machines.build(game_device: "steam") do |gm|
-  /   = gm.label t('users.new.game_device')
-  /   = gm.text_field :game_device, disabled: :disabled, class: :device_field
-
-  /   = gm.hidden_field :game_device
-  /   = gm.label t('users.new.device_account')
-  /   = gm.text_field :device_id
+    = gm.hidden_field :game_device
+    = gm.label t('users.new.device_account')
+    = gm.text_field :device_id
 
   .actions
     = f.submit t('users.new.submit')
 
 = render "users/shared/links"
+
+= link_to "ログアウト", destroy_user_session_path

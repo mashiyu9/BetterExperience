@@ -8,4 +8,22 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    header
+      nav
+        /! user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド
+        - if user_signed_in?
+          /! current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド
+          /!
+            | *_path はUserモデルを作成したときに、
+            | deviseにより自動で作成されてますので、rake routesで確認できます
+          = link_to 'プロフィール変更', edit_user_registration_path
+          = link_to "ログアウト", destroy_user_session_path
+        - else
+          = link_to "サインイン", new_user_registration_path
+          = link_to "ログイン", new_user_session_path
+    p.notice= notice
+    p.alert= alert
+
+    = link_to "ログアウト", destroy_user_session_path
+
     = yield

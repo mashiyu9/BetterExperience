@@ -6,12 +6,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    @user = User.new
     super
-    # @user.game_machines.build(game_device: "playstation")
-    # @user.game_machines.build(game_device: "nintendo")
-    # @user.game_machines.build(game_device: "steam")
+    @user = User.new
+
+    # @game_devices =
+    #   ["playstation", "nintendo", "steam"].reduce([]) do |a, b|
+    #     a << @user.game_machines.build(game_device: b)
+    #   end
   end
+
+  # def create
+  #   super
+  # end
 
   # POST /resource
   # def create
@@ -44,17 +50,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def configure_sign_up_params
-    device_parameter_sanitizer.permit(:sign_up) do |params|
-      params.permit(:name, game_machines_attributes: [:game_device, :device_id])
-    end
-  end
-
-  def user_params
-    device_parameter_sanitizer.permit(:user) do |params|
-      params.permit(:name, game_machines_attributes: [:game_device, :device_id, :name])
-    end
-  end
+  # def configure_sign_up_params
+  #   device_parameter_sanitizer.permit(:sign_up) do |params|
+  #     params.permit(:name, game_machines_attributes: [:game_device, :device_id])
+  #   end
+  # end
+  #
+  # def user_params
+  #   device_parameter_sanitizer.permit(:user) do |params|
+  #     params.permit(:name, game_machines_attributes: [:game_device, :device_id, :name])
+  #   end
+  # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
