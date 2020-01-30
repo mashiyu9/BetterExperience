@@ -24,4 +24,33 @@ ja:
       3hour: 3時間
       4hour: 4時間
       5hour: 未定,とりあえず長く
+    index:
+      game_title: "ゲームタイトル"
+      room_title: "一言メッセージ"
+      play_time: "予定遊ぶ時間"
+      hour: "時間"
+      comment: "募集要項"
+      available_vc: "ボイスチャットを利用します"
+      available_skype: "スカイプを利用します"
+      available_discord: "ディスコードを利用します"
+      available_ingame: "ゲーム内ボイスチャットを利用します"
+      open_twitter: "ツイッターアカウントの公開を要求します"
+      twitter_all: "自分のツイッターアカウントを公開します(参加者は公開しなくても入れます)"
+      start_time: "予定開始時間"
+      game_device: "遊ぶ機種"
+    show:
+      title: "募集詳細ページ"
+      game_title: "ゲームタイトル"
+      room_title: "一言メッセージ"
+      play_time: "予定遊ぶ時間"
+      hour: "時間"
+      comment: "募集要項"
+      available_vc: "ボイスチャットを利用します"
+      available_skype: "スカイプを利用します"
+      available_discord: "ディスコードを利用します"
+      available_ingame: "ゲーム内ボイスチャットを利用します"
+      open_twitter: "ツイッターアカウントの公開を要求します"
+      twitter_all: "自分のツイッターアカウントを公開します(参加者は公開しなくても入れます)"
+      start_time: "予定開始時間"
+      game_device: "遊ぶ機種"
 

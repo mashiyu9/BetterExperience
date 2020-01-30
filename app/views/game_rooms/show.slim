@@ -1,0 +1,57 @@
+
+
+h1 = t('game_rooms.show.title')
+
+- if current_user.id == @owner.participant_id
+  - @participants.each do |participant|
+    p = participant.state
+
+
+.show_game_room
+  .room_game_title.room_items
+    p = t('game_rooms.show.game_title')
+    p = @game_room.game_title
+
+  .room_title.room_items
+    p = t('game_rooms.show.room_title')
+    p = @game_room.room_name
+
+  .room_comment.room_items
+    p = t('game_rooms.show.comment')
+    p = @game_room.comment
+
+  .room_vc.room_items
+    p = t('game_rooms.show.available_vc')
+    p = @game_room.vc_possible
+
+  .room_skype.room_items
+    p = t('game_rooms.show.available_skype')
+    p = @game_room.available_skype
+
+  .room_discord.room_items
+    p = t('game_rooms.show.available_discord')
+    p = @game_room.available_discord
+
+  .room_ingame_vc.room_items
+    p = t('game_rooms.show.available_ingame')
+    p = @game_room.available_ingame_vc
+
+  .room_twitter.room_items
+    p = t('game_rooms.show.open_twitter')
+    p = @game_room.available_twitter
+
+  .room_start_time.room_items
+    p = t('game_rooms.show.start_time')
+    p = @game_room.start_time
+
+  .room_play_time.room_items
+    p = t('game_rooms.show.play_time')
+    p = "#{@game_room.play_time} #{t('game_rooms.show.hour')}"
+
+  .room_device.room_items
+    p = t('game_rooms.show.game_device')
+    p = @game_room.play_device
+
+  .room_twitter.room_items
+    p = t('game_rooms.show.twitter_all')
+    p = @game_room.open_twitter
