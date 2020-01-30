@@ -60,6 +60,7 @@ group :development do
 
   gem 'slim'
   gem 'html2slim'
+  gem 'letter_opener_web'
 end
 
 group :test do
