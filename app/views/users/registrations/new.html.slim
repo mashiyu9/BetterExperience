@@ -16,11 +16,11 @@ h2 Sign up
     = f.email_field :email, autofocus: true, autocomplete: "email"
 
   .field
-    = f.label :password
+    = f.label t('users.new.password')
     = f.password_field :password, autocomplete: "new-password"
 
   .field
-    = f.label :password_confirmation
+    = f.label t('users.new.password_confirmation')
     = f.password_field :password_confirmation, autocomplete: "new-password"
 
   .field
@@ -45,9 +45,10 @@ h2 Sign up
   /     = gm.text_field :device_id
 
 
-  = f.fields_for :game_machines, resource.game_machines.build(game_device: "nintendo") do |gm|
+  = f.fields_for :game_machines, resource.game_machines.build(game_device: "Nintendo") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
@@ -55,13 +56,15 @@ h2 Sign up
   = f.fields_for :game_machines , resource.game_machines.build(game_device: "playstation") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
 
-  = f.fields_for :game_machines , resource.game_machines.build(game_device: "steam") do |gm|
+  = f.fields_for :game_machines , resource.game_machines.build(game_device: "PC_steam") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id

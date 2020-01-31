@@ -4,26 +4,26 @@ ja:
       name: 名前
   game_rooms:
     new:
-      room_name: 募集目的
-      title: 一緒にプレイする人を募集します
-      game_title: ゲームタイトル
-      comment: 募集要項
-      vc: ボイスチャットは利用します。
-      skype: スカイプのアカウントをボイスチャットに利用します。
-      discord: ディスコードのアカウントを利用します。
-      ingame: ゲーム内ボイスチャットを利用します。
-      twitter: 参加者にツイッターアカウントの公開を要求します。
-      start_time: 遊び始める時間
-      play_time: 遊ぶ予定時間
-      play_device: 遊ぶ機種
-      open_twitter: ツイッターアカウントを募集時に公開します。（相手に要求することはしません）
-      close_message: 参加することが確定した人に伝えたいこと。
-      submit: 送信
-      1hour: 1時間
-      2hour: 2時間
-      3hour: 3時間
-      4hour: 4時間
-      5hour: 未定,とりあえず長く
+      room_name: "募集目的"
+      title: "一緒にプレイする人を募集します"
+      game_title: "ゲームタイトル"
+      comment: "募集要項"
+      vc: "ボイスチャットは利用します。"
+      skype: "スカイプのアカウントをボイスチャットに利用します。"
+      discord: "ディスコードのアカウントを利用します。"
+      ingame: "ゲーム内ボイスチャットを利用します。"
+      twitter: "参加者にツイッターアカウントの公開を要求します。"
+      start_time: "遊び始める時間"
+      play_time: "遊ぶ予定時間"
+      play_device: "遊ぶ機種"
+      open_twitter: "ツイッターアカウントを募集時に公開します。（相手に要求することはしません）"
+      close_message: "参加することが確定した人に伝えたいこと。"
+      submit: "送信"
+      1hour: "1時間"
+      2hour: "2時間"
+      3hour: "3時間"
+      4hour: "4時間"
+      5hour: "未定,とりあえず長く"
     index:
       game_title: "ゲームタイトル"
       room_title: "一言メッセージ"
@@ -35,9 +35,10 @@ ja:
       available_discord: "ディスコードを利用します"
       available_ingame: "ゲーム内ボイスチャットを利用します"
       open_twitter: "ツイッターアカウントの公開を要求します"
-      twitter_all: "自分のツイッターアカウントを公開します(参加者は公開しなくても入れます)"
+      twitter_all: "募集主のツイッターアカウントを公開します参加者は公開しなくても入れます)"
       start_time: "予定開始時間"
       game_device: "遊ぶ機種"
+      hope_to: "参加希望！"
     show:
       title: "募集詳細ページ"
       game_title: "ゲームタイトル"

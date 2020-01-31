@@ -1,4 +1,6 @@
 class GameRoomsController < ApplicationController
+  before_action :authenticate_user!
+
 
   def index
     @game_rooms = GameRoom.all
@@ -67,6 +69,12 @@ class GameRoomsController < ApplicationController
 
   def game_room_params
     params.require(:game_room).permit(:game_title, :comment, :vc_possible, :available_skype, :available_discord, :available_twitter, :available_ingame_vc, :start_time, :play_time, :play_device, :open_twitter, :close_info, :close_message, :room_name)
+  end
+
+  def sign_in?
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
   end
 
 end

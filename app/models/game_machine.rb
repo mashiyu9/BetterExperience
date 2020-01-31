@@ -3,7 +3,7 @@ class GameMachine < ApplicationRecord
 
   enum game_device:{
     playstation: 0,
-    nintendo: 1,
-    steam: 2,
+    Nintendo: 1,
+    PC_steam: 2,
   }
 end

@@ -23,6 +23,22 @@ class ApplicationController < ActionController::Base
                   ]
                 ]
               )
+    devise_parameter_sanitizer
+    .permit(:account_update,
+            keys:
+              [
+                :id,
+                :name,
+                :profile,
+                :twitter_address,
+                :skype_id,
+                :discord_id,
+                game_machines_attributes: [
+                  :game_device,
+                  :device_id
+                ]
+              ]
+            )
   end
 
 end

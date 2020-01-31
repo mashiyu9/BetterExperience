@@ -15,25 +15,25 @@ h1 一覧
       p = t('game_rooms.index.comment')
       p = gr.comment
 
-    .room_vc.room_items
-      p = t('game_rooms.index.available_vc')
-      p = gr.vc_possible
+    - if gr.vc_possible == true
+      .room_vc.room_items
+        p = t('game_rooms.index.available_vc')
 
-    .room_skype.room_items
-      p = t('game_rooms.index.available_skype')
-      p = gr.available_skype
+    - if gr.available_skype == true
+      .room_skype.room_items
+        p = t('game_rooms.index.available_skype')
 
-    .room_discord.room_items
-      p = t('game_rooms.index.available_discord')
-      p = gr.available_discord
+    - if gr.available_discord == true
+      .room_discord.room_items
+        p = t('game_rooms.index.available_discord')
 
-    .room_ingame_vc.room_items
-      p = t('game_rooms.index.available_ingame')
-      p = gr.available_ingame_vc
+    - if gr.available_ingame_vc == true
+      .room_ingame_vc.room_items
+        p = t('game_rooms.index.available_ingame')
 
-    .room_twitter.room_items
-      p = t('game_rooms.index.open_twitter')
-      p = gr.available_twitter
+    - if gr.available_twitter == true
+      .room_twitter.room_items
+        p = t('game_rooms.index.open_twitter')
 
     .room_start_time.room_items
       p = t('game_rooms.index.start_time')
@@ -47,9 +47,13 @@ h1 一覧
       p = t('game_rooms.index.game_device')
       p = gr.play_device
 
-    .room_twitter.room_items
-      p = t('game_rooms.index.twitter_all')
-      p = gr.open_twitter
+    - if gr.open_twitter == true
+      .room_twitter.room_items
+        p = t('game_rooms.index.twitter_all')
+        p = gr.participants.where(state: 0).first.participant.twitter_address
+
+    - if current_user.id != gr.participants.where(state: 0).first.participant_id
+      = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gr.id), method: :post
 
   h2 ここまででひとつ
 
