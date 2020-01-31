@@ -1,0 +1,8 @@
+- if gameroom.play_device == "PlayStation" && current_user.game_machines.where(game_device: 0).first.device_id.present?
+  = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post
+- elsif gameroom.play_device == "Nintendo" && current_user.game_machines.where(game_device: 1).first.device_id.present?
+  = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post
+- elsif gameroom.play_device == "Steam" && current_user.game_machines.where(game_device: 2).first.device_id.present?
+  = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post
+- else
+  p = t('game_rooms.index.validate_device')

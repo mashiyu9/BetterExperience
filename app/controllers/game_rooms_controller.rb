@@ -62,7 +62,6 @@ class GameRoomsController < ApplicationController
     @game_room = GameRoom.find(params[:id])
     @participants = @game_room.participants
     @owner = @participants.where(state: 0).first
-    binding.irb
   end
 
   private

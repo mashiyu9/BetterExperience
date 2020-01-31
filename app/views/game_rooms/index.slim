@@ -52,10 +52,36 @@ h1 一覧
         p = t('game_rooms.index.twitter_all')
         p = gr.participants.where(state: 0).first.participant.twitter_address
 
-    - if current_user.id != gr.participants.where(state: 0).first.participant_id
-      = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gr.id), method: :post
+    - if gr.available_twitter == true
+      - if current_user.twitter_address.present?
+        - if gr.available_skype == true
+          - if current_user.skype_id.present?
+            = render 'index_device_check', gameroom: gr
+          - else
+            p = t("game_rooms.index.validate_skype")
 
-  h2 ここまででひとつ
+        - elsif gr.available_discord == true
+          - if current_user.discord_id.present?
+            = render 'index_device_check', gameroom: gr
+          - else
+            p = t("game_rooms.index.validate_discord")
 
+        - else
+          = render 'index_device_check', gameroom: gr
 
+    - elsif gr.available_twitter == false
+      - if gr.available_skype == true
+        - if current_user.skype_id.present?
+          = render 'index_device_check', gameroom: gr
+        - else
+          p = t("game_rooms.index.validate_skype")
 
+      - elsif gr.available_discord == true
+        - if current_user.discord_id.present?
+          = render 'index_device_check', gameroom: gr
+        - else
+          p = t("game_rooms.index.validate_discord")
+
+      - else
+        = render 'index_device_check', gameroom: gr
+  h1 ここまでで一つの募集

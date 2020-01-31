@@ -1,6 +1,5 @@
 class ParticipantsController < ApplicationController
   def create
-    binding.irb
     @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:participant_id])
     if @participant.save
       redirect_to game_rooms_path

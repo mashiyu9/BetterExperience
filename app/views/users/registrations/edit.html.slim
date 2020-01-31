@@ -1,6 +1,6 @@
 h2 = "#{resource.email} #{t('users.edit.top')}"
 
-= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :patch }) do |f|
   = devise_error_messages!
 
   .field
@@ -27,9 +27,10 @@ h2 = "#{resource.email} #{t('users.edit.top')}"
     = f.label t('users.new.discord_id')
     = f.text_field :discord_id
 
-  = f.fields_for :game_machines, resource.game_machines.where(game_device: "Nintendo") do |gm|
+  = f.fields_for :game_machines, resource.game_machines.where(user_id: current_user.id, game_device: "Nintendo") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
@@ -37,6 +38,7 @@ h2 = "#{resource.email} #{t('users.edit.top')}"
   = f.fields_for :game_machines , resource.game_machines.where(game_device: "playstation") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id
@@ -44,6 +46,7 @@ h2 = "#{resource.email} #{t('users.edit.top')}"
   = f.fields_for :game_machines , resource.game_machines.where(game_device: "PC_steam") do |gm|
     = gm.label t('users.new.game_device')
     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
 
     = gm.label t('users.new.device_account')
     = gm.text_field :device_id

@@ -15,5 +15,9 @@ class GameRoom < ApplicationRecord
     Steam: 2,
   }
 
+  def mytestmethod
+    puts "テストメソッドです"
+  end
+
 
 end
