@@ -2,24 +2,34 @@
 
 h1 = t('game_rooms.show.title')
 
-/ - if current_user.id == @owner.participant_id
-- @participants.each do |user|
-  p = user.participant.name
+.game_rooms_user_index
+  h2 = t('game_rooms.show.user_index')
+  - @participants.each do |user|
+    .game_room_participants
+      p = user.participant.name
 
-  - if current_user.id == @owner.participant_id
-    p = user.state
-    / = link_to t('game_rooms.show.承認承認する'), participant_path(user, method: :patch)
-    / = link_to “削除”, member_path(params[:id]), method: :delete
-    = link_to t('game_rooms.show.submit'), participant_path(user), method: :delete
-    h2 "オーナー限定"
+      - if current_user.id == @owner.participant_id && user.id != current_user.id && user.state == "参加希望者"
+        p = user.state
+        = link_to t('game_rooms.show.submit'), participant_path(user, room_id: @game_room.id), method: :patch
 
-  - else
-    p = user.state
+      - else
+        p = user.state
 
-  - if @game_room.available_twitter == true
-    h2 "aaaaaaa"
-    = user.participant.twitter_address
-    h2 "ツイッターアカウントが表示されます"
+      - if current_user.id == @owner.participant_id && @game_room.available_twitter == true
+        p = t('game_rooms.show.twitter_address')
+        p = user.participant.twitter_address
+
+      - if @game_room.available_discord == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
+        p = user.participant.discord_id
+
+      - if @game_room.available_skype == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
+
+      - if current_user.id == @owner.participant_id && user.state != t('game_rooms.show.room_owner')
+        p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
+
+
+
+      h2 ここまでが一人
 
 
 

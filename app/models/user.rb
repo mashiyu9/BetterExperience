@@ -1,6 +1,9 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+
+  before_create :ensure_has_name
+  before_update :ensure_has_name
+
+  # devise
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable #:confirmable
 
@@ -13,8 +16,7 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :game_machines
 
-
-  # device facebook認証 自動ログイン
+  # devise facebook認証 自動ログイン
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
 
@@ -29,6 +31,12 @@ class User < ApplicationRecord
     user.skip_confirmation!
     user.save
     user
+  end
+
+  private
+
+  def ensure_has_name
+    self.name = '名無しさん' if name.blank?
   end
 
 end

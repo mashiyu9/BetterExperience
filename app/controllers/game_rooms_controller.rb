@@ -60,6 +60,9 @@ class GameRoomsController < ApplicationController
 
   def show
     @game_room = GameRoom.find(params[:id])
+    if @game_room.participants.where(participant_id: current_user.id).blank?
+      redirect_to game_rooms_path
+    end
     @participants = @game_room.participants
     @owner = @participants.where(state: 0).first
   end

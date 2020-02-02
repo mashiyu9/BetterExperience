@@ -3,6 +3,8 @@ h1 一覧
 
 - @game_rooms.each do |gr|
   .game_room
+    - if gr.participants.where(participant_id: current_user.id).present?
+      = link_to "詳細ページへ", game_room_path(gr.id)
     .room_game_title.room_items
       p = t('game_rooms.index.game_title')
       p = gr.game_title
@@ -10,6 +12,10 @@ h1 一覧
     .room_title.room_items
       p = t('game_rooms.index.room_title')
       p = gr.room_name
+
+    .room_title.room_items
+      p = t('game_rooms.index.owner_name')
+      p = gr.participants.where(state: 0).first.participant.name
 
     .room_comment.room_items
       p = t('game_rooms.index.comment')
@@ -52,8 +58,27 @@ h1 一覧
         p = t('game_rooms.index.twitter_all')
         p = gr.participants.where(state: 0).first.participant.twitter_address
 
-    - if gr.available_twitter == true
-      - if current_user.twitter_address.present?
+    - if gr.participants.where(state: 0).first.participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
+      - if gr.available_twitter == true
+        - if current_user.twitter_address.present?
+          - if gr.available_skype == true
+            - if current_user.skype_id.present?
+              = render 'index_device_check', gameroom: gr
+            - else
+              p = t("game_rooms.index.validate_skype")
+          - else
+            = render 'index_device_check', gameroom: gr
+
+        - elsif gr.available_discord == true
+          - if current_user.discord_id.present?
+            = render 'index_device_check', gameroom: gr
+          - else
+            p = t("game_rooms.index.validate_discord")
+
+        - else
+          = render 'index_device_check', gameroom: gr
+
+      - elsif gr.available_twitter == false
         - if gr.available_skype == true
           - if current_user.skype_id.present?
             = render 'index_device_check', gameroom: gr
@@ -68,20 +93,4 @@ h1 一覧
 
         - else
           = render 'index_device_check', gameroom: gr
-
-    - elsif gr.available_twitter == false
-      - if gr.available_skype == true
-        - if current_user.skype_id.present?
-          = render 'index_device_check', gameroom: gr
-        - else
-          p = t("game_rooms.index.validate_skype")
-
-      - elsif gr.available_discord == true
-        - if current_user.discord_id.present?
-          = render 'index_device_check', gameroom: gr
-        - else
-          p = t("game_rooms.index.validate_discord")
-
-      - else
-        = render 'index_device_check', gameroom: gr
   h1 ここまでで一つの募集

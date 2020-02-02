@@ -12,9 +12,12 @@ class ParticipantsController < ApplicationController
   def update
     @participant = Participant.find(params[:id])
     if @participant.update(state: 2)
+      redirect_to game_room_path(params[:room_id])
     end
   end
 
   def destroy
+    Participant.find_by(participant_id: params[:user_id]).destroy
+    redirect_to game_room_path(params[:room_id])
   end
 end
