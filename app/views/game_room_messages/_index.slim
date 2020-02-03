@@ -1,0 +1,16 @@
+- if @participants.find_by(participant_id: current_user.id)
+  - @room_message.each do |m|
+    p 名前
+    p = m.write_user.name
+    p コメント
+    p = m.body
+    p = m.created_at
+  h1 メッセージ一覧
+
+  - form_with(model: GameRoomMessage.new, url: game_room_messages_path, remote: true) do |f|
+    .field
+      = f.text_area :body, class: "form-control"
+      = f.text_field :user_id, value: current_user.id, type: "hidden"
+
+      = f.hidden_field :room_id, value: @game_room.id
+      = f.submit "メッセージを送る"

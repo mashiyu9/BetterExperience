@@ -1,6 +1,9 @@
 class GameRoom < ApplicationRecord
-  # belongs_to :game_chat_room
+
   has_many :participants, dependent: :destroy
+  has_many :game_room_messages, dependent: :destroy
+
+  # accepts_nested_attributes_for :game_chat_room, allow_destroy: true
 
   validates :game_title, presence: true
   validates :start_time, presence: true
@@ -8,16 +11,10 @@ class GameRoom < ApplicationRecord
   validates :play_device, presence: true
   validates :room_name, presence: true
 
-
   enum play_device:{
     PlayStation: 0,
     Nintendo: 1,
     Steam: 2,
   }
-
-  def mytestmethod
-    puts "テストメソッドです"
-  end
-
 
 end

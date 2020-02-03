@@ -13,6 +13,7 @@ class GameRoomsController < ApplicationController
   def create
     @game_room = GameRoom.new(game_room_params)
     @game_room.participants.build(id: @game_room.id, participant_id: current_user.id, state: 0)
+    # @game_chat_room = GameChatRoom.new(game_room_id: @game_room.id)
 
     if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_skype])
       @game_room.update_attributes(available_skype: true)
@@ -50,6 +51,7 @@ class GameRoomsController < ApplicationController
       @game_room.update_attributes(open_twitter: false)
     end
 
+
     if @game_room.save
       redirect_to game_rooms_path
     else
@@ -64,7 +66,8 @@ class GameRoomsController < ApplicationController
       redirect_to game_rooms_path
     end
     @participants = @game_room.participants
-    @owner = @participants.where(state: 0).first
+    @owner = @participants.find_by(state: 0)
+    @room_message = @game_room.game_room_messages
   end
 
   private

@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :passive_block, foreign_key: 'block_user_id', class_name: 'blacklist', dependent: :destroy
   has_many :game_machines, dependent: :destroy
   has_many :participants, dependent: :destroy
+  has_many :game_room_messages, dependent: :destroy, class_name: 'game_room_message', :foreign_key => 'wirte_user_id'
   has_many :message, dependent: :destroy
   has_many :chat_groups, dependent: :destroy
 

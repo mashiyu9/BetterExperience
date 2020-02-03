@@ -57,12 +57,12 @@ ActiveRecord::Schema.define(version: 2020_01_23_062131) do
   end
 
   create_table "game_room_messages", force: :cascade do |t|
-    t.bigint "game_chat_room_id"
+    t.bigint "game_room_id"
     t.bigint "write_user_id"
     t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["game_chat_room_id"], name: "index_game_room_messages_on_game_chat_room_id"
+    t.index ["game_room_id"], name: "index_game_room_messages_on_game_room_id"
     t.index ["write_user_id"], name: "index_game_room_messages_on_write_user_id"
   end
 
@@ -129,7 +129,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_062131) do
   add_foreign_key "chat_groups", "users"
   add_foreign_key "game_chat_rooms", "game_rooms"
   add_foreign_key "game_machines", "users"
-  add_foreign_key "game_room_messages", "game_chat_rooms"
+  add_foreign_key "game_room_messages", "game_rooms"
   add_foreign_key "game_room_messages", "users", column: "write_user_id"
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"

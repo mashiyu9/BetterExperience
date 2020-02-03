@@ -27,11 +27,17 @@ h1 = t('game_rooms.show.title')
       - if current_user.id == @owner.participant_id && user.state != t('game_rooms.show.room_owner')
         p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
 
-
-
       h2 ここまでが一人
 
+- if @participants.find_by(participant_id: current_user.id)
+  p = @game_room.close_message
+  p "参加者限定のメッセージです"
 
+- if @participants.find_by(participant_id: current_user.id)
+  #message_box
+    #comments_area
+      = render partial: 'game_room_messages/index'
+    = render partial: 'game_room_messages/form'
 
 .show_game_room
   .room_game_title.room_items
@@ -81,3 +87,5 @@ h1 = t('game_rooms.show.title')
   .room_twitter.room_items
     p = t('game_rooms.show.twitter_all')
     p = @game_room.open_twitter
+
+
