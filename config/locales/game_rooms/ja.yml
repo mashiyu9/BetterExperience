@@ -53,6 +53,7 @@ ja:
       play_time: "予定遊ぶ時間"
       hour: "時間"
       kick: "追い出す"
+      delete_message: "メッセージの削除"
       comment: "募集要項"
       available_vc: "ボイスチャットを利用します"
       available_skype: "スカイプを利用します"
@@ -64,5 +65,10 @@ ja:
       start_time: "予定開始時間"
       game_device: "遊ぶ機種"
       user_index: "参加者一覧"
+      edit_link: "部屋の条件を編集する"
       submit: "参加を承認"
+    edit:
+      title: "部屋の編集"
+      submit: "編集する"
+      notice: "注意:条件を変更しても、既に参加が確定している人に関して、変更後の条件を満たしていなくても、そのままです"
 

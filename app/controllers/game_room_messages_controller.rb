@@ -19,4 +19,16 @@ class GameRoomMessagesController < ApplicationController
 
   end
 
+  def destroy
+    # GameRoomMessage.find(params[:id]).destroy
+    respond_to do |format|
+      if GameRoomMessage.find(params[:id]).destroy
+        format.html { redirect_to game_room_path(params[:room_id])}
+        format.js { render :index }
+      else
+        format.html { redirect_to game_room_path(params[:game_room_message][:room_id]), notice: 'コメントに失敗しました'}
+      end
+    end
+  end
+
 end

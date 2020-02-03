@@ -70,6 +70,20 @@ class GameRoomsController < ApplicationController
     @room_message = @game_room.game_room_messages
   end
 
+  def edit
+    @game_room = GameRoom.find(params[:id])
+  end
+
+  def update
+    binding.irb
+    @game_room = GameRoom.find(params[:id])
+    if @game_room.update(game_room_params)
+      redirect_to @game_room
+    else
+      render :edit
+    end
+  end
+
   private
 
   def game_room_params
@@ -81,5 +95,7 @@ class GameRoomsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
+
+
 
 end
