@@ -4,6 +4,8 @@ class GameRoomsController < ApplicationController
 
   def index
     @game_rooms = GameRoom.all
+    @q = GameRoom.ransack(params[:q])
+    @game_rooms = @q.result(distinct: true)
   end
 
   def new
