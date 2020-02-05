@@ -27,13 +27,13 @@ class ApplicationController < ActionController::Base
     .permit(:account_update,
             keys:
               [
-                :id,
                 :name,
                 :profile,
                 :twitter_address,
                 :skype_id,
                 :discord_id,
                 game_machines_attributes: [
+                  :id,
                   :game_device,
                   :device_id
                 ]

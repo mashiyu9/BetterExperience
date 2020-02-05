@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  resources :users, only: %i!new create edit update show destroy!
   resources :game_rooms, only: %i!index new create edit update show destroy!
   resources :participants, only: %i! create update destroy!
   resources :game_room_messages, only: %i! show create update destroy!
