@@ -77,6 +77,7 @@ class GameRoomsController < ApplicationController
   end
 
   def update
+    binding.irb
     @game_room = GameRoom.find(params[:id])
     if @game_room.update(game_room_params)
       redirect_to @game_room

@@ -1,2 +1,9 @@
-.message
-  p = index.body
+- if @participants.find_by(participant_id: current_user.id)
+  - @room_message.each do |m|
+    p 名前
+    p = m.write_user.name
+    p コメント
+    p = m.body
+    p = m.created_at
+    p = link_to t('game_rooms.show.delete_message'), game_room_message_path(id: m.id, room_id: @game_room.id), method: :delete
+  h1 レンダリングされたもの
