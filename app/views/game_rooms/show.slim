@@ -1,0 +1,92 @@
+
+
+h1 = t('game_rooms.show.title')
+
+.game_rooms_user_index
+  h2 = t('game_rooms.show.user_index')
+  - @participants.each do |user|
+    .game_room_participants
+      p = user.participant.name
+
+      - if current_user.id == @owner.participant_id && user.id != current_user.id && user.state == "参加希望者"
+        p = user.state
+        = link_to t('game_rooms.show.submit'), participant_path(user, room_id: @game_room.id), method: :patch
+
+      - else
+        p = user.state
+
+      - if current_user.id == @owner.participant_id && @game_room.available_twitter == true
+        p = t('game_rooms.show.twitter_address')
+        p = user.participant.twitter_address
+
+      - if @game_room.available_discord == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
+        p = user.participant.discord_id
+
+      - if @game_room.available_skype == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
+
+      - if current_user.id == @owner.participant_id && user.state != t('game_rooms.show.room_owner')
+        p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
+
+      h2 ここまでが一人
+
+- if @participants.find_by(participant_id: current_user.id)
+  p = @game_room.close_message
+  p "参加者限定のメッセージです"
+
+- if @participants.find_by(participant_id: current_user.id)
+  #message_box
+    #comments_area
+      = render partial: 'game_room_messages/index'
+    = render partial: 'game_room_messages/form'
+
+.show_game_room
+  .room_game_title.room_items
+    p = t('game_rooms.show.game_title')
+    p = @game_room.game_title
+
+  .room_title.room_items
+    p = t('game_rooms.show.room_title')
+    p = @game_room.room_name
+
+  .room_comment.room_items
+    p = t('game_rooms.show.comment')
+    p = @game_room.comment
+
+  .room_vc.room_items
+    p = t('game_rooms.show.available_vc')
+    p = @game_room.vc_possible
+
+  .room_skype.room_items
+    p = t('game_rooms.show.available_skype')
+    p = @game_room.available_skype
+
+  .room_discord.room_items
+    p = t('game_rooms.show.available_discord')
+    p = @game_room.available_discord
+
+  .room_ingame_vc.room_items
+    p = t('game_rooms.show.available_ingame')
+    p = @game_room.available_ingame_vc
+
+  .room_twitter.room_items
+    p = t('game_rooms.show.open_twitter')
+    p = @game_room.available_twitter
+
+  .room_start_time.room_items
+    p = t('game_rooms.show.start_time')
+    p = @game_room.start_time
+
+  .room_play_time.room_items
+    p = t('game_rooms.show.play_time')
+    p = "#{@game_room.play_time} #{t('game_rooms.show.hour')}"
+
+  .room_device.room_items
+    p = t('game_rooms.show.game_device')
+    p = @game_room.play_device
+
+  .room_twitter.room_items
+    p = t('game_rooms.show.twitter_all')
+    p = @game_room.open_twitter
+
+= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
+

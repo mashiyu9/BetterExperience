@@ -1,0 +1,129 @@
+
+h1 一覧
+
+= search_form_for @q do |f|
+  = f.label :name, t('game_rooms.index.sarch_title')
+  = f.search_field :game_title_cont
+
+  p = f.label t('game_rooms.index.sarch_vc_possible')
+  | #{f.radio_button :vc_possible_eq, '', {:checked => true}}指定なし
+  | #{f.radio_button :vc_possible_eq, true} #{t('game_rooms.index.sarch_vc_true')}
+  | #{f.radio_button :vc_possible_eq, false} #{t('game_rooms.index.sarch_vc_false')}
+
+  p = f.label t('game_rooms.index.sarch_skype')
+  | #{f.radio_button :available_skype_eq, '', {:checked => true}}指定なし
+  | #{f.radio_button :available_skype_eq, true} #{t('game_rooms.index.sarch_skype_true')}
+  | #{f.radio_button :available_skype_eq, false} #{t('game_rooms.index.sarch_skype_false')}
+
+  p = f.label t('game_rooms.index.sarch_discord')
+  | #{f.radio_button :available_discord_eq, '', {:checked => true}}指定なし
+  | #{f.radio_button :available_discord_eq, true} #{t('game_rooms.index.sarch_discord_true')}
+  | #{f.radio_button :available_discord_eq, false} #{t('game_rooms.index.sarch_discord_false')}
+
+  p = f.label t('game_rooms.index.sarch_ingame')
+  | #{f.radio_button :available_ingame_vc_eq, '', {:checked => true}}指定なし
+  | #{f.radio_button :available_ingame_vc_eq, true} #{t('game_rooms.index.sarch_ingame_true')}
+  | #{f.radio_button :available_ingame_vc_eq, false} #{t('game_rooms.index.sarch_ingame_false')}
+
+  p = f.label t('game_rooms.index.play_device')
+  | #{f.radio_button :play_device_eq, '', {:checked => true}}指定なし
+  | #{f.radio_button :play_device_eq, 0} #{t('game_rooms.index.sarch_device_playstation')}
+  | #{f.radio_button :play_device_eq, 1} #{t('game_rooms.index.sarch_device_Nintendo')}
+  | #{f.radio_button :play_device_eq, 2} #{t('game_rooms.index.sarch_device_Steam')}
+
+
+  p = f.submit t('game_rooms.index.sarch')
+
+- @game_rooms.each do |gr|
+  .game_room
+    - if gr.participants.where(participant_id: current_user.id).present?
+      = link_to "詳細ページへ", game_room_path(gr.id)
+    .room_game_title.room_items
+      p = t('game_rooms.index.game_title')
+      p = gr.game_title
+
+    .room_title.room_items
+      p = t('game_rooms.index.room_title')
+      p = gr.room_name
+
+    .room_title.room_items
+      p = t('game_rooms.index.owner_name')
+      p = gr.participants.where(state: 0).first.participant.name
+
+    .room_comment.room_items
+      p = t('game_rooms.index.comment')
+      p = gr.comment
+
+    - if gr.vc_possible == true
+      .room_vc.room_items
+        p = t('game_rooms.index.available_vc')
+
+    - if gr.available_skype == true
+      .room_skype.room_items
+        p = t('game_rooms.index.available_skype')
+
+    - if gr.available_discord == true
+      .room_discord.room_items
+        p = t('game_rooms.index.available_discord')
+
+    - if gr.available_ingame_vc == true
+      .room_ingame_vc.room_items
+        p = t('game_rooms.index.available_ingame')
+
+    - if gr.available_twitter == true
+      .room_twitter.room_items
+        p = t('game_rooms.index.open_twitter')
+
+    .room_start_time.room_items
+      p = t('game_rooms.index.start_time')
+      p = gr.start_time
+
+    .room_play_time.room_items
+      p = t('game_rooms.index.play_time')
+      p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
+
+    .room_device.room_items
+      p = t('game_rooms.index.game_device')
+      p = gr.play_device
+
+    - if gr.open_twitter == true
+      .room_twitter.room_items
+        p = t('game_rooms.index.twitter_all')
+        p = gr.participants.where(state: 0).first.participant.twitter_address
+
+    - if gr.participants.where(state: 0).first.participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
+      - if gr.available_twitter == true
+        - if current_user.twitter_address.present?
+          - if gr.available_skype == true
+            - if current_user.skype_id.present?
+              = render 'index_device_check', gameroom: gr
+            - else
+              p = t("game_rooms.index.validate_skype")
+          - else
+            = render 'index_device_check', gameroom: gr
+
+        - elsif gr.available_discord == true
+          - if current_user.discord_id.present?
+            = render 'index_device_check', gameroom: gr
+          - else
+            p = t("game_rooms.index.validate_discord")
+
+        - else
+          = render 'index_device_check', gameroom: gr
+
+      - elsif gr.available_twitter == false
+        - if gr.available_skype == true
+          - if current_user.skype_id.present?
+            = render 'index_device_check', gameroom: gr
+          - else
+            p = t("game_rooms.index.validate_skype")
+
+        - elsif gr.available_discord == true
+          - if current_user.discord_id.present?
+            = render 'index_device_check', gameroom: gr
+          - else
+            p = t("game_rooms.index.validate_discord")
+
+        - else
+          = render 'index_device_check', gameroom: gr
+  h1 ここまでで一つの募集

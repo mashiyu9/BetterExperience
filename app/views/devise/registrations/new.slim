@@ -1,0 +1,76 @@
+h2 Sign up
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = render "devise/shared/error_messages", resource: resource
+
+  .field
+    = f.label t('users.new.name')
+    = f.text_field :name
+
+  .field
+    = f.label t('users.new.profile')
+    = f.text_field :profile
+
+  .field
+    = f.label t('users.new.email')
+    = f.email_field :email, autofocus: true, autocomplete: "email"
+
+  .field
+    = f.label t('users.new.password')
+    = f.password_field :password, autocomplete: "new-password"
+
+  .field
+    = f.label t('users.new.password_confirmation')
+    = f.password_field :password_confirmation, autocomplete: "new-password"
+
+  .field
+    = f.label t('users.new.twitter_address')
+    = f.text_field :twitter_address
+
+  .field
+    = f.label t('users.new.skype_id')
+    = f.text_field :skype_id
+
+  .field
+    = f.label t('users.new.discord_id')
+    = f.text_field :discord_id
+
+  / - @game_devices.each do |game_device|
+  /   - f.fields_for :game_machines, game_device do |gm|
+  /     = gm.label t('users.new.game_device')
+  /     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+
+  /     = gm.hidden_field :game_device
+  /     = gm.label t('users.new.device_account')
+  /     = gm.text_field :device_id
+
+
+  = f.fields_for :game_machines, resource.game_machines.build(game_device: "Nintendo") do |gm|
+    = gm.label t('users.new.game_device')
+    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
+
+    = gm.label t('users.new.device_account')
+    = gm.text_field :device_id
+
+  = f.fields_for :game_machines , resource.game_machines.build(game_device: "playstation") do |gm|
+    = gm.label t('users.new.game_device')
+    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
+
+    = gm.label t('users.new.device_account')
+    = gm.text_field :device_id
+
+  = f.fields_for :game_machines , resource.game_machines.build(game_device: "PC_steam") do |gm|
+    = gm.label t('users.new.game_device')
+    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+    = gm.hidden_field :game_device
+
+    = gm.label t('users.new.device_account')
+    = gm.text_field :device_id
+
+  .actions
+    = f.submit t('users.new.submit')
+
+= render "devise/shared/links"
+
