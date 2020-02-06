@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_chat_room: one
+  write_user: one
+  body: MyString
+
+two:
+  game_chat_room: two
+  write_user: two
+  body: MyString

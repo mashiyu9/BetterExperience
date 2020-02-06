@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title
+      | BetterExperience
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    header
+      nav
+        - if user_signed_in?
+          = link_to t('layout.profile_change'), edit_user_registration_path
+          = link_to t('layout.logout'), destroy_user_session_path
+          = link_to t('layout.play'), new_game_room_path
+          = link_to t('layout.index'), game_rooms_path
+        - else
+          = link_to t('layout.sign_in'), new_user_registration_path
+          = link_to t('layout.log_in'), new_user_session_path
+    p.notice = notice
+    p.alert = alert
+
+
+    = yield

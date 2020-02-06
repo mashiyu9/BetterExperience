@@ -84,3 +84,7 @@ https://docs.google.com/spreadsheets/d/1ztr8OBD9sL7bU5GkpFUlQOFSeF0JWYLK9cPFfK5s
 
 ### 辞書機能
 * i18n
+
+### slim記法
+* slim
+* html2slim

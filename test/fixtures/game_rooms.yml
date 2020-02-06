@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_title: MyString
+  comment: MyString
+  vc_possible: false
+  available_skype: false
+  available_discord: false
+  available_twitter: false
+  available_ingame_vc: false
+  start_time: 2020-01-23 14:28:03
+  play_time: 1
+  play_device: 1
+  open_info: 1
+  close_info: 1
+  close_message: MyString
+  room_name: MyString
+
+two:
+  game_title: MyString
+  comment: MyString
+  vc_possible: false
+  available_skype: false
+  available_discord: false
+  available_twitter: false
+  available_ingame_vc: false
+  start_time: 2020-01-23 14:28:03
+  play_time: 1
+  play_device: 1
+  open_info: 1
+  close_info: 1
+  close_message: MyString
+  room_name: MyString
