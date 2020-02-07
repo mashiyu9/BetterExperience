@@ -36,8 +36,8 @@ h1 = t('game_rooms.show.title')
 - if @participants.find_by(participant_id: current_user.id)
   #message_box
     #comments_area
-      = render partial: 'game_room_messages/index'
-    = render partial: 'game_room_messages/form'
+      = render 'game_room_messages/index'
+    = render 'game_room_messages/form', room_id: @game_room.id
 
 .show_game_room
   .room_game_title.room_items

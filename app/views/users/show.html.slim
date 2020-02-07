@@ -1,0 +1,97 @@
+h1 マイページ
+.user_item
+  p = t('users.show.name')
+  p = @user.name
+.user_item
+  p = t('users.show.email')
+  p = @user.email
+.user_item
+  p = t('users.show.profile')
+  p = @user.profile
+.user_item
+  p = t('users.show.twitter_address')
+  p = @user.twitter_address
+.user_item
+  p = t('users.show.skype_address')
+  p = @user.skype_id
+.user_item
+  p = t('users.show.discord_id')
+  p = @user.discord_id
+- @game_machine.each do |gm|
+  .user_item
+    p = gm.game_device
+    p = gm.device_id
+
+h2 参加中、参加予定の募集
+- @user.game_rooms.each do |gm|
+  .mypage_game_rooms
+
+    p = gm.room_name
+    p = gm.game_title
+    p = gm.close_message
+    p = gm.start_time
+    p = "#{gm.play_time} 時間"
+
+= link_to t('layout.profile_change'), edit_user_registration_path
+
+
+
+
+/   - if @participants.find_by(participant_id: current_user.id)
+/     p = @game_room.close_message
+/     p "参加者限定のメッセージです"
+
+/ - if @participants.find_by(participant_id: current_user.id)
+/   #message_box
+/     #comments_area
+/       = render partial: 'game_room_messages/index'
+/     = render partial: 'game_room_messages/form'
+
+/ .show_game_room
+/   .room_game_title.room_items
+/     p = t('game_rooms.show.game_title')
+/     p = @game_room.game_title
+
+/   .room_title.room_items
+/     p = t('game_rooms.show.room_title')
+/     p = @game_room.room_name
+
+/   .room_comment.room_items
+/     p = t('game_rooms.show.comment')
+/     p = @game_room.comment
+
+/   .room_vc.room_items
+/     p = t('game_rooms.show.available_vc')
+/     p = @game_room.vc_possible
+
+/   .room_skype.room_items
+/     p = t('game_rooms.show.available_skype')
+/     p = @game_room.available_skype
+
+/   .room_discord.room_items
+/     p = t('game_rooms.show.available_discord')
+/     p = @game_room.available_discord
+
+/   .room_ingame_vc.room_items
+/     p = t('game_rooms.show.available_ingame')
+/     p = @game_room.available_ingame_vc
+
+/   .room_twitter.room_items
+/     p = t('game_rooms.show.open_twitter')
+/     p = @game_room.available_twitter
+
+/   .room_start_time.room_items
+/     p = t('game_rooms.show.start_time')
+/     p = @game_room.start_time
+
+/   .room_play_time.room_items
+/     p = t('game_rooms.show.play_time')
+/     p = "#{@game_room.play_time} #{t('game_rooms.show.hour')}"
+
+/   .room_device.room_items
+/     p = t('game_rooms.show.game_device')
+/     p = @game_room.play_device
+
+/   .room_twitter.room_items
+/     p = t('game_rooms.show.twitter_all')
+/     p = @game_room.open_twitter

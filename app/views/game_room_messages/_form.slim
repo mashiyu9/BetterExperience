@@ -3,5 +3,5 @@
       = f.text_area :body, class: "form-control"
       = f.text_field :user_id, value: current_user.id, type: "hidden"
 
-      = f.hidden_field :room_id, value: @game_room.id
+      = f.hidden_field :room_id, value: room_id
       = f.submit "メッセージを送る"
