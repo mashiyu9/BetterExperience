@@ -19,6 +19,12 @@ ja:
     show:
       mypage: 'のマイページです'
       title: '%{user_name}さんのユーザ情報'
+      name: 'ニックネーム'
+      email: 'メールアドレス'
+      profile: '自己紹介'
+      twitter_address: 'ツイッターのアカウント'
+      skype_address: 'スカイプのアカウント'
+      discord_id: 'ディスコードのアカウント'
     edit:
       top: 'さんのユーザ情報を編集'
       name: 'ニックネーム'

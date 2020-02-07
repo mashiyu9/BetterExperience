@@ -11,7 +11,7 @@ html
     header
       nav
         - if user_signed_in?
-          = link_to t('layout.profile_change'), edit_user_registration_path
+          = link_to(t('layout.mypage'), user_path(current_user.id))
           = link_to t('layout.logout'), destroy_user_session_path
           = link_to t('layout.play'), new_game_room_path
           = link_to t('layout.index'), game_rooms_path
