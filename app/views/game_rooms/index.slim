@@ -4,6 +4,21 @@ h1 一覧
 = search_form_for @q do |f|
   = f.label :name, t('game_rooms.index.sarch_title')
   = f.search_field :game_title_cont
+  ul.game_tag
+    li.game_title
+      button type="button" ApexLegends
+    li.game_title
+      button type="button" PlayerUnknown's Battlegrounds (PUBG)
+    li.game_title
+      button tyep="button" Fortnite
+    li.game_title
+      button type="button" FF14
+    li.game_title
+      button type="button" dead by daylight
+    li.game_title
+      button type="button" ポケモン ソード・シールド
+    li.game_title
+      button type="button" モンスターハンター World
 
   p = f.label t('game_rooms.index.sarch_vc_possible')
   | #{f.radio_button :vc_possible_eq, '', {:checked => true}}指定なし
