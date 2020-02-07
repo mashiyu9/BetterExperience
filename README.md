@@ -61,15 +61,15 @@ https://docs.google.com/spreadsheets/d/1ztr8OBD9sL7bU5GkpFUlQOFSeF0JWYLK9cPFfK5s
 * omniauth-facebook
 * omniauth-twitter
 
-### 画像編集機能
-* carrierwave
-* mini_magic
-
-### cssフレームワーク
+### フロント
+* webpacker
 * bootstrap
 
 ### デバッグ
 * better_errors
+
+### 環境変数
+* dotenv-rails
 
 ### 検索
 * ransack
