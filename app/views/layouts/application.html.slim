@@ -8,18 +8,43 @@ html
     = javascript_pack_tag 'application'
     = stylesheet_pack_tag 'application'
   body
-    header
-      nav
-        - if user_signed_in?
-          = link_to(t('layout.mypage'), user_path(current_user.id))
-          = link_to t('layout.logout'), destroy_user_session_path
-          = link_to t('layout.play'), new_game_room_path
-          = link_to t('layout.index'), game_rooms_path
-        - else
-          = link_to t('layout.sign_in'), new_user_registration_path
-          = link_to t('layout.log_in'), new_user_session_path
-    p.notice = notice
-    p.alert = alert
+    header.container-fluid
+      / nav.container
+        / - if user_signed_in?
+        /   = link_to(t('layout.mypage'), user_path(current_user.id))
+        /   = link_to t('layout.logout'), destroy_user_session_path
+        /   = link_to t('layout.play'), new_game_room_path
+        /   = link_to t('layout.index'), game_rooms_path
+        / - else
+        /   = link_to t('layout.sign_in'), new_user_registration_path
+        /   = link_to t('layout.log_in'), new_user_session_path
 
+      nav.navbar.navbar-expand-sm.navbar-dark
+        button.navbar-toggler type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation"
+          span.navbar-toggler-icon
+        = link_to t('layout.title'), game_rooms_path, {class: "navbar-brand"}
+        .collapse.navbar-collapse
+          ul.navbar-nav
+            - if user_signed_in?
+              li.nav-item.active
+                = link_to t('layout.mypage'), user_path(current_user.id), {class: "nav-link"}
+              li.nav-item.active
+                = link_to t('layout.logout'), destroy_user_session_path, {class: "nav-link"}
+              li.nav-item.active
+                = link_to t('layout.play'), new_game_room_path, {class: "nav-link"}
+            - else
+              li.nav-item.active
+                = link_to t('layout.sign_in'), new_user_registration_path, {class: "nav-link"}
+              li.nav-item.active
+                = link_to t('layout.log_in'), new_user_session_path, {class: "nav-link"}
 
-    = yield
+    .wrap.container
+      p.notice = notice
+      p.alert = alert
+
+      = yield
+
+    footer.container-fluid
+      .footer_content.container
+        p ©️2010
+
