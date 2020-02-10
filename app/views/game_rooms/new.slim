@@ -1,26 +1,5 @@
 h1 = t('game_rooms.new.title')
 p#test テストです
-.container
-  .jumbotron.m-3
-    h1.display-4 Hello, Bootstrap!
-    hr.my-4/
-    p This is the template of Ruby on Rails using Bootstrap.
-    button.btn.btn-primary.btn-lg data-target="#exampleModal" data-toggle="modal" type="button"
-      i.far.fa-window-maximize
-      | Click here
-  /! Modal
-  #exampleModal.modal.fade aria-hidden="true" aria-labelledby="exampleModalLabel" role="dialog" tabindex="-1"
-    .modal-dialog role="document"
-      .modal-content
-        .modal-header
-          h5#exampleModalLabel.modal-title Modal title
-          button.close aria-label="Close" data-dismiss="modal" type="button"
-            span aria-hidden="true"  &times;
-        .modal-body
-          | Hello!
-        .modal-footer
-          button.btn.btn-secondary data-dismiss="modal" type="button"  Close
-
 - if @game_room.errors.any?
   #error_explanatsion
     ul
@@ -35,15 +14,15 @@ p#test テストです
 
   .form-group
     = f.label t('game_rooms.new.game_title'), class: "control-label"
-    = f.text_field :game_title, class: "form-control"
+    = f.text_field :game_title, class: "form-control", id: "game_title"
     .game_tag.container
-      button type="button" class="btn button" ApexLegends
-      button type="button" class="btn button" PUBG
-      button tyep="button" class="btn button" Fortnite
-      button type="button" class="btn button" FF14
-      button type="button" class="btn button" dead by daylight
-      button type="button" class="btn button" ポケモン ソード・シールド
-      button type="button" class="btn button" モンスターハンター World
+      button type="button" class="btn button" id="tag_1" ApexLegends
+      button type="button" class="btn button" id="tag_2" PUBG
+      button tyep="button" class="btn button" id="tag_3" Fortnite
+      button type="button" class="btn button" id="tag_4" FF14
+      button type="button" class="btn button" id="tag_5" dead by daylight
+      button type="button" class="btn button" id="tag_6" ポケモン ソード・シールド
+      button type="button" class="btn button" id="tag_7" モンスターハンター World
 
 
   .form-group
@@ -51,24 +30,25 @@ p#test テストです
     = f.text_area :comment, class: "comment", placeholder: "募集の詳細。記入しておくことで他のユーザーが参加しやすくなるかもしれません。"
 
   .form-group
-    = f.label t('game_rooms.new.vc'), class: "control-label"
+    = f.label t('game_rooms.new.vc'), class: "control-label", id: "test"
     .checkbox
-      = f.check_box :vc_possible
+      = f.check_box :vc_possible, id: "vc_possible"
 
-  .form-group
-    = f.label t('game_rooms.new.skype'), class: "control-label"
-    .checkbox
-      = f.check_box :available_skype
+  .layout_none#layout_none
+    .form-group
+      = f.label t('game_rooms.new.skype'), class: "control-label"
+      .checkbox
+        = f.check_box :available_skype
 
-  .form-group
-    = f.label t('game_rooms.new.discord'), class: "control-label"
-    .checkbox
-      = f.check_box :available_discord
+    .form-group
+      = f.label t('game_rooms.new.discord'), class: "control-label"
+      .checkbox
+        = f.check_box :available_discord
 
-  .form-group
-    = f.label t('game_rooms.new.ingame'), class: "control-label"
-    .checkbox
-      = f.check_box :available_ingame_vc
+    .form-group
+      = f.label t('game_rooms.new.ingame'), class: "control-label"
+      .checkbox
+        = f.check_box :available_ingame_vc
 
   .form-group
     = f.label t('game_rooms.new.twitter'), class: "control-label"
