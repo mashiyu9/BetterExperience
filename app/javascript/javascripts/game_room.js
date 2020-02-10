@@ -42,5 +42,24 @@
         // $("#layout_none").addClass("layout_none");
       }
     });
+
+    $("#vc_possible_index").change(function() {
+      var val = $("#vc_possible_index").prop("checked");
+      if (val) {
+        $("#layout_none").fadeIn(500);
+      }
+    });
+    $("#vc_possible_index_none").change(function() {
+      var val = $("#vc_possible_index_none").prop("checked");
+      if (val) {
+        $("#layout_none").fadeOut(100);
+      }
+    });
+    $("#vc_possible_index_no").change(function() {
+      var val = $("#vc_possible_index_no").prop("checked");
+      if (val) {
+        $("#layout_none").fadeOut(100);
+      }
+    });
   });
 })(jQuery);
