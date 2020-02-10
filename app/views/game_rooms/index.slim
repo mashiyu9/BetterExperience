@@ -1,39 +1,40 @@
 
 .index_field
   = search_form_for @q do |f|
-    = f.search_field :game_title_cont, class: "search_box", placeholder: "ゲームタイトルで検索"
+    = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: "ゲームタイトルで検索"
     .game_tag.container
-      button type="button" class="btn button" ApexLegends
-      button type="button" class="btn button" PUBG
-      button tyep="button" class="btn button" Fortnite
-      button type="button" class="btn button" FF14
-      button type="button" class="btn button" dead by daylight
-      button type="button" class="btn button" ポケモン ソード・シールド
-      button type="button" class="btn button" モンスターハンター World
+      button type="button" class="btn button" id="tag_1" ApexLegends
+      button type="button" class="btn button" id="tag_2" PUBG
+      button tyep="button" class="btn button" id="tag_3" Fortnite
+      button type="button" class="btn button" id="tag_4" FF14
+      button type="button" class="btn button" id="tag_5" dead by daylight
+      button type="button" class="btn button" id="tag_6" ポケモン ソード・シールド
+      button type="button" class="btn button" id="tag_7" モンスターハンター World
 
       .index_search_zone
         p = f.label t('game_rooms.index.sarch_vc_possible')
-        | #{f.radio_button :vc_possible_eq, '', {:checked => true}}指定なし
-        | #{f.radio_button :vc_possible_eq, true} #{t('game_rooms.index.sarch_vc_true')}
-        | #{f.radio_button :vc_possible_eq, false} #{t('game_rooms.index.sarch_vc_false')}
+        | #{f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none", checked: true}指定なし
+        | #{f.radio_button :vc_possible_eq, true, id: "vc_possible_index"} #{t('game_rooms.index.sarch_vc_true')}
+        | #{f.radio_button :vc_possible_eq, false, id: "vc_possible_index_no"} #{t('game_rooms.index.sarch_vc_false')}
 
-      .index_search_zone
-        p = f.label t('game_rooms.index.sarch_skype')
-        | #{f.radio_button :available_skype_eq, '', {:checked => true}}指定なし
-        | #{f.radio_button :available_skype_eq, true} #{t('game_rooms.index.sarch_skype_true')}
-        | #{f.radio_button :available_skype_eq, false} #{t('game_rooms.index.sarch_skype_false')}
+      .layout_none#layout_none
+        .index_search_zone
+          p = f.label t('game_rooms.index.sarch_skype')
+          | #{f.radio_button :available_skype_eq, '', {:checked => true}}指定なし
+          | #{f.radio_button :available_skype_eq, true} #{t('game_rooms.index.sarch_skype_true')}
+          | #{f.radio_button :available_skype_eq, false} #{t('game_rooms.index.sarch_skype_false')}
 
-      .index_search_zone
-        p = f.label t('game_rooms.index.sarch_discord')
-        | #{f.radio_button :available_discord_eq, '', {:checked => true}}指定なし
-        | #{f.radio_button :available_discord_eq, true} #{t('game_rooms.index.sarch_discord_true')}
-        | #{f.radio_button :available_discord_eq, false} #{t('game_rooms.index.sarch_discord_false')}
+        .index_search_zone
+          p = f.label t('game_rooms.index.sarch_discord')
+          | #{f.radio_button :available_discord_eq, '', {:checked => true}}指定なし
+          | #{f.radio_button :available_discord_eq, true} #{t('game_rooms.index.sarch_discord_true')}
+          | #{f.radio_button :available_discord_eq, false} #{t('game_rooms.index.sarch_discord_false')}
 
-      .index_search_zone
-        p = f.label t('game_rooms.index.sarch_ingame')
-        | #{f.radio_button :available_ingame_vc_eq, '', {:checked => true}}指定なし
-        | #{f.radio_button :available_ingame_vc_eq, true} #{t('game_rooms.index.sarch_ingame_true')}
-        | #{f.radio_button :available_ingame_vc_eq, false} #{t('game_rooms.index.sarch_ingame_false')}
+        .index_search_zone
+          p = f.label t('game_rooms.index.sarch_ingame')
+          | #{f.radio_button :available_ingame_vc_eq, '', {:checked => true}}指定なし
+          | #{f.radio_button :available_ingame_vc_eq, true} #{t('game_rooms.index.sarch_ingame_true')}
+          | #{f.radio_button :available_ingame_vc_eq, false} #{t('game_rooms.index.sarch_ingame_false')}
 
       .index_search_zone
         p = f.label t('game_rooms.index.play_device')
