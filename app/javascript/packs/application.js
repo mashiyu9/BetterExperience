@@ -8,11 +8,9 @@
 // layout file, like app/views/layouts/application.html.erb
 
 // import "bootstrap";
-import "jquery";
-import "popper.js";
-import "jquery/dist/jquery.js";
-import "popper.js/dist/popper.js";
-import "../src/application.scss";
+// import "jquery/dist/jquery.js";
+// import "popper.js/dist/popper.js";
 import "@fortawesome/fontawesome-free/js/all";
-
-$(".navbar").css("background-color", "red");
+import "bootstrap/dist/js/bootstrap";
+import "../src/application.scss";
+import "../javascripts/game_room.js";
