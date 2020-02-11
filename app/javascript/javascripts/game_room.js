@@ -57,9 +57,19 @@
     });
     $("#vc_possible_index_no").change(function() {
       var val = $("#vc_possible_index_no").prop("checked");
+      console.log("test");
       if (val) {
         $("#layout_none").fadeOut(100);
       }
     });
+
+    $(".inlink")
+      .parents(".game_room")
+      .removeClass("no_border")
+      .addClass("ok_border");
+    $(".index_show_button")
+      .parents(".game_room")
+      .removeClass("no_border")
+      .addClass("ok_border");
   });
 })(jQuery);
