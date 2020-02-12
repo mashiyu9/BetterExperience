@@ -33,13 +33,9 @@
     $("#vc_possible").change(function() {
       var val = $("#vc_possible").prop("checked");
       if (val) {
-        // $("#layout_none").removeClass("layout_none");
-        // $("#layout_none").addClass("layout_block");
         $("#layout_none").fadeIn(500);
       } else {
-        // $("#layout_none").removeClass("layout_block");
         $("#layout_none").fadeOut(100);
-        // $("#layout_none").addClass("layout_none");
       }
     });
 
@@ -64,12 +60,23 @@
     });
 
     $(".inlink")
-      .parents(".game_room")
+      .parents(".testdiv")
       .removeClass("no_border")
       .addClass("ok_border");
     $(".index_show_button")
-      .parents(".game_room")
+      .parents(".testdiv")
       .removeClass("no_border")
       .addClass("ok_border");
+
+    $(".inlink")
+      .parents(".testdiv")
+      .children(".koko")
+      .removeClass("room_game_title_no")
+      .addClass("room_game_title");
+    $(".index_show_button")
+      .parents(".testdiv")
+      .children(".koko")
+      .removeClass("room_game_title_no")
+      .addClass("room_game_title");
   });
 })(jQuery);
