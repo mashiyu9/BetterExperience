@@ -46,116 +46,80 @@
       .index_search_zone
         p = f.submit t('game_rooms.index.sarch')
 
-section#sec
-  ul
-    li
-      span.fa.fa-users
-      h3 Music
-      p test
-    li
-      span.fa.fa-users
-      h3 Music
-      p test
-    li
-      span.fa.fa-users
-      h3 Music
-      p test
-    li
-      span.fa.fa-users
-      h3 Music
-      p test jfieajief
-      p test2
+  section#sec
+    ul.row.padding-0
+      - @game_rooms.each do |gr|
+        li.col-md-4
+          .testdiv.no_border
+            .room_game_title_no.koko.room_items
+              p = gr.game_title
+            .room_device.room_items
+              p.device_button = gr.play_device
 
-  .row
-    - @game_rooms.each do |gr|
-      .game_room.no_border.col-md-4
-        .room_game_title.room_items.col-md-4
-          p = t('game_rooms.index.game_title')
-          p = gr.game_title
-          - if gr.participants.where(state: 0).first.participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
-            - if gr.available_twitter == true
-              - if current_user.twitter_address.present?
+
+            - if gr.participants.where(state: 0).first.participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
+              - if gr.available_twitter == true
+                - if current_user.twitter_address.present?
+                  - if gr.available_skype == true
+                    - if current_user.skype_id.present?
+                      = render 'index_device_check', gameroom: gr
+                    - else
+                      p = t("game_rooms.index.validate_skype")
+                  - else
+                    p = render 'index_device_check', gameroom: gr
+                - elsif gr.available_discord == true
+                  - if current_user.discord_id.present?
+                    p = render 'index_device_check', gameroom: gr
+                  - else
+                    p = t("game_rooms.index.validate_discord")
+                - else
+                  p = render 'index_device_check', gameroom: gr
+              - elsif gr.available_twitter == false
                 - if gr.available_skype == true
                   - if current_user.skype_id.present?
-                    = render 'index_device_check', gameroom: gr
+                    p = render 'index_device_check', gameroom: gr
                   - else
                     p = t("game_rooms.index.validate_skype")
+                - elsif gr.available_discord == true
+                  - if current_user.discord_id.present?
+                    p = render 'index_device_check', gameroom: gr
+                  - else
+                    p = t("game_rooms.index.validate_discord")
                 - else
-                  = render 'index_device_check', gameroom: gr
-
-              - elsif gr.available_discord == true
-                - if current_user.discord_id.present?
-                  = render 'index_device_check', gameroom: gr
-                - else
-                  p = t("game_rooms.index.validate_discord")
-
-              - else
-                = render 'index_device_check', gameroom: gr
-
-            - elsif gr.available_twitter == false
-              - if gr.available_skype == true
-                - if current_user.skype_id.present?
-                  = render 'index_device_check', gameroom: gr
-                - else
-                  p = t("game_rooms.index.validate_skype")
-
-              - elsif gr.available_discord == true
-                - if current_user.discord_id.present?
-                  = render 'index_device_check', gameroom: gr
-                - else
-                  p = t("game_rooms.index.validate_discord")
-
-              - else
-                = render 'index_device_check', gameroom: gr
-          - if gr.participants.where(participant_id: current_user.id).present?
-            = link_to "詳細ページへ", game_room_path(gr.id), class: "btn button index_show_button"
-
-
-          .room_title.room_items
-            p = t('game_rooms.index.room_title')
-            p = gr.room_name
-
-          .room_title.room_items
-            p = t('game_rooms.index.owner_name')
-            p = gr.participants.where(state: 0).first.participant.name
-
-          .room_comment.room_items
-            p = t('game_rooms.index.comment')
-            p = gr.comment
-
-          - if gr.vc_possible == true
-            .room_vc.room_items
-              p = t('game_rooms.index.available_vc')
-
-          - if gr.available_skype == true
-            .room_skype.room_items
-              p = t('game_rooms.index.available_skype')
-
-          - if gr.available_discord == true
-            .room_discord.room_items
-              p = t('game_rooms.index.available_discord')
-
-          - if gr.available_ingame_vc == true
-            .room_ingame_vc.room_items
-              p = t('game_rooms.index.available_ingame')
-
-          - if gr.available_twitter == true
-            .room_twitter.room_items
-              p = t('game_rooms.index.open_twitter')
-
-          .room_start_time.room_items
-            p = t('game_rooms.index.start_time')
-            p = gr.start_time
-
-          .room_play_time.room_items
-            p = t('game_rooms.index.play_time')
-            p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
-
-          .room_device.room_items
-            p = t('game_rooms.index.game_device')
-            p = gr.play_device
-
-          - if gr.open_twitter == true
-            .room_twitter.room_items
-              p = t('game_rooms.index.twitter_all')
-              p = gr.participants.where(state: 0).first.participant.twitter_address
+                  p= render 'index_device_check', gameroom: gr
+            - if gr.participants.where(participant_id: current_user.id).present?
+              p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
+            .room_title.room_items
+              p = gr.room_name
+            .room_start_time.room_items
+              p = t('game_rooms.index.start_time')
+              p = gr.start_time.strftime("%y年%m月%d日 %H:%M:%S")
+            .room_play_time.room_items
+              p = t('game_rooms.index.play_time')
+              p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
+            .room_owner_name.room_items
+              p = t('game_rooms.index.owner_name')
+              p = gr.participants.find_by(state: 0).participant.name
+            - if gr.comment.present?
+              .room_comment.room_items
+                p = t('game_rooms.index.comment')
+                p = gr.comment
+            - if gr.vc_possible == true
+              .room_vc.room_items
+                p = t('game_rooms.index.available_vc')
+            - if gr.available_skype == true
+              .room_skype.room_items
+                p = t('game_rooms.index.available_skype')
+            - if gr.available_discord == true
+              .room_discord.room_items
+                p = t('game_rooms.index.available_discord')
+            - if gr.available_ingame_vc == true
+              .room_ingame_vc.room_items
+                p = t('game_rooms.index.available_ingame')
+            - if gr.available_twitter == true
+              .room_twitter.room_items
+                p = t('game_rooms.index.open_twitter')
+            - if gr.open_twitter == true
+              .room_twitter.room_items
+                p = t('game_rooms.index.twitter_all')
+                p = gr.participants.where(state: 0).first.participant.twitter_addres

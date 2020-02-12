@@ -1,5 +1,9 @@
 ja:
   users:
+    login:
+      email: 'メールアドレス'
+      password: 'パスワード'
+      login: 'ログイン'
     new:
       name: 'テスト'
       title: '会員登録'

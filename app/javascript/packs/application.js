@@ -13,4 +13,6 @@
 import "@fortawesome/fontawesome-free/js/all";
 import "bootstrap/dist/js/bootstrap";
 import "../src/application.scss";
+const images = require.context("../images/", true);
 import "../javascripts/game_room.js";
+import "../javascripts/user.js";
