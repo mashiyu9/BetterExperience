@@ -1,38 +1,44 @@
-h1 マイページ
-.user_item
-  p = t('users.show.name')
-  p = @user.name
-.user_item
-  p = t('users.show.email')
-  p = @user.email
-.user_item
-  p = t('users.show.profile')
-  p = @user.profile
-.user_item
-  p = t('users.show.twitter_address')
-  p = @user.twitter_address
-.user_item
-  p = t('users.show.skype_address')
-  p = @user.skype_id
-.user_item
-  p = t('users.show.discord_id')
-  p = @user.discord_id
-- @game_machine.each do |gm|
-  .user_item
-    p = gm.game_device
-    p = gm.device_id
+.user_show.container
+  .profile.text-align-center
+    h1.mb30 = "#{@user.name}のマイページ"
+    .user_item
+      p.mb0 = t('users.show.email')
+      p = @user.email
+    .user_item
+      p.mb0 = t('users.show.profile')
+      p = @user.profile
+    .user_item
+      p.mb0 = t('users.show.twitter_address')
+      p = @user.twitter_address
+    .user_item
+      p.mb0 = t('users.show.skype_address')
+      p = @user.skype_id
+    .user_item
+      p.mb0 = t('users.show.discord_id')
+      p = @user.discord_id
+    - @game_machine.each do |gm|
+      .user_item
+        p.mb0 = gm.game_device
+        p = gm.device_id
+    = link_to t('layout.profile_change'), edit_user_registration_path, class: "btn btn-primary"
 
-h2 参加中、参加予定の募集
-- @user.game_rooms.each do |gm|
-  .mypage_game_rooms
+  - if @user.game_rooms.count > 0
+    section#sec.row.container-fluid
+      h2.col-md-12 = t('users.show.game_rooms')
+      ul.container-fluid
+        - @user.game_rooms.each do |gm|
+          li.mypage_game_rooms.col-md-4.col-sm-6.col-lg-4
+            h3.game_room_title = gm.game_title
+            p.pt30 = gm.room_name
+            p = gm.game_title
+            p = gm.close_message
+            p = gm.start_time.strftime("%m月%d日 %H:%M")
+            p = "#{gm.play_time} 時間"
+            - if gm.participants.find_by(state: 0).participant.id == current_user.id
+             p 募集主です
+            = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
 
-    p = gm.room_name
-    p = gm.game_title
-    p = gm.close_message
-    p = gm.start_time
-    p = "#{gm.play_time} 時間"
 
-= link_to t('layout.profile_change'), edit_user_registration_path
 
 
 

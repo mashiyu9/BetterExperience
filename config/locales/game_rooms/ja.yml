@@ -1,7 +1,4 @@
 ja:
-  users:
-    new:
-      name: 名前
   game_rooms:
     new:
       room_name: "募集目的"
