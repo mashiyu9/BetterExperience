@@ -84,7 +84,7 @@
       }
 
       h3 {
-        color: darken($font-color, 20%);
+        color: darken($font-color, 10%);
         display: inline-block;
         font-size: 24px;
         font-weight: 100;
@@ -167,6 +167,9 @@
   background-color: #f7eaec;
   border-radius: 0.25rem;
 }
+.game_room_title{
+  width: 100%;
+}
 .game_room{
   margin-bottom: 3em;
   .room_items{
@@ -242,3 +245,32 @@
   display: block;
 }
 
+// show
+.game_room_show{
+  h1{
+    font-size: 2em;
+  }
+  h2{
+    font-size: 1.6em;
+    border-bottom: 4px solid;
+
+  }
+  p{
+    font-size: 1.2em;
+    margin-bottom: 0;
+  }
+  .game_rooms_user_index{
+    h2{
+      font-size: 1.6em;
+      border-bottom: 4px solid;
+    }
+    .game_room_participants{
+    }
+  }
+  .show_game_room{
+    .edit_link{
+      float: right;
+      font-size: 0.9em;
+    }
+  }
+}

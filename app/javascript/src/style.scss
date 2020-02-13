@@ -40,7 +40,7 @@ footer{
   text-align: center;
 }
 $margin-min: 0;
-$margin-max: 50;
+$margin-max: 100;
 
 @for $i from $margin-min through $margin-max {
   .mt#{$i} {
@@ -57,7 +57,7 @@ $margin-max: 50;
   }
 }
 $padding-min: 0;
-$padding-max: 50;
+$padding-max: 100;
 
 @for $i from $padding-min through $padding-max {
     .pt#{$i} {

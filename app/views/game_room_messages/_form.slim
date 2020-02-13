@@ -1,7 +1,7 @@
   = form_with(model: GameRoomMessage.new, url: game_room_messages_path) do |f|
-    .field
+    .field.mt20
       = f.text_area :body, class: "form-control"
       = f.text_field :user_id, value: current_user.id, type: "hidden"
 
       = f.hidden_field :room_id, value: room_id
-      = f.submit "メッセージを送る"
+      = f.submit "メッセージを送る", class:"mt10"

@@ -1,92 +1,118 @@
 
 
-h1 = t('game_rooms.show.title')
+.game_room_show
+  h1.mb60.text-align-center = t('game_rooms.show.title')
 
-.game_rooms_user_index
-  h2 = t('game_rooms.show.user_index')
-  - @participants.each do |user|
-    .game_room_participants
-      p = user.participant.name
+  .game_rooms_user_index
+    h2
+      i.fa.fa-user.mr10
+      = t('game_rooms.show.user_index')
 
-      - if current_user.id == @owner.participant_id && user.id != current_user.id && user.state == "参加希望者"
-        p = user.state
-        = link_to t('game_rooms.show.submit'), participant_path(user, room_id: @game_room.id), method: :patch
+    - @participants.each do |user|
+      .game_room_participants.mt20
+        p = user.participant.name
+        - if current_user.id == @owner.participant_id && user.id != current_user.id && user.state == "参加希望者"
+          p.mt5 = user.state
+          = link_to t('game_rooms.show.submit'), participant_path(user, room_id: @game_room.id), method: :patch
+        - else
+          p.mt5 = user.state
+        - if current_user.id == @owner.participant_id && @game_room.available_twitter == true
+          p.mt5
+            i.fab.fa-twitter-square.mr8.fa-lg
+            = user.participant.twitter_address
+        - elsif @game_room.open_twitter
+          p.mt5
+            i.fab.fa-twitter-square.mr8.fa-lg
+            = user.participant.twitter_address
 
+        - if @game_room.available_discord == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
+          p.mt5
+            i.fab.fa-discord.mr8.fa-lg
+            = user.participant.discord_id
+
+        - if @game_room.available_skype == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
+          p.mt5
+            i.fab.fa-skype.mr8.fa-lg
+            = user.participant.skype_id
+
+        - if @game_room.play_device == "PlayStation"
+          p.mt5
+            i.fab.fa-playstation.mr8.fa-lg
+            = user.participant.game_machines.find_by(game_device: "playstation").device_id
+
+        - elsif @game_room.play_device == "Nintendo"
+          p.mt5
+            i.fas.fa-gamepad.mr8.fa-lg
+            = user.participant.game_machines.find_by(game_device: "Nintendo").device_id
+
+        - else @game_room.play_device == "Steam"
+          p.mt5
+            i.fab.fa-steam-square
+            = user.participant.game_machines.find_by(game_device: "PC_steam").device_id
+
+        - if current_user.id == @owner.participant_id && user.state != t('game_rooms.show.room_owner')
+          p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
+
+
+  - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0)
+    h2.mt40
+      i.fas.fa-sticky-note.mr8
+      = t('game_rooms.show.close_message')
+    p.pl20.pr20.mt20= @game_room.close_message
+
+  - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0)
+    #message_box.mt40
+      #comments_area
+        = render 'game_room_messages/index'
+      = render 'game_room_messages/form', room_id: @game_room.id
+
+  .show_game_room.mt40
+    .room_game_title.room_items
+      h2
+        = @game_room.game_title
+        span.edit_link= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
+
+    .room_title.room_items.mt30
+      p = @game_room.room_name
+
+    .room_comment.room_items.mt15
+      p = t('game_rooms.show.comment')
+      p = @game_room.comment
+
+    .room_vc.room_items.mt15
+      - if @game_room.vc_possible == true
+        p = t('game_rooms.show.available_vc')
       - else
-        p = user.state
+        p = t('game_rooms.show.no_vc')
 
-      - if current_user.id == @owner.participant_id && @game_room.available_twitter == true
-        p = t('game_rooms.show.twitter_address')
-        p = user.participant.twitter_address
+    .room_skype.room_items.mt15
+      - if @game_room.available_skype == true
+        p = t('game_rooms.show.available_skype')
 
-      - if @game_room.available_discord == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
-        p = user.participant.discord_id
+    .room_discord.room_items.mt15
+      - if @game_room.available_discord
+        p = t('game_rooms.show.available_discord')
 
-      - if @game_room.available_skype == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
+    .room_ingame_vc.room_items.mt15
+      - if @game_room.available_ingame_vc
+        p = t('game_rooms.show.available_ingame')
 
-      - if current_user.id == @owner.participant_id && user.state != t('game_rooms.show.room_owner')
-        p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
+    .room_twitter.room_items.mt15
+      - if @game_room.available_twitter
+        p = t('game_rooms.show.open_twitter')
 
-      h2 ここまでが一人
+    .room_start_time.room_items.mt15
+      p = t('game_rooms.show.start_time')
+      p = @game_room.start_time.strftime("%m月%d日 %H:%M")
 
-- if @participants.find_by(participant_id: current_user.id)
-  p = @game_room.close_message
-  p "参加者限定のメッセージです"
+    .room_play_time.room_items.mt15
+      p = t('game_rooms.show.play_time')
+      p = "#{@game_room.play_time} #{t('game_rooms.show.hour')}"
 
-- if @participants.find_by(participant_id: current_user.id)
-  #message_box
-    #comments_area
-      = render 'game_room_messages/index'
-    = render 'game_room_messages/form', room_id: @game_room.id
+    .room_device.room_items.mt15
+      p = t('game_rooms.show.game_device')
+      p = @game_room.play_device
 
-.show_game_room
-  .room_game_title.room_items
-    p = t('game_rooms.show.game_title')
-    p = @game_room.game_title
-
-  .room_title.room_items
-    p = t('game_rooms.show.room_title')
-    p = @game_room.room_name
-
-  .room_comment.room_items
-    p = t('game_rooms.show.comment')
-    p = @game_room.comment
-
-  .room_vc.room_items
-    p = t('game_rooms.show.available_vc')
-    p = @game_room.vc_possible
-
-  .room_skype.room_items
-    p = t('game_rooms.show.available_skype')
-    p = @game_room.available_skype
-
-  .room_discord.room_items
-    p = t('game_rooms.show.available_discord')
-    p = @game_room.available_discord
-
-  .room_ingame_vc.room_items
-    p = t('game_rooms.show.available_ingame')
-    p = @game_room.available_ingame_vc
-
-  .room_twitter.room_items
-    p = t('game_rooms.show.open_twitter')
-    p = @game_room.available_twitter
-
-  .room_start_time.room_items
-    p = t('game_rooms.show.start_time')
-    p = @game_room.start_time
-
-  .room_play_time.room_items
-    p = t('game_rooms.show.play_time')
-    p = "#{@game_room.play_time} #{t('game_rooms.show.hour')}"
-
-  .room_device.room_items
-    p = t('game_rooms.show.game_device')
-    p = @game_room.play_device
-
-  .room_twitter.room_items
-    p = t('game_rooms.show.twitter_all')
-    p = @game_room.open_twitter
-
-= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
-
+    .room_twitter.room_items.mt15
+      - if @game_room.open_twitter
+        p = t('game_rooms.show.twitter_all')
