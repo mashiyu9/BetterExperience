@@ -1,26 +1,30 @@
-.align
-  .grid
-    = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form login" }) do |f|
-      .field.form__field
-        / = f.label :email
-        label.label for="email"
-          svg.fas.fa-user
-        = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: t('users.login.email')
+.top_title
+  h1 BetterExperience
+  p ~より良いゲーム体験をあなたに~
+.session_new
+  .align
+    .grid
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form login" }) do |f|
+        .field.form__field
+          / = f.label :email
+          label.label for="email"
+            svg.fas.fa-user
+          = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: t('users.login.email')
 
-      .field.form__field
-        label.label for="password"
-          svg.fas.fa-key
-        = f.password_field :password, autocomplete: "current-password", placeholder: t('users.login.password')
+        .field.form__field
+          label.label for="password"
+            svg.fas.fa-key
+          = f.password_field :password, autocomplete: "current-password", placeholder: t('users.login.password')
 
-      - if devise_mapping.rememberable?
-        .field.remember_me.text--center
-          = f.check_box :remember_me
-          = f.label :remember_me
+        - if devise_mapping.rememberable?
+          .field.remember_me.text--center
+            = f.check_box :remember_me
+            = f.label :remember_me
 
-      .actions.form__field
-        = f.submit t('users.login.login')
-      / = render "devise/shared/links"
-    .devise_link.form_field
-      p.devise_facebook
-        a href="/users/auth/facebook" Sign in with Facebook
-      a href="/users/password/new" class="remember_me" Forgot your password?
+        .actions.form__field
+          = f.submit t('users.login.login')
+        / = render "devise/shared/links"
+      .devise_link.form_field
+        p.devise_facebook
+          a href="/users/auth/facebook" = t('users.login.facebook_confirment')
+        a href="/users/password/new" class="remember_me" Forgot your password?
