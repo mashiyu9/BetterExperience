@@ -54,7 +54,7 @@
           p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
 
 
-  - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0)
+  - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0) && @game_room.close_message.present?
     h2.mt40
       i.fas.fa-sticky-note.mr8
       = t('game_rooms.show.close_message')

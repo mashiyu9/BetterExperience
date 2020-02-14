@@ -1,4 +1,68 @@
-h2 = "#{resource.email} #{t('users.edit.top')}"
+h2.mb40 = "#{resource.email} #{t('users.edit.top')}"
+
+.test
+  = form_for(resource, url: user_registration_path, html: { method: :patch }) do |f|
+    = devise_error_messages!
+    .group
+      = f.text_field :name, autofocus: true
+      span.highlight
+      span.bar
+      label = t('users.edit.name')
+    .group
+      = f.text_field :profile
+      span.highlight
+      span.bar
+      label = t('users.new.profile')
+    .group
+      = f.text_field :email, required: ""
+      span.highlight
+      span.bar
+      label = t('users.new.email')
+    .group
+      = f.text_field :twitter_address
+      span.highlight
+      span.bar
+      label = t('users.new.twitter_address')
+    .group
+      = f.text_field :skype_id
+      span.highlight
+      span.bar
+      label = t('users.new.skype_id')
+    .group
+      = f.text_field :discord_id
+      span.highlight
+      span.bar
+      label = t('users.new.discord_id')
+    = f.fields_for :game_machines, resource.game_machines.where(user_id: current_user.id, game_device: "Nintendo") do |gm|
+      .group
+        = gm.text_field :game_device, disabled: :disabled, class: :device_field
+        span.highlight
+        span.bar
+        = gm.text_field :device_id, placeholder: "アカウントを入力してください"
+        span.highlight
+        span.bar
+        label = t('users.new.device_account')
+    = f.fields_for :game_machines, resource.game_machines.where(user_id: current_user.id, game_device: "playstation") do |gm|
+      .group
+        = gm.text_field :game_device, disabled: :disabled, class: :device_field
+        span.highlight
+        span.bar
+        = gm.text_field :device_id, placeholder: "アカウントを入力してください"
+        span.highlight
+        span.bar
+        label = t('users.new.device_account')
+    = f.fields_for :game_machines, resource.game_machines.where(user_id: current_user.id, game_device: "PC_steam") do |gm|
+      .group
+        = gm.text_field :game_device, disabled: :disabled, class: :device_field
+        span.highlight
+        span.bar
+        = gm.text_field :device_id, placeholder: "アカウントを入力してください"
+        span.highlight
+        span.bar
+        label = t('users.new.device_account')
+
+    .action
+    = f.submit t('users.edit.submit')
 
 = form_for(resource, url: user_registration_path, html: { method: :patch }) do |f|
   = devise_error_messages!
