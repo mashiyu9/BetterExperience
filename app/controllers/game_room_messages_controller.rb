@@ -21,7 +21,6 @@ class GameRoomMessagesController < ApplicationController
 
   def destroy
     # GameRoomMessage.find(params[:id]).destroy
-    binding.irb
     respond_to do |format|
       if GameRoomMessage.find(params[:id]).destroy
         format.html { redirect_to game_room_path(params[:room_id])}
