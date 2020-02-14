@@ -7,7 +7,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     super
-    @user = User.new
 
     # @game_devices =
     #   ["playstation", "nintendo", "steam"].reduce([]) do |a, b|
