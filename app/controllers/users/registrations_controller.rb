@@ -5,14 +5,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  def new
-    super
+  # def new
+  #   super
 
-    # @game_devices =
-    #   ["playstation", "nintendo", "steam"].reduce([]) do |a, b|
-    #     a << @user.game_machines.build(game_device: b)
-    #   end
-  end
+  #    @game_devices =
+  #      ["playstation", "nintendo", "steam"].reduce([]) do |a, b|
+  #        a << @user.game_machines.build(game_device: b)
+  #      end
+  # end
 
 
   # def create
