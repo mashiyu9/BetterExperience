@@ -1,7 +1,10 @@
 
 
 header{
-  background-color: #51AFAD ;
+  background-color: #4285f4;
+  .navbar{
+    box-shadow: none;
+  }
   nav{
     a{
       padding-top: 20px;
