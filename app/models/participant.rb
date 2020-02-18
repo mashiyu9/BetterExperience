@@ -3,7 +3,6 @@ class Participant < ApplicationRecord
   belongs_to :participant, class_name: "User"
   has_many :game_room_messages
 
-  validates :game_room_id, presence: true
   validates :participant_id, presence: true
   validates :state, presence: true
 
