@@ -17,6 +17,7 @@ class GameRoomsController < ApplicationController
     @game_room.participants.build(id: @game_room.id, participant_id: current_user.id, state: 0)
     # @game_chat_room = GameChatRoom.new(game_room_id: @game_room.id)
 
+
     if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_skype])
       @game_room.update_attributes(available_skype: true)
     else
@@ -64,11 +65,11 @@ class GameRoomsController < ApplicationController
 
   def show
     @game_room = GameRoom.find(params[:id])
-    if @game_room.participants.where(participant_id: current_user.id).blank?
+    if @game_room.participants.search_current_user(current_user.id).blank?
       redirect_to game_rooms_path
     end
     @participants = @game_room.participants
-    @owner = @participants.find_by(state: 0)
+    @owner = @participants.owner
     @room_message = @game_room.game_room_messages
   end
 
