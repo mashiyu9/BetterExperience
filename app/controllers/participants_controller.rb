@@ -1,4 +1,5 @@
 class ParticipantsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:participant_id])
     @current_user = current_user
