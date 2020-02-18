@@ -54,14 +54,14 @@
 
         p = gm.text_field :device_id, class: :input_field, placeholder: t('users.new.nintendo')
     .field
-      = f.fields_for :game_machines , resource.game_machines.build(game_device: "playstation") do |gm|
+      = f.fields_for :game_machines , resource.game_machines.build(game_device: "PlayStation") do |gm|
         p = gm.text_field :game_device, disabled: :disabled, class: :device_field
         p = gm.hidden_field :game_device
 
         p = gm.text_field :device_id, class: :input_field, placeholder: t('users.new.playstation')
 
     .field
-      = f.fields_for :game_machines , resource.game_machines.build(game_device: "PC_steam") do |gm|
+      = f.fields_for :game_machines , resource.game_machines.build(game_device: "Steam") do |gm|
         p = gm.text_field :game_device, disabled: :disabled, class: :device_field
         p = gm.hidden_field :game_device
 
