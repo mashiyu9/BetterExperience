@@ -52,6 +52,9 @@ gem 'webpacker', '~> 3.5'
 
 gem 'slim'
 
+gem 'devise-i18n'
+gem 'devise-i18n-views'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
