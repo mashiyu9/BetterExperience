@@ -7,7 +7,5 @@ FactoryBot.define do
   factory :participant do
     game_room_id {0}
   end
-  binding.irb
-
 
 end
