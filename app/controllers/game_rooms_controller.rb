@@ -14,7 +14,6 @@ class GameRoomsController < ApplicationController
   def create
     @game_room = GameRoom.new(game_room_params)
     @game_room.participants.build(id: @game_room.id, participant_id: current_user.id, state: 0)
-    binding.irb
     # @game_chat_room = GameChatRoom.new(game_room_id: @game_room.id)
 
 
@@ -55,12 +54,9 @@ class GameRoomsController < ApplicationController
     end
 
 
-    binding.irb
     if @game_room.save
-      binding.irb
       redirect_to game_rooms_path
     else
-      binding.irb
       render "new"
     end
 

@@ -70,7 +70,8 @@
     .room_game_title.room_items
       h2
         = @game_room.game_title
-        span.edit_link= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
+        - if current_user.id == @owner.id
+          span.edit_link= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
 
     .room_title.room_items.mt30
       p = @game_room.room_name

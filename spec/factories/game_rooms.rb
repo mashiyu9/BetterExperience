@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :game_room do
-    id {1}
     game_title {"test_title"}
     start_time {"2029/12/10"}
     play_time {1}

@@ -39,8 +39,9 @@ html
                 = link_to t('layout.log_in'), new_user_session_path, {class: "nav-link"}
 
     .wrap.container
-      p.notice = notice
-      p.alert = alert
+      .error
+        p.notice.mt20 = notice
+        p.alert = alert
 
       = yield
 
