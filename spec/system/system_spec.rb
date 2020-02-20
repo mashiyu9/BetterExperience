@@ -1,11 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe '管理機能', type: :system do
-  let(:user){FactoryBot.create(:user) do |s|
-    s.game_machines.build(FactoryBot.attributes_for(:playstation))
-    s.game_machines.build(FactoryBot.attributes_for(:nintendo))
-    s.game_machines.build(FactoryBot.attributes_for(:steam))
-  end}
+RSpec.describe 'systemspec', type: :system do
+  let(:user){FactoryBot.create(:user)}
+  let(:game_room){FactoryBot.create(:game_room)}
+  let(:playstation){FactoryBot.create(:playstation, user: user)}
+  let(:nintendo){FactoryBot.create(:nintendo, user: user)}
+  let(:steam){FactoryBot.create(:steam, user: user)}
+  # let(:participant){FactoryBot.create(:owner)}
   # shop = FactoryBot.build(:shop) do |s|
   #   s.staffs.build(FactoryBot.attributes_for(:staff))
   # end
@@ -14,22 +15,7 @@ RSpec.describe '管理機能', type: :system do
     fill_in 'user[email]', with: user.email
     fill_in 'user[password]', with: user.password
     click_on 'commit'
-    binding.irb
     # @user = create(:user, password: "password")
-    # @user2 = create(:user, password: "password")
-    # @user3 = create(:user, password: "password")
-    # @user4 = create(:user, password: "password")
-    # @admin_user = create(:user, password: "password", admin: true)
-
-    # @task1 = create(:task1, user_id: @user.id)
-    # @task2 = create(:task2, user_id: @user.id)
-    # @task3 = create(:task3, user_id: @user.id)
-
-    # @test_label1 = create(:label1, user_id: @user.id)
-    # @test_label2 = create(:label2, user_id: @user.id)
-    # @test_label3 = create(:label3, user_id: @user.id)
-    # @test_label4 = create(:label4, user_id: @user2.id)
-
   end
 
   describe 'ログイン,ログアウト機能まわり' do
@@ -42,23 +28,13 @@ RSpec.describe '管理機能', type: :system do
       end
     end
 
-    # context 'facebookログインが成功するかどうかj' do
-    #   it 'ゲームルーム一覧画面に飛ぶ' do
-    #     click_on 'ログアウト'
-    #     binding.irb
-    #     click_link 'facebookアカウントでログイン'
-    #     sleep 1
-    #     visit game_rooms_path
-    #     expext(page).to have_content 'Facebook アカウントによる認証に成功しました。'
-    #   end
-    end
-
     context 'ログイン状態でログイン画面に行こうとしたとき' do
       it 'ゲームルーム一覧画面に戻される' do
         visit new_user_session_path
         expect(page).to have_content 'すでにログインしています'
       end
     end
+  end
   describe '募集開始ページ' do
     it 'ユーザーが募集をすることができる' do
       visit new_game_room_path
@@ -69,13 +45,22 @@ RSpec.describe '管理機能', type: :system do
     end
   end
 
-  # describe '募集一覧ページ' do
-  #   before do
-  #     visit new_game_room_path
-  #     fill_in 'game_room[game_title]', with: "game_title"
-  #     fill_in 'game_room[start_time]', with: "2033-02-20T03:33"
-  #     click_on 'commit'
-  #   end
+  describe '募集一覧ページ' do
+    before do
+      visit new_game_room_path
+      fill_in 'game_room[game_title]', with: "game_title"
+      fill_in 'game_room[start_time]', with: "2033-02-20T03:33"
+      click_on 'commit'
+    end
+    it '詳細ページを押したときに募集の詳細に飛ぶことができる' do
+      # FactoryBot.create(:participant, participant_id: user.id, game_room_id: game_room.id)
+      playstation
+      steam
+      nintendo
+      click_on '詳細ページへ'
+      expect(page).to have_content "募集詳細ページ"
+    end
+  end
   #   it '詳細ページを押したときに募集の詳細に飛ぶことができる' do
   #     binding.irb
   #     visit game_rooms_path

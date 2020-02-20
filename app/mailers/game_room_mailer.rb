@@ -2,7 +2,6 @@ class GameRoomMailer < ApplicationMailer
   def request_mail(current_user, owner_user)
     @current_user = current_user
     @owner_user = owner_user
-    binding.irb
     mail to: @owner_user.participant.email, subject: "あなたの募集に参加を希望する人がいます!"
   end
 

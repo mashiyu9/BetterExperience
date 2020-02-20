@@ -41,6 +41,7 @@
             = user.participant.game_machines.find_by(game_device: "PlayStation").device_id
 
         - elsif @game_room.play_device == "Nintendo"
+          - binding.irb
           p.mt5
             i.fas.fa-gamepad.mr8.fa-lg
             = user.participant.game_machines.find_by(game_device: "Nintendo").device_id

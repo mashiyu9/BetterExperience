@@ -5,7 +5,7 @@ class ParticipantsController < ApplicationController
     @current_user = current_user
     @owner_user = GameRoom.find(params[:participant_id]).participants.find_by(state: 0)
     if @participant.save
-      redirect_to game_rooms_path
+      redirect_to game_rooms_path, notice: '参加を希望しました！'
       GameRoomMailer.request_mail(@current_user, @owner_user).deliver
     else
       redirect_to game_rooms_path

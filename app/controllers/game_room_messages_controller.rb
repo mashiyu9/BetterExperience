@@ -6,8 +6,6 @@ class GameRoomMessagesController < ApplicationController
     @participants = @game_room.participants
     @room_message = @game_room.game_room_messages
 
-    # redirect_to game_room_path(params[:game_room_message][:room_id])
-
     respond_to do |format|
       if @message.save
         format.html { redirect_to game_room_path(params[:game_room_message][:room_id])}
@@ -20,13 +18,12 @@ class GameRoomMessagesController < ApplicationController
   end
 
   def destroy
-    # GameRoomMessage.find(params[:id]).destroy
     respond_to do |format|
       if GameRoomMessage.find(params[:id]).destroy
         format.html { redirect_to game_room_path(params[:room_id])}
         format.js { render :index }
       else
-        format.html { redirect_to game_room_path(params[:game_room_message][:room_id]), notice: 'コメントに失敗しました'}
+        format.html { redirect_to game_room_path(params[:game_room_message][:room_id])}
       end
     end
   end
