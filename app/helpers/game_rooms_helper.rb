@@ -6,4 +6,5 @@ module GameRoomsHelper
       game_room_path
     end
   end
+
 end

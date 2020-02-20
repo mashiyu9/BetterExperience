@@ -40,20 +40,35 @@ class Users::RegistrationsController < Devise::RegistrationsController
         set_flash_message_for_update(resource, prev_unconfirmed_email)
         bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
 
-      # my
-        # if GameRoom.find(params[:room_info]).
-        binding.irb
-          @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:room_info])
-          @current_user = current_user
-          @owner_user = GameRoom.find(params[:room_info]).participants.find_by(state: 0)
-          binding.irb
-          if @participant.save
-            binding.irb
-            GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+      ############################ my
+        @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:room_info])
+        @current_user = current_user
+        @owner_user = GameRoom.find(params[:room_info]).participants.find_by(state: 0)
+        if params[:skype] == "true"
+          if params[:user][:skype_id]
+            if @participant.save
+              GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            end
           end
-          binding.irb
+        elsif params[:twitter] == "true"
+          if params[:user][:twitter_address]
+            if @participant.save
+              GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            end
+          end
+        elsif params[:discord] == "true"
+          if params[:user][:discord_id]
+            if @participant.save
+              GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            end
+          end
+        elsif params[:game_device] == "true"
+          # if params[:user][:discord_id]
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          # end
         end
-      ##############################
         respond_with resource, location: after_update_path_for(resource)
       else
         clean_up_passwords resource
