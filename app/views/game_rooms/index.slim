@@ -46,7 +46,7 @@
       .index_search_zone
         p = f.submit t('game_rooms.index.sarch')
 
-  section#sec
+  section#sec.mt40
     ul.row.padding-0
       - @game_rooms.each do |gr|
         li.col-md-4.col-sm-6
@@ -65,7 +65,6 @@
                     - else
                       p = t("game_rooms.index.validate_skype")
                       = render 'index_input_form', gameroom: gr, device: "skype"
-
                   - else
                     p = render 'index_device_check', gameroom: gr
                 - elsif gr.available_discord == true
@@ -76,6 +75,11 @@
                     = render 'index_input_form', gameroom: gr, device: "discord"
                 - else
                   p = render 'index_device_check', gameroom: gr
+
+
+
+
+
               - elsif gr.available_twitter == false
                 - if gr.available_skype == true
                   - if current_user.skype_id.present?
@@ -90,7 +94,7 @@
                     p = t("game_rooms.index.validate_discord")
                     = render 'index_input_form', gameroom: gr, device: "discord"
                 - else
-                  p= render 'index_device_check', gameroom: gr
+                  p = render 'index_device_check', gameroom: gr
             - if gr.participants.where(participant_id: current_user.id).present?
               p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
             .room_title.room_items

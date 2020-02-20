@@ -11,5 +11,5 @@ FactoryBot.define do
     available_ingame_vc {0}
     open_twitter {0}
     room_name {"test_room_name"}
-    end
+  end
 end

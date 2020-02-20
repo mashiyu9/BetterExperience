@@ -57,7 +57,7 @@ ja:
       start_time: "予定開始時間"
       game_device: "遊ぶ機種"
       validate_device: "募集主と遊ぶ環境が異なるようです。必要な情報を登録してください"
-      hope_to: "参加希望！"
+      hope_to: "参加希望"
       hope: "相手の承認待ちです！"
     show:
       title: "募集詳細ページ"
