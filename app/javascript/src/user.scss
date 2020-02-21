@@ -226,6 +226,33 @@
 // .registration_new
 
 .registration_new{
+  .user_new{
+    text-align: center;
+    .devise_facebook{
+      margin: 20px auto;
+      width: 320px;
+      border-radius: 0.25rem;
+      background-color: $main-color;
+      color: #eee;
+      font-weight: 700;
+      :focus,
+      :hover{
+        background-color: $sub-color;
+      }
+
+      a{
+        width: 320px;
+        display: block;
+        padding: 16px;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+    a {
+      color: #666;
+    }
+  }
   h1{
     margin-bottom: 30px;
   }

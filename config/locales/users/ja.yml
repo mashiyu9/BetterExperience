@@ -5,6 +5,7 @@ ja:
       password: 'パスワード'
       login: 'ログイン'
       facebook_confirment: 'facebookアカウントでログイン'
+      forget_pass: 'パスワードを忘れた方'
     new:
       name: 'ニックネーム'
       title: '会員登録'
