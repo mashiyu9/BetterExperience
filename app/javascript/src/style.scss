@@ -29,10 +29,14 @@ h1{
 }
 
 footer{
+  text-align: center;
   background-color: $footer-color;
   color: #fff;
   .footer_content{
-    padding: 20px 0;
+    padding: 30px 0;
+  }
+  p{
+    margin: 0;
   }
   margin-top: 50px;
 }
