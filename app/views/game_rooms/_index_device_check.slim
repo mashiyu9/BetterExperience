@@ -6,4 +6,4 @@
   p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
 - else
   p = t('game_rooms.index.validate_device')
-  = render 'index_input_form', gameroom: gameroom, device: "game_device"
+  / = render 'index_input_form', gameroom: gameroom, device: "game_device"

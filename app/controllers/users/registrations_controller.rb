@@ -44,23 +44,48 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:room_info])
         @current_user = current_user
         @owner_user = GameRoom.find(params[:room_info]).participants.find_by(state: 0)
-        if params[:skype] == "true"
-          if params[:user][:skype_id]
+        if params[:twitter] == "true" && params[:skype] == "true"
+          if params[:user][:skype_id].present? && params[:user][:twitter_address].present?
+            binding.irb
             # if @participant.save
             #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
             # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
+          end
+        elsif params[:twitter] == "true" && params[:discord] == "true"
+          if params[:user][:discord_id].present? && params[:user][:twitter_address].present?
+            binding.irb
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
+          end
+        elsif params[:skype] == "true"
+          if params[:user][:skype_id].present?
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
           end
         elsif params[:twitter] == "true"
-          if params[:user][:twitter_address]
+          if params[:user][:twitter_address].present?
+
             # if @participant.save
             #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
             # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
           end
         elsif params[:discord] == "true"
-          if params[:user][:discord_id]
+          if params[:user][:discord_id].present?
             # if @participant.save
             #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
             # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
           end
         elsif params[:game_device] == "true"
           # if params[:user][:discord_id]

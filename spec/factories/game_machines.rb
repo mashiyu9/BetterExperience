@@ -11,6 +11,7 @@ FactoryBot.define do
 
   factory :steam, class: GameMachine do
     game_device {2}
+
     device_id {"Steam"}
   end
   # factory :game_machine do
