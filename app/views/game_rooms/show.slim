@@ -38,7 +38,7 @@
         - if @game_room.play_device == "PlayStation"
           p.mt5
             i.fab.fa-playstation.mr8.fa-lg
-            = user.participant.game_machines.find_by(game_device: "playstation").device_id
+            = user.participant.game_machines.find_by(game_device: "PlayStation").device_id
 
         - elsif @game_room.play_device == "Nintendo"
           p.mt5
@@ -48,10 +48,11 @@
         - else @game_room.play_device == "Steam"
           p.mt5
             i.fab.fa-steam-square
-            = user.participant.game_machines.find_by(game_device: "PC_steam").device_id
+            = user.participant.game_machines.find_by(game_device: "Steam").device_id
 
         - if current_user.id == @owner.participant_id && user.state != t('game_rooms.show.room_owner')
           p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
+
 
 
   - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0) && @game_room.close_message.present?
@@ -70,7 +71,8 @@
     .room_game_title.room_items
       h2
         = @game_room.game_title
-        span.edit_link= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
+        - if current_user.id == @owner.participant_id
+          span.edit_link= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
 
     .room_title.room_items.mt30
       p = @game_room.room_name

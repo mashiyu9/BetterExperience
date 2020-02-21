@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   # devise
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable #,:confirmable
+         :recoverable, :rememberable, :validatable, :omniauthable#, :confirmable
 
   has_many :active_block, foreign_key: 'user_id', class_name: 'blacklist', dependent: :destroy
   has_many :passive_block, foreign_key: 'block_user_id', class_name: 'blacklist', dependent: :destroy
@@ -18,9 +18,10 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :game_machines
 
+
   # devise facebook認証 自動ログイン
   def self.find_for_oauth(auth)
-    user = User.where(uid: auth.uid, provider: auth.provider).first
+    user = User.find_by(uid: auth.uid, provider: auth.provider)
 
     unless user
       user = User.create(
@@ -29,9 +30,15 @@ class User < ApplicationRecord
         email:    auth.info.email,
         password: Devise.friendly_token[0, 20]
       )
+      game_machine = user.game_machines.build(game_device: "Nintendo", device_id: "")
+      game_machine.save
+      game_machine = user.game_machines.build(game_device: "PlayStation", device_id: "")
+      game_machine.save
+      game_machine = user.game_machines.build(game_device: "Steam", device_id: "")
+      game_machine.save
     end
-    user.skip_confirmation!
-    user.save
+    # user.skip_confirmation!
+    # user.save
     user
   end
 

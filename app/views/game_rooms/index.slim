@@ -40,13 +40,13 @@
         p = f.label t('game_rooms.index.play_device')
         | #{f.radio_button :play_device_eq, '', {:checked => true}}指定なし
         | #{f.radio_button :play_device_eq, 0} #{t('game_rooms.index.sarch_device_playstation')}
-        | #{f.radio_button :play_device_eq, 1} #{t('game_rooms.index.sarch_device_Nintendo')}
-        | #{f.radio_button :play_device_eq, 2} #{t('game_rooms.index.sarch_device_Steam')}
+        | #{f.radio_button :play_device_eq, 1} #{t('game_rooms.index.sarch_device_nintendo')}
+        | #{f.radio_button :play_device_eq, 2} #{t('game_rooms.index.sarch_device_steam')}
 
       .index_search_zone
         p = f.submit t('game_rooms.index.sarch')
 
-  section#sec
+  section#sec.mt40
     ul.row.padding-0
       - @game_rooms.each do |gr|
         li.col-md-4.col-sm-6
@@ -56,7 +56,7 @@
               p.device_button = gr.play_device
 
 
-            - if gr.participants.where(state: 0).first.participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
+            - if gr.participants.find_by(state: 0).participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
               - if gr.available_twitter == true
                 - if current_user.twitter_address.present?
                   - if gr.available_skype == true
@@ -64,29 +64,51 @@
                       = render 'index_device_check', gameroom: gr
                     - else
                       p = t("game_rooms.index.validate_skype")
+                      = render 'index_input_form', gameroom: gr, device: "skype"
+                  - elsif gr.available_discord == true
+                    - if current_user.discord_id.present?
+                      = render 'index_device_check', gameroom: gr
+                    - else
+                      p = t("game_rooms.index.validate_discord")
+                      = render 'index_input_form', gameroom: gr, device: "discord"
                   - else
                     p = render 'index_device_check', gameroom: gr
+
                 - elsif gr.available_discord == true
                   - if current_user.discord_id.present?
-                    p = render 'index_device_check', gameroom: gr
+                    p = t("game_rooms.index.validate_twitter")
+                    = render 'index_input_form', gameroom: gr, device: "twitter"
                   - else
                     p = t("game_rooms.index.validate_discord")
-                - else
-                  p = render 'index_device_check', gameroom: gr
+                    p = t("game_rooms.index.validate_twitter")
+                    = render 'index_input_form_params2', gameroom: gr, device: "twitter", device2: "discord"
+                - elsif gr.available_skype == true
+                  - if current_user.skype_id.present?
+                    p = t("game_rooms.index.validate_twitter")
+                    = render 'index_input_form', gameroom: gr, device: "twitter"
+                  - else
+                    p = t("game_rooms.index.validate_skype")
+                    p = t("game_rooms.index.validate_twitter")
+                    = render 'index_input_form_params2', gameroom: gr, device: "twitter", device2: "skype"
+                p = render 'index_device_check', gameroom: gr
+
               - elsif gr.available_twitter == false
                 - if gr.available_skype == true
                   - if current_user.skype_id.present?
                     p = render 'index_device_check', gameroom: gr
                   - else
                     p = t("game_rooms.index.validate_skype")
+                    = render 'index_input_form', gameroom: gr, device: "skype"
                 - elsif gr.available_discord == true
                   - if current_user.discord_id.present?
                     p = render 'index_device_check', gameroom: gr
                   - else
                     p = t("game_rooms.index.validate_discord")
+                    = render 'index_input_form', gameroom: gr, device: "discord"
                 - else
-                  p= render 'index_device_check', gameroom: gr
-            - if gr.participants.where(participant_id: current_user.id).present?
+                  p = render 'index_device_check', gameroom: gr
+
+            - else gr.participants.where(participant_id: current_user.id).present?
               p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
             .room_title.room_items
               p = gr.room_name
@@ -122,3 +144,4 @@
               .room_twitter.room_items
                 p = t('game_rooms.index.twitter_all')
                 p = gr.participants.find_by(state:0).participant.twitter_address
+    = paginate @game_rooms

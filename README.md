@@ -33,11 +33,11 @@ rails 5.2.4.1
 * プレイヤーを募集をすることができる
 * 募集するとき条件を設定することができる
 * 募集編集機能
+* 自動メール機能
+### これからつけたいもの
+* twitter認証
 * 募集取り消し機能
 * ブラックリスト機能
-* 自動ツイート機能
-* 自動メール機能
-* ユーザー間でメッセージのやり取りをすることができる
 
 ## カタログ設計
 https://docs.google.com/spreadsheets/d/15-XLGuEqWu93lxXG8fRfVomv2uYzUNcQ1HW1Ns8UN_Q/edit?usp=sharing
@@ -57,6 +57,8 @@ https://docs.google.com/spreadsheets/d/1ztr8OBD9sL7bU5GkpFUlQOFSeF0JWYLK9cPFfK5s
 ## 使用GEM
 ### ログイン関係
 * device
+* devise-i18n
+* devise-i18n-views'
 * omniauth
 * omniauth-facebook
 * omniauth-twitter
@@ -64,6 +66,7 @@ https://docs.google.com/spreadsheets/d/1ztr8OBD9sL7bU5GkpFUlQOFSeF0JWYLK9cPFfK5s
 ### フロント
 * webpacker
 * bootstrap
+* kaminari
 
 ### デバッグ
 * better_errors

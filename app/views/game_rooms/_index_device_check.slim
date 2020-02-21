@@ -1,8 +1,9 @@
-- if gameroom.play_device == "PlayStation" && current_user.game_machines.where(game_device: 0).first.device_id.present?
+- if gameroom.play_device == "PlayStation" && current_user.game_machines.find_by(game_device: 0).device_id.present?
   p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post, class: "inlink"
-- elsif gameroom.play_device == "Nintendo" && current_user.game_machines.where(game_device: 1).first.device_id.present?
+- elsif gameroom.play_device == "Nintendo" && current_user.game_machines.find_by(game_device: 1).device_id.present?
   p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post, class: "inlink"
-- elsif gameroom.play_device == "Steam" && current_user.game_machines.where(game_device: 2).first.device_id.present?
-  p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post, class: "inlink"
+- elsif gameroom.play_device == "Steam" && current_user.game_machines.find_by(game_device: 2).device_id.present?
+  p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gameroom.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
 - else
   p = t('game_rooms.index.validate_device')
+  / = render 'index_input_form', gameroom: gameroom, device: "game_device"

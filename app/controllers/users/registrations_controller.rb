@@ -30,9 +30,80 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    if params[:room_info]
+      self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+      prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
+      resource_updated = update_resource(resource, account_update_params)
+      yield resource if block_given?
+      if resource_updated
+        set_flash_message_for_update(resource, prev_unconfirmed_email)
+        bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
+
+      ############################ my
+        @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:room_info])
+        @current_user = current_user
+        @owner_user = GameRoom.find(params[:room_info]).participants.find_by(state: 0)
+        if params[:twitter] == "true" && params[:skype] == "true"
+          if params[:user][:skype_id].present? && params[:user][:twitter_address].present?
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
+          end
+        elsif params[:twitter] == "true" && params[:discord] == "true"
+          if params[:user][:discord_id].present? && params[:user][:twitter_address].present?
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
+          end
+        elsif params[:skype] == "true"
+          if params[:user][:skype_id].present?
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
+          end
+        elsif params[:twitter] == "true"
+          if params[:user][:twitter_address].present?
+
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
+          end
+        elsif params[:discord] == "true"
+          if params[:user][:discord_id].present?
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          else
+            flash[:notice] = t('game_rooms.index.validate_info')
+          end
+        elsif params[:game_device] == "true"
+          # if params[:user][:discord_id]
+            # if @participant.save
+            #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
+            # end
+          # end
+        end
+        ##########################################################################
+        respond_with resource, location: after_update_path_for(resource)
+      else
+        clean_up_passwords resource
+        set_minimum_password_length
+        respond_with resource
+      end
+    else
+      super
+    end
+
+  end
 
   # DELETE /resource
   # def destroy
