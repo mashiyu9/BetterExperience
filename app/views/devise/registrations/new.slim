@@ -68,7 +68,9 @@
         p = gm.text_field :device_id, class: :input_field, placeholder: t('users.new.steam')
 
       .actions
-        p = f.submit t('users.new.submit')
-
-  = render "devise/shared/links"
+        = f.submit t('users.new.submit')
+  .user_new
+    p.devise_facebook
+      a href="/users/auth/facebook" = t('users.login.facebook_confirment')
+    a href="/users/password/new" class="remember_me" = t('users.login.forget_pass')
 

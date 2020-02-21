@@ -8,45 +8,65 @@ h3 = t('game_rooms.edit.notice')
         li = message
 
 
-= form_with(model: @game_room, url: new_or_edit, local: true) do |f|
-  = f.label t('game_rooms.new.room_name')
-  = f.label t('users.new.name')
-  = f.text_field :room_name
+.game_room_edit
+  = form_with(model: @game_room, url: new_or_edit, local: true) do |f|
 
-  = f.label t('game_rooms.new.game_title')
-  = f.text_field :game_title
+    .form-group
+      = f.label t('game_rooms.new.room_name'), class: "control-label"
+      = f.text_field :room_name, class: "form-control"
 
-  = f.label t('game_rooms.new.comment')
-  = f.text_area :comment, class: "comment", placeholder: "募集の詳細。記入しておくことで他のユーザーが参加しやすくなるかもしれません。"
+    .form-group
+      = f.label t('game_rooms.new.game_title', class: "control-label")
+      = f.text_field :game_title, class: "form-control"
 
-  = f.label t('game_rooms.new.vc')
-  = f.check_box :vc_possible
+    .form-group
+      = f.label t('game_rooms.new.comment', class: "control-label")
+      = f.text_area :comment, class: "comment", placeholder: "募集の詳細。記入しておくことで他のユーザーが参加しやすくなるかもしれません。"
 
-  = f.label t('game_rooms.new.skype')
-  = f.check_box :available_skype
+    .form-group
+      = f.label t('game_rooms.new.vc', class: "control-label")
+      .checkbox
+        = f.check_box :vc_possible
 
-  = f.label t('game_rooms.new.discord')
-  = f.check_box :available_discord
+    .form-group
+      = f.label t('game_rooms.new.skype', class: "control-label")
+      .checkbox
+        = f.check_box :available_skype
 
-  = f.label t('game_rooms.new.ingame')
-  = f.check_box :available_ingame_vc
+    .form-group
+      = f.label t('game_rooms.new.discord', class: "control-label")
+      .checkbox
+        = f.check_box :available_discord
 
-  = f.label t('game_rooms.new.twitter')
-  = f.check_box :available_twitter
+    .form-group
+      = f.label t('game_rooms.new.ingame', class: "control-label")
+      .checkbox
+        = f.check_box :available_ingame_vc
 
-  = f.label t('game_rooms.new.start_time')
-  = f.datetime_select :start_time, {}, class: 'form-control'
+    .form-group
+      = f.label t('game_rooms.new.twitter', class: "control-label")
+      .checkbox
+        = f.check_box :available_twitter
 
-  = f.label t('game_rooms.new.play_time')
-  = f.select :play_time, [[t('game_rooms.new.1hour'), 1], [t('game_rooms.new.2hour'), 2], [t('game_rooms.new.3hour'), 3], [t('game_rooms.new.4hour'), 4], [t('game_rooms.new.5hour'), 5]], { selected: 1}, class: 'sample'
+    .form-group
+      = f.label t('game_rooms.new.start_time', class: "control-label")
+      = f.datetime_field :start_time, min: Date.today
 
-  = f.label t('game_rooms.new.play_device')
-  = f.select :play_device, GameRoom.play_devices.keys.to_a, {}
+    .form-group
+      = f.label t('game_rooms.new.play_time', class: "control-label")
+      = f.select :play_time, [[t('game_rooms.new.1hour'), 1], [t('game_rooms.new.2hour'), 2], [t('game_rooms.new.3hour'), 3], [t('game_rooms.new.4hour'), 4], [t('game_rooms.new.5hour'), 5]], { selected: 1}, class: 'sample'
 
-  = f.label t('game_rooms.new.open_twitter')
-  = f.check_box :open_twitter
+    .form-group
+      = f.label t('game_rooms.new.play_device', class: "control-label")
+      = f.select :play_device, GameRoom.play_devices.keys.to_a, {}
 
-  = f.label t('game_rooms.new.close_message')
-  = f.text_area :close_message, placeholder: "参加が確定した人に対してしてほしいこと、ゲームを始めるまでの簡単な流れを書いておくとスムーズにマッチングできるかもしれません。例）予定時間の前までにゲーム内でフレンド申請を送ってください", class: "close_message"
+    .form-group
+      = f.label t('game_rooms.new.open_twitter', class: "control-label")
+      = f.check_box :open_twitter
 
-  = f.submit t('game_rooms.edit.submit')
+    .form-group
+      = f.label t('game_rooms.new.close_message', class: "control-label")
+      = f.text_area :close_message, placeholder: "参加が確定した人に対してしてほしいこと、ゲームを始めるまでの簡単な流れを書いておくとスムーズにマッチングできるかもしれません。例）予定時間の前までにゲーム内でフレンド申請を送ってください", class: "close_message"
+
+    .form-group
+      = f.submit t('game_rooms.edit.submit')

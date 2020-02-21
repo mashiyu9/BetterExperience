@@ -7,8 +7,9 @@ $(document).on("turbolinks:load", function() {
     $("#game_title").val("PUBG");
   });
 
-  $("#tag_3").on("click", function() {
+  $("#tag_3").on("click", function(event) {
     $("#game_title").val("Fortnite");
+    event.preventDefault();
   });
 
   $("#tag_4").on("click", function() {
@@ -25,6 +26,9 @@ $(document).on("turbolinks:load", function() {
 
   $("#tag_7").on("click", function() {
     $("#game_title").val("モンスターハンターworld");
+  });
+  $("#tag_8").on("click", function() {
+    $("#game_title").val("大乱闘スマッシュブラザーズ");
   });
 
   $("vc_possible").prop("checked");

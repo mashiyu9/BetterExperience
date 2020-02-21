@@ -61,7 +61,8 @@
       = t('game_rooms.show.close_message')
     p.pl20.pr20.mt20= @game_room.close_message
 
-  - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0)
+  / - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0)
+  - if @participants.find_by(participant_id: current_user.id).state == "募集主" or @participants.find_by(participant_id: current_user.id).state == "参加確定者"
     #message_box.mt40
       #comments_area
         = render 'game_room_messages/index'

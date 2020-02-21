@@ -243,6 +243,68 @@
 .layout_block{
   display: block;
 }
+//edit
+
+.game_room_edit{
+  .comment{
+    height: calc( 1.5em * 5 );
+    line-height: 1.5;
+    width: 100%;
+    padding: 6px 12px;
+    padding: 0.375rem 0.75rem;
+    font-size: 16px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  }
+  .close_message{
+    height: calc( 1.5em * 10);
+    display: block;
+    width: 100%;
+    padding: 6px 12px;
+    padding: 0.375rem 0.75rem;
+    font-size: 16px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+  }
+  .form-group{
+    .button{
+      background-color: #FEEBE3;
+      color: #495057;
+      margin: 0.3em;
+    }
+  }
+
+  .button{
+    background-color: #FEEBE3;
+    color: #495057
+  }
+  .layout_none{
+    display: none;
+  }
+  .layout_block{
+    display: block;
+  }
+}
 
 // show
 .game_room_show{
