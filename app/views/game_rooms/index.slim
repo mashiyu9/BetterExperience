@@ -3,6 +3,10 @@
   = search_form_for @q do |f|
     = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: "ゲームタイトルで検索"
     .game_tag.container.mt6
+      / - @game_titles.each do |title|
+      /   button type="button" class="btn btn-primary mr6 mb6" id="tag_#{"@n"}"
+      /     = title
+
       button type="button" class="btn btn-primary mr6 mb6" id="tag_1" ApexLegends
       button type="button" class="btn btn-primary mr6 mb6" id="tag_2" PUBG
       button tyep="button" class="btn btn-primary mr6 mb6" id="tag_3" Fortnite
@@ -10,6 +14,7 @@
       button type="button" class="btn btn-primary mr6 mb6" id="tag_5" dead by daylight
       button type="button" class="btn btn-primary mr6 mb6" id="tag_6" ポケモン ソード・シールド
       button type="button" class="btn btn-primary mr6 mb6" id="tag_7" モンスターハンター World
+      button type="button" class="btn btn-primary mr6 mb6" id="tag_8" 大乱闘スマッシュブラザーズ
 
       .index_search_zone
         p = f.label t('game_rooms.index.sarch_vc_possible')

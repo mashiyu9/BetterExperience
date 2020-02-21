@@ -6,6 +6,7 @@ class GameRoomsController < ApplicationController
   def index
     @q = GameRoom.ransack(params[:q])
     @game_rooms = @q.result(distinct: true).page(params[:page]).per(PER)
+    @game_titles = ["Apexlegends","PUBG","Fortnite","FF14","dead by daylight", "ポケモン ソード・シールド", "モンスターハンター World"]
   end
 
   def new
@@ -15,34 +16,33 @@ class GameRoomsController < ApplicationController
   def create
     @game_room = GameRoom.new(game_room_params)
     @game_room.participants.build(participant_id: current_user.id, state: 0)
-    # @game_chat_room = GameChatRoom.new(game_room_id: @game_room.id)
 
 
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_skype])
+    if Activerecord::type::boolean.new.cast(params[:game_room][:available_skype])
       @game_room.update_attributes(available_skype: true)
     else
       @game_room.update_attributes(available_skype: false)
     end
 
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:vc_possible])
+    if Activerecord::type::boolean.new.cast(params[:game_room][:vc_possible])
       @game_room.update_attributes(vc_possible: true)
     else
       @game_room.update_attributes(vc_possible: false)
     end
 
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_discord])
+    if Activerecord::type::boolean.new.cast(params[:game_room][:available_discord])
       @game_room.update_attributes(available_discord: true)
     else
       @game_room.update_attributes(available_discord: false)
     end
 
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_ingame_vc])
+    if Activerecord::type::boolean.new.cast(params[:game_room][:available_ingame_vc])
       @game_room.update_attributes(available_ingame_vc: true)
     else
       @game_room.update_attributes(available_ingame_vc: false)
     end
 
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_twitter])
+    if Activerecord::type::boolean.new.cast(params[:game_room][:available_twitter])
       @game_room.update_attributes(available_twitter: true)
     else
       @game_room.update_attributes(available_twitter: false)
