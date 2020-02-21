@@ -55,6 +55,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         elsif params[:twitter] == "true" && params[:discord] == "true"
           if params[:user][:discord_id].present? && params[:user][:twitter_address].present?
             if @participant.save
+              flash[:notice] = "情報を更新して参加しました"
               GameRoomMailer.request_mail(@current_user, @owner_user).deliver
             end
           else
