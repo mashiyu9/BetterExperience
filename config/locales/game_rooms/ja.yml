@@ -56,7 +56,7 @@ ja:
       validate_twitter: "ツイッターのアカウントを登録してください"
       available_ingame: "ゲーム内ボイスチャットを利用します"
       open_twitter: "ツイッターアカウントの公開を要求します"
-      twitter_all: "募集主のツイッターアカウントを公開します参加者は公開しなくても入れます)"
+      twitter_all: "募集主のツイッターアカウントです"
       start_time: "予定開始時間"
       game_device: "遊ぶ機種"
       validate_device: "募集主と遊ぶ環境が異なるようです。必要な情報を登録してください"

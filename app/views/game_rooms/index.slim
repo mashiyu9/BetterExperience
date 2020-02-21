@@ -145,7 +145,8 @@
             - if gr.available_twitter == true
               .room_twitter.room_items
                 p = t('game_rooms.index.open_twitter')
-            - if gr.open_twitter == true
+                p = gr.participants.find_by(state:0).participant.twitter_address
+            - else gr.open_twitter == true
               .room_twitter.room_items
                 p = t('game_rooms.index.twitter_all')
                 p = gr.participants.find_by(state:0).participant.twitter_address

@@ -1,6 +1,6 @@
 h2.mb40 = "#{resource.email} #{t('users.edit.top')}"
 
-.test
+.edit_user
   = form_for(resource, url: user_registration_path, html: { method: :patch }) do |f|
     = devise_error_messages!
     .group
@@ -64,56 +64,56 @@ h2.mb40 = "#{resource.email} #{t('users.edit.top')}"
     .action
     = f.submit t('users.edit.submit')
 
-= form_for(resource, url: user_registration_path, html: { method: :patch }) do |f|
-  = devise_error_messages!
+/ = form_for(resource, url: user_registration_path, html: { method: :patch }) do |f|
+/   = devise_error_messages!
 
-  .field
-    = f.label t('users.edit.name')
-    = f.text_field :name, autofocus: true
+/   .field
+/     = f.label t('users.edit.name')
+/     = f.text_field :name, autofocus: true
 
-  .field
-    = f.label t('users.new.profile')
-    = f.text_field :profile
+/   .field
+/     = f.label t('users.new.profile')
+/     = f.text_field :profile
 
-  .field
-    = f.label t('users.new.email')
-    = f.email_field :email, autofocus: true, autocomplete: "email"
+/   .field
+/     = f.label t('users.new.email')
+/     = f.email_field :email, autofocus: true, autocomplete: "email"
 
-  .field
-    = f.label t('users.new.twitter_address')
-    = f.text_field :twitter_address
+/   .field
+/     = f.label t('users.new.twitter_address')
+/     = f.text_field :twitter_address
 
-  .field
-    = f.label t('users.new.skype_id')
-    = f.text_field :skype_id
+/   .field
+/     = f.label t('users.new.skype_id')
+/     = f.text_field :skype_id
 
-  .field
-    = f.label t('users.new.discord_id')
-    = f.text_field :discord_id
+/   .field
+/     = f.label t('users.new.discord_id')
+/     = f.text_field :discord_id
 
-  = f.fields_for :game_machines, resource.game_machines.where(user_id: current_user.id, game_device: "Nintendo") do |gm|
-    = gm.label t('users.new.game_device')
-    = gm.text_field :game_device, disabled: :disabled, class: :device_field
-    = gm.hidden_field :game_device
+/   = f.fields_for :game_machines, resource.game_machines.where(user_id: current_user.id, game_device: "Nintendo") do |gm|
+/     = gm.label t('users.new.game_device')
+/     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+/     = gm.hidden_field :game_device
 
-    = gm.label t('users.new.device_account')
-    = gm.text_field :device_id
+/     = gm.label t('users.new.device_account')
+/     = gm.text_field :device_id
 
-  = f.fields_for :game_machines , resource.game_machines.where(game_device: "PlayStation") do |gm|
-    = gm.label t('users.new.game_device')
-    = gm.text_field :game_device, disabled: :disabled, class: :device_field
-    = gm.hidden_field :game_device
+/   = f.fields_for :game_machines , resource.game_machines.where(game_device: "PlayStation") do |gm|
+/     = gm.label t('users.new.game_device')
+/     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+/     = gm.hidden_field :game_device
 
-    = gm.label t('users.new.device_account')
-    = gm.text_field :device_id
+/     = gm.label t('users.new.device_account')
+/     = gm.text_field :device_id
 
-  = f.fields_for :game_machines , resource.game_machines.where(game_device: "Steam") do |gm|
-    = gm.label t('users.new.game_device')
-    = gm.text_field :game_device, disabled: :disabled, class: :device_field
-    = gm.hidden_field :game_device
+/   = f.fields_for :game_machines , resource.game_machines.where(game_device: "Steam") do |gm|
+/     = gm.label t('users.new.game_device')
+/     = gm.text_field :game_device, disabled: :disabled, class: :device_field
+/     = gm.hidden_field :game_device
 
-    = gm.label t('users.new.device_account')
-    = gm.text_field :device_id
+/     = gm.label t('users.new.device_account')
+/     = gm.text_field :device_id
 
-  .actions
-    = f.submit t('users.edit.submit')
+/   .actions
+/     = f.submit t('users.edit.submit')
