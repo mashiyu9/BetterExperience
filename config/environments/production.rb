@@ -65,6 +65,7 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "BetterExperience_#{Rails.env}"
 
+  config.action_mailer.raise_delivery_errors = false
   config.action_mailer.perform_caching = false
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -77,21 +78,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   #送信方法として:smtpを指定した場合は、このconfigを使って送信詳細の設定を行います
   config.action_mailer.smtp_settings = {
-    # #gmail利用時はaddress,domain,portは下記で固定
-    # address:"smtp.gmail.com",
-    # domain: 'gmail.com',
-    # port:587,
-    # #gmailのユーザアカウント（xxxx@gmail.com)※念のため、credentials.yml.enc行き
-    # user_name: Rails.application.credentials.gmail[$['GMAIL']],
-    # #gmail２段階認証回避のためにアプリケーションでの利用パスワードを取得、必ずcredentials.yml.endに設定を！！
-    # password: Rails.application.credentials.gmail[$['GMAILPASSWORD']],
-    # #パスワードをBase64でエンコード
-    # authentication: :login
-    port: 587,
     address: 'smtp.gmail.com',
-    domain: 'smtp.gmail.com',
-    user_name: $['GMAIL'],
-    password: $['GMAILPASSWORD'],
+    port: 587,
+    domain: 'gmail.com',
+    user_name: ENV["GMAIL"],
+    password: ENV["GMAILPASSWORD"],
+    authentication: 'plain',
     enable_starttls_auto: true
   }
 

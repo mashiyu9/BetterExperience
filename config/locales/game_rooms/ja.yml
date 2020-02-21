@@ -23,6 +23,7 @@ ja:
       5hour: "未定,とりあえず長く"
     index:
       validate_info: "必要な情報を入力してください"
+      create_room: "募集を開始しました"
       game_title: "ゲームタイトル"
       sarch: "検索"
       sarch_vc_true: "利用します"

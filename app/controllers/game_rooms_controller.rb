@@ -57,6 +57,7 @@ class GameRoomsController < ApplicationController
 
     if @game_room.save
       redirect_to game_rooms_path
+      flash[:notice] = t('game_rooms.index.create_room')
     else
       render "new"
     end
