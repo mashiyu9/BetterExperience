@@ -18,31 +18,31 @@ class GameRoomsController < ApplicationController
     @game_room.participants.build(participant_id: current_user.id, state: 0)
 
 
-    if Activerecord::type::boolean.new.cast(params[:game_room][:available_skype])
+    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_skype])
       @game_room.update_attributes(available_skype: true)
     else
       @game_room.update_attributes(available_skype: false)
     end
 
-    if Activerecord::type::boolean.new.cast(params[:game_room][:vc_possible])
+    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:vc_possible])
       @game_room.update_attributes(vc_possible: true)
     else
       @game_room.update_attributes(vc_possible: false)
     end
 
-    if Activerecord::type::boolean.new.cast(params[:game_room][:available_discord])
+    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_discord])
       @game_room.update_attributes(available_discord: true)
     else
       @game_room.update_attributes(available_discord: false)
     end
 
-    if Activerecord::type::boolean.new.cast(params[:game_room][:available_ingame_vc])
+    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_ingame_vc])
       @game_room.update_attributes(available_ingame_vc: true)
     else
       @game_room.update_attributes(available_ingame_vc: false)
     end
 
-    if Activerecord::type::boolean.new.cast(params[:game_room][:available_twitter])
+    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_twitter])
       @game_room.update_attributes(available_twitter: true)
     else
       @game_room.update_attributes(available_twitter: false)

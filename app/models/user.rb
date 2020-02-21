@@ -5,7 +5,7 @@ class User < ApplicationRecord
 
   # devise
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable#, :confirmable
+        :recoverable, :rememberable, :validatable, :omniauthable, :confirmable
 
   has_many :active_block, foreign_key: 'user_id', class_name: 'blacklist', dependent: :destroy
   has_many :passive_block, foreign_key: 'block_user_id', class_name: 'blacklist', dependent: :destroy
@@ -37,8 +37,8 @@ class User < ApplicationRecord
       game_machine = user.game_machines.build(game_device: "Steam", device_id: "")
       game_machine.save
     end
-    # user.skip_confirmation!
-    # user.save
+    user.skip_confirmation!
+    user.save
     user
   end
 
