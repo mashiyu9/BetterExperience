@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'systemspec', type: :system do
   let(:user){FactoryBot.create(:user)}
+
   let(:game_room){FactoryBot.create(:game_room)}
   let(:playstation){FactoryBot.create(:playstation, user: user)}
   let(:nintendo){FactoryBot.create(:nintendo, user: user)}
