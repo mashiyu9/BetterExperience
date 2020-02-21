@@ -13,32 +13,32 @@ RSpec.describe 'systemspec', type: :system do
     click_on 'commit'
   end
 
-  # describe 'ログイン,ログアウト機能まわり' do
-  #   context 'ログインしていないのにゲームルーム一覧に飛ぼうとした時' do
-  #     it 'ログイン画面に飛ぶ' do
-  #       click_on 'ログアウト'
-  #       sleep 1
-  #       visit new_user_session_path
-  #       expect(page).to have_content 'ログインを記憶'
-  #     end
-  #   end
+  describe 'ログイン,ログアウト機能まわり' do
+    context 'ログインしていないのにゲームルーム一覧に飛ぼうとした時' do
+      it 'ログイン画面に飛ぶ' do
+        click_on 'ログアウト'
+        sleep 1
+        visit new_user_session_path
+        expect(page).to have_content 'ログインを記憶'
+      end
+    end
 
-  #   context 'ログイン状態でログイン画面に行こうとしたとき' do
-  #     it 'ゲームルーム一覧画面に戻される' do
-  #       visit new_user_session_path
-  #       expect(page).to have_content 'すでにログインしています'
-  #     end
-  #   end
-  # end
-  # describe '募集開始ページ' do
-  #   it 'ユーザーが募集をすることができる' do
-  #     visit new_game_room_path
-  #     fill_in 'game_room[game_title]', with: "game_title"
-  #     fill_in 'game_room[start_time]', with: "2033-02-20T03:33"
-  #     click_on 'commit'
-  #     expect(page).to have_content "game_title"
-  #   end
-  # end
+    context 'ログイン状態でログイン画面に行こうとしたとき' do
+      it 'ゲームルーム一覧画面に戻される' do
+        visit new_user_session_path
+        expect(page).to have_content 'すでにログインしています'
+      end
+    end
+  end
+  describe '募集開始ページ' do
+    it 'ユーザーが募集をすることができる' do
+      visit new_game_room_path
+      fill_in 'game_room[game_title]', with: "game_title"
+      fill_in 'game_room[start_time]', with: "2033-02-20T03:33"
+      click_on 'commit'
+      expect(page).to have_content "game_title"
+    end
+  end
 
   describe '募集一覧ページ' do
     before do
@@ -47,215 +47,55 @@ RSpec.describe 'systemspec', type: :system do
       fill_in 'game_room[start_time]', with: "2033-02-20T03:33"
       click_on 'commit'
     end
-    # it '詳細ページを押したときに募集の詳細に飛ぶことができる' do
-    #   playstation
-    #   steam
-    #   nintendo
-    #   click_on '詳細ページへ'
-    #   expect(page).to have_content "募集詳細ページ"
-    # end
-    # it '参加希望を押したときに参加を申請できる' do
-    #   @user2 = FactoryBot.create(:user2)
-    #   @playstation = FactoryBot.create(:playstation, user: @user2)
-    #   @nintendo = FactoryBot.create(:nintendo, user: @user2)
-    #   @steam = FactoryBot.create(:steam, user: @user2)
-    #   click_on 'ログアウト'
-    #   sleep 2
-    #   fill_in 'user[email]', with: @user2.email
-    #   fill_in 'user[password]', with: @user2.password
-    #   click_on 'commit'
-    #   click_on '参加希望'
-    #   expect(page).to have_content "参加を希望しました！"
-    # end
-
-    # it 'タグをクリックすると検索フォームに入る' do
-    #   click_on 'ApexLegends'
-    #   expect(page).to have_field name="q[game_title_cont]", with: 'ApexLegends'
-    #   click_on 'FF14'
-    #   expect(page).to have_field name="q[game_title_cont]", with: 'FF14'
-    #   click_on 'PUBG'
-    #   expect(page).to have_field name="q[game_title_cont]", with: 'PUBG'
-    # end
-
-    # it 'vcを利用するをクリックすると細かい条件を入力できる' do
-    #   choose 'vc_possible_index'
-    #   expect(page).to have_content "スカイプを利用する"
-    # end
     it '詳細ページを押したときに募集の詳細に飛ぶことができる' do
-      binding.irb
-      visit game_rooms_path
-      visit game_room_path(10)
-      # click_on '詳細ページへ'
+      playstation
+      steam
+      nintendo
+      click_on '詳細ページへ'
       expect(page).to have_content "募集詳細ページ"
     end
+    it '参加希望を押したときに参加を申請できる' do
+      @user2 = FactoryBot.create(:user2)
+      @playstation = FactoryBot.create(:playstation, user: @user2)
+      @nintendo = FactoryBot.create(:nintendo, user: @user2)
+      @steam = FactoryBot.create(:steam, user: @user2)
+      click_on 'ログアウト'
+      sleep 2
+      fill_in 'user[email]', with: @user2.email
+      fill_in 'user[password]', with: @user2.password
+      click_on 'commit'
+      click_on '参加希望'
+      expect(page).to have_content "参加を希望しました！"
+    end
+
+    it 'タグをクリックすると検索フォームに入る' do
+      click_on 'ApexLegends'
+      expect(page).to have_field name="q[game_title_cont]", with: 'ApexLegends'
+      click_on 'FF14'
+      expect(page).to have_field name="q[game_title_cont]", with: 'FF14'
+      click_on 'PUBG'
+      expect(page).to have_field name="q[game_title_cont]", with: 'PUBG'
+    end
+
+    it 'vcを利用するをクリックすると細かい条件を入力できる' do
+      choose 'vc_possible_index'
+      expect(page).to have_content "スカイプを利用する"
+    end
+  describe '募集詳細ページ' do
+    before do
+      playstation
+      nintendo
+      steam
+      click_on '詳細ページへ'
+    end
+    it '募集主だと部屋の情報を更新できる' do
+      expect(page).to have_content "部屋の条件を編集する"
+    end
+    it 'メッセージを送ることができる' do
+      fill_in 'game_room_message[body]', with: "comenttest"
+      click_on 'メッセージを送る'
+      expect(page).to have_content "comenttest"
+    end
   end
-
-  #     it 'ユーザーを削除することができる' do
-  #       user2 = create(:user, password: "password")
-  #       visit admin_users_path
-  #       num = User.all.count - 1
-  #       all('tbody td')[6].click_link '削除'
-  #       page.driver.browser.switch_to.alert.accept
-  #       sleep 1
-  #       expect(User.all.count).to eq num
-  #     end
-
-  #     it 'ユーザーを更新することができる' do
-  #       visit admin_users_path
-  #       all('tbody td')[5].click_link '編集'
-  #       fill_in 'user[name]', with: "testですよ"
-  #       fill_in 'user[email]', with: "test@gmail.com"
-  #       fill_in 'user[password]', with: 'password'
-  #       fill_in 'user[password_confirmation]', with: 'password'
-  #       click_button 'commit'
-  #       expect(page).to have_content "testですよ"
-
-
-
-  #     end
-  #   end
-
-  #   context '管理者画面から詳細ユーザーの詳細画面に飛んだ時' do
-  #     it 'そのユーザーの作成したタスクも表示される' do
-  #       visit admin_user_path(@user)
-  #       expect(page).to have_content @task1.content
-  #     end
-  #   end
-
-
-  # end
-
-
-  # describe 'タスク一覧画面' do
-
-  #   before do
-  #     visit new_session_path
-  #     fill_in 'session[email]', with: @user.email
-  #     fill_in 'session[password]', with: 'password'
-  #     click_on 'commit'
-  #   end
-
-  #   context 'タスクを作成した場合' do
-  #     it '作成済みのタスクが表示されること' do
-  #       visit tasks_path
-  #       expect(page).to have_content 'fugafuga'
-  #     end
-
-  #     it '複数のラベルをタスクにつけられること' do
-  #       visit new_task_path
-  #       fill_in 'task[title]', with: 'testtitle'
-  #       fill_in 'task[content]', with: 'test'
-  #       select '高', from: 'task[importance]'
-  #       select '完了', from: 'task[status]'
-  #       # check "testlabel1"
-  #       check "task_label_ids_#{@test_label1.id}"
-  #       check "task_label_ids_#{@test_label2.id}"
-
-  #       # check "#test_label_ids_" + "#{@test_label2.id}"
-  #       click_button '登録する'
-
-  #       expect(page).to have_content @test_label1.series
-  #       expect(page).to have_content @test_label2.series
-  #     end
-
-  #   end
-
-  #   context 'タスク一覧画面に遷移した時' do
-  #     it '作成日時の降順でタスクが表記される' do
-  #       visit tasks_path
-  #       tasks = all('.task_list_parts')
-  #       expect(tasks[0]).to have_content "aaa"
-  #       expect(tasks[1]).to have_content "fugafuga"
-  #       expect(tasks[2]).to have_content "hellow world"
-
-  #     end
-
-  #   end
-
-  #   context '重要度ボタンを押した時' do
-  #     it '重要度が高い順にソートされる' do
-  #       visit tasks_path
-  #       click_on '優先度'
-  #       sleep 2
-  #       all('tbody td')[5].click_link '詳細'
-  #       sleep 2
-  #       expect(page).to have_content "高"
-  #     end
-  #   end
-
-  #   context '終了期限順ボタンを押したとき' do
-  #     it '期限が近い順にソートされる' do
-  #       visit tasks_path
-  #       tasks = all('.task_list_parts')
-  #       expect(tasks[0]).to have_content "tanaka"
-  #     end
-  #   end
-
-  # end
-
-  # describe 'タスク登録画面' do
-  #   before do
-  #     visit new_session_path
-  #     fill_in 'session[email]', with: @user.email
-  #     fill_in 'session[password]', with: 'password'
-  #     click_on 'commit'
-  #   end
-
-  #   context '必要項目を入力して、createボタンを押した場合' do
-  #     it 'データが保存されること' do
-  #       visit new_task_path
-  #       fill_in 'task[title]', with: 'テストタイトルffffffffffff'
-  #       fill_in 'task[content]', with: 'テストコンテンツ'
-  #       select '高', from: 'task[importance]'
-  #       select '完了', from: 'task[status]'
-  #       click_button '登録する'
-  #       visit tasks_path
-  #       expect(page).to have_content '高'
-  #     end
-  #   end
-  # end
-
-  # describe 'タスク編集画面' do
-  #   before do
-  #     visit new_session_path
-  #     fill_in 'session[email]', with: @user.email
-  #     fill_in 'session[password]', with: 'password'
-  #     click_on 'commit'
-  #   end
-  #   context 'タスクを編集する時' do
-  #     it 'ラベルも一緒に編集できること' do
-  #       visit edit_task_path(@task1)
-  #       check "task_label_ids_#{@test_label1.id}"
-  #       check "task_label_ids_#{@test_label3.id}"
-  #       click_button '更新する'
-  #       expect(page).to have_content @test_label1.series, @test_label3.series
-  #     end
-  #   end
-  # end
-
-  # describe 'ラベル作成画面' do
-  #   before do
-  #     visit new_session_path
-  #     fill_in 'session[email]', with: @user.email
-  #     fill_in 'session[password]', with: 'password'
-  #     click_on 'commit'
-  #   end
-
-  #   context 'ユーザーが任意のラベルを作成した時' do
-  #     it '自分が作ったラベルしか使えないように' do
-  #       visit new_task_path
-  #       expect(page).not_to have_content @user2.labels
-  #     end
-  #   end
-  # end
-
-  # describe 'タスク詳細画面' do
-  #   context '任意のタスク詳細画面に遷移した場合' do
-  #     it '該当タスクの内容が表示されたページに遷移すること' do
-
-  #       visit task_path(@task1)
-  #       expect(page).to have_content 'hellow world'
-  #     end
-  #   end
-  # end
+  end
 end

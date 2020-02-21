@@ -46,7 +46,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @owner_user = GameRoom.find(params[:room_info]).participants.find_by(state: 0)
         if params[:twitter] == "true" && params[:skype] == "true"
           if params[:user][:skype_id].present? && params[:user][:twitter_address].present?
-            binding.irb
             # if @participant.save
             #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
             # end
@@ -55,7 +54,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
           end
         elsif params[:twitter] == "true" && params[:discord] == "true"
           if params[:user][:discord_id].present? && params[:user][:twitter_address].present?
-            binding.irb
             # if @participant.save
             #   GameRoomMailer.request_mail(@current_user, @owner_user).deliver
             # end

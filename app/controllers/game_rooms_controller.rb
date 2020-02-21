@@ -1,10 +1,11 @@
 class GameRoomsController < ApplicationController
   before_action :authenticate_user!
+  PER = 12
 
 
   def index
     @q = GameRoom.ransack(params[:q])
-    @game_rooms = @q.result(distinct: true)
+    @game_rooms = @q.result(distinct: true).page(params[:page]).per(PER)
   end
 
   def new
@@ -13,7 +14,7 @@ class GameRoomsController < ApplicationController
 
   def create
     @game_room = GameRoom.new(game_room_params)
-    @game_room.participants.build(id: @game_room.id, participant_id: current_user.id, state: 0)
+    @game_room.participants.build(participant_id: current_user.id, state: 0)
     # @game_chat_room = GameChatRoom.new(game_room_id: @game_room.id)
 
 

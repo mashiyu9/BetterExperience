@@ -55,6 +55,9 @@ gem 'slim'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
+gem 'kaminari', '~> 0.17.0'
+gem 'kaminari-bootstrap', '~> 3.0.1'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

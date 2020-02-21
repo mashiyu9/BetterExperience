@@ -40,8 +40,8 @@
         p = f.label t('game_rooms.index.play_device')
         | #{f.radio_button :play_device_eq, '', {:checked => true}}指定なし
         | #{f.radio_button :play_device_eq, 0} #{t('game_rooms.index.sarch_device_playstation')}
-        | #{f.radio_button :play_device_eq, 1} #{t('game_rooms.index.sarch_device_Nintendo')}
-        | #{f.radio_button :play_device_eq, 2} #{t('game_rooms.index.sarch_device_Steam')}
+        | #{f.radio_button :play_device_eq, 1} #{t('game_rooms.index.sarch_device_nintendo')}
+        | #{f.radio_button :play_device_eq, 2} #{t('game_rooms.index.sarch_device_steam')}
 
       .index_search_zone
         p = f.submit t('game_rooms.index.sarch')
@@ -108,7 +108,7 @@
                 - else
                   p = render 'index_device_check', gameroom: gr
 
-            - if gr.participants.where(participant_id: current_user.id).present?
+            - else gr.participants.where(participant_id: current_user.id).present?
               p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
             .room_title.room_items
               p = gr.room_name
@@ -144,3 +144,4 @@
               .room_twitter.room_items
                 p = t('game_rooms.index.twitter_all')
                 p = gr.participants.find_by(state:0).participant.twitter_address
+    = paginate @game_rooms
