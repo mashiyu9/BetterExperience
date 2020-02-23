@@ -83,6 +83,7 @@
                   - if current_user.discord_id.present?
                     p = t("game_rooms.index.validate_twitter")
                     = render 'index_input_form', gameroom: gr, device: "twitter"
+                    = render 'index_input_form', gameroom: gr, device: "discord"
                   - else
                     p = t("game_rooms.index.validate_discord")
                     p = t("game_rooms.index.validate_twitter")
