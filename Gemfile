@@ -58,7 +58,7 @@ gem 'devise-i18n-views'
 gem 'kaminari', '~> 0.17.0'
 gem 'kaminari-bootstrap', '~> 3.0.1'
 
-gem 'faker'
+gem 'seed-fu'
 
 
 group :development, :test do
@@ -67,6 +67,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'spring-commands-rspec'
   gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do

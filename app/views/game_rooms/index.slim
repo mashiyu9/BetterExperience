@@ -62,6 +62,7 @@
 
 
             - if gr.participants.find_by(state: 0).participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
+
               - if gr.available_twitter == true
                 - if current_user.twitter_address.present?
                   - if gr.available_skype == true
@@ -83,7 +84,6 @@
                   - if current_user.discord_id.present?
                     p = t("game_rooms.index.validate_twitter")
                     = render 'index_input_form', gameroom: gr, device: "twitter"
-                    = render 'index_input_form', gameroom: gr, device: "discord"
                   - else
                     p = t("game_rooms.index.validate_discord")
                     p = t("game_rooms.index.validate_twitter")
