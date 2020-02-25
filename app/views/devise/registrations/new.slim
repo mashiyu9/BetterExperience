@@ -68,7 +68,7 @@
         p = gm.text_field :device_id, class: :input_field, placeholder: t('users.new.steam')
 
       .actions
-        = f.submit t('users.new.submit')
+        = f.submit t('users.new.submit'), :class=>"btn btn-primary my-btn"
   .user_new
     p.devise_facebook
       a href="/users/auth/facebook" = t('users.login.facebook_confirment')

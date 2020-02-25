@@ -226,6 +226,20 @@
 // .registration_new
 
 .registration_new{
+  input[type='submit'] {
+    background-color: $main-color;
+    color: #eee;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  input[type='submit'] {
+    border-radius: 0.25rem;
+    padding: 16px;
+  }
+  input[type='submit']:focus,
+  input[type='submit']:hover {
+    background-color: $sub-color;
+  }
   .user_new{
     text-align: center;
     .devise_facebook{
