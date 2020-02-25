@@ -6,7 +6,7 @@
   .modal-dialog
     .modal-content
       .modal-header
-        h4 class="modal-title" id="myModalLabel"&gt;削除確認画面
+        h4 class="modal-title" id="myModalLabel"&gt;ユーザー情報を編集
       .modal-body
         .test
           = form_for(current_user, url: user_registration_path, html: { method: :patch }) do |f|
