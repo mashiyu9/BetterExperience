@@ -1,11 +1,13 @@
 class GameRoomsController < ApplicationController
+
+  require 'date'
+
   before_action :authenticate_user!
+
   PER = 12
-
-
   def index
     @q = GameRoom.ransack(params[:q])
-    @game_rooms = @q.result(distinct: true).page(params[:page]).per(PER)
+    @game_rooms = @q.result(distinct: true).where('start_time >= ?', Date.today).page(params[:page]).per(PER)
     @game_titles = ["Apexlegends","PUBG","Fortnite","FF14","dead by daylight", "ポケモン ソード・シールド", "モンスターハンター World"]
   end
 

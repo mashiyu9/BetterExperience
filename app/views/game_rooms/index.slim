@@ -51,6 +51,8 @@
       .index_search_zone
         p = f.submit t('game_rooms.index.sarch')
 
+  = sort_link(@q, :start_time, "開始時間")
+
   section#sec.mt40
     ul.row.padding-0
       - @game_rooms.each do |gr|
@@ -59,7 +61,6 @@
             h3.game_room_title = gr.game_title
             .room_device.room_items
               p.device_button = gr.play_device
-
 
             - if gr.participants.find_by(state: 0).participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
 
