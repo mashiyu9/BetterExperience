@@ -22,6 +22,9 @@ ja:
       skype_id_ex: 'スカイプ名'
       game_device: '利用できるゲーム機種'
       device_account: 'ゲームの機種ごとのアカウント'
+      device_account_need_playstation: 'PlayStationのアカウントを登録してください'
+      device_account_need_steam: 'Steamのアカウントを登録してください'
+      device_account_need_nintendo: 'Nintendoのアカウントを登録してください'
       playstation: 'プレイステーションのID'
       nintendo: 'ニンテンドーアカウントのID'
 

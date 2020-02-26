@@ -19,46 +19,46 @@ div id="testModal#{gameroom.id}" class="modal fade show" aria-hidden="true" aria
                   label = t('users.new.skype_id')
               - if info == :twitter
                 .group
-                  = f.text_field :twitter_address
+                  = f.text_field :twitter_address, required: true
                   span.highlight
                   span.bar
                   label = t('users.new.twitter_address')
               - if info == :discord
                 .group
-                  = f.text_field :discord_id
+                  = f.text_field :discord_id, required: true
                   span.highlight
                   span.bar
                   label = t('users.new.discord_id')
               - if info == :PlayStation
                 = f.fields_for :game_machines, current_user.game_machines.where(game_device: "PlayStation") do |gm|
                   .group
-                    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+                    / = gm.text_field :game_device, disabled: :disabled, class: :device_field, required: true
                     span.highlight
                     span.bar
-                    = gm.text_field :device_id, placeholder: "アカウントを入力してください"
+                    = gm.text_field :device_id, required: true
                     span.highlight
                     span.bar
-                    label = t('users.new.device_account')
+                    label = t('users.new.device_account_need_playstation')
               - if info == :Steam
                 = f.fields_for :game_machines, current_user.game_machines.where(user_id: current_user.id, game_device: "Steam") do |gm|
                   .group
-                    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+                    / = gm.text_field :game_device, disabled: :disabled, class: :device_field, required: true
                     span.highlight
                     span.bar
-                    = gm.text_field :device_id, placeholder: "アカウントを入力してください"
+                    = gm.text_field :device_id, required: true
                     span.highlight
                     span.bar
-                    label = t('users.new.device_account')
+                    label = t('users.new.device_account_need_steam')
               - if info == :Nintendo
                 = f.fields_for :game_machines, current_user.game_machines.where(user_id: current_user.id, game_device: "Nintendo") do |gm|
                   .group
-                    = gm.text_field :game_device, disabled: :disabled, class: :device_field
+                    / = gm.text_field :game_device, disabled: :disabled, class: :device_field, required: true
                     span.highlight
                     span.bar
-                    = gm.text_field :device_id, placeholder: "アカウントを入力してください"
+                    = gm.text_field :device_id, required: true
                     span.highlight
                     span.bar
-                    label = t('users.new.device_account')
+                    label = t('users.new.device_account_need_nintendo')
 
 
             input type="hidden" id="game_room_info" name="room_info" value="#{gameroom.id}"
