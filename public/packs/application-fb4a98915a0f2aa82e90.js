@@ -30347,9 +30347,9 @@ Popper.Defaults = Defaults;
       $("#game_title").val("PUBG");
     });
 
-    $("#tag_3").on("click", function () {
-      $("#game_title").val("Fortnite");
-    });
+    // $("#tag_3").on("click", function () {
+    //   $("#game_title").val("Fortnite");
+    // });
 
     $("#tag_4").on("click", function () {
       $("#game_title").val("FF14");

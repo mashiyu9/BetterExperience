@@ -1,41 +1,39 @@
 $(document).on("turbolinks:load", function() {
   $("#tag_1").on("click", function() {
     $("#game_title").val("ApexLegends");
-    event.preventDefault();
   });
 
   $("#tag_2").on("click", function() {
     $("#game_title").val("PUBG");
-    event.preventDefault();
   });
 
-  $("#tag_3").on("click", function(event) {
+  // $("#tag_3").on("click", function() {
+  //   $("#game_title").val("Fortnite");
+  // });
+  // $("#tag_3").on("click", function() {
+  //   $("#game_title").val("Foraaaaatnite");
+  // });
+  $("#tag_3").on("click", function() {
     $("#game_title").val("Fortnite");
-    event.preventDefault();
   });
 
   $("#tag_4").on("click", function() {
     $("#game_title").val("FF14");
-    event.preventDefault();
   });
 
   $("#tag_5").on("click", function() {
     $("#game_title").val("dead by daylight");
-    event.preventDefault();
   });
 
   $("#tag_6").on("click", function() {
     $("#game_title").val("ポケモン ソード・シールド");
-    event.preventDefault();
   });
 
   $("#tag_7").on("click", function() {
     $("#game_title").val("モンスターハンターworld");
-    event.preventDefault();
   });
   $("#tag_8").on("click", function() {
     $("#game_title").val("大乱闘スマッシュブラザーズ");
-    event.preventDefault();
   });
 
   $("vc_possible").prop("checked");
