@@ -10,20 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_23_062131) do
+ActiveRecord::Schema.define(version: 2020_01_22_073826) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "blacklists", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "block_user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["block_user_id"], name: "index_blacklists_on_block_user_id"
-    t.index ["user_id", "block_user_id"], name: "index_blacklists_on_user_id_and_block_user_id", unique: true
-    t.index ["user_id"], name: "index_blacklists_on_user_id"
-  end
 
   create_table "chat_groups", force: :cascade do |t|
     t.bigint "chat_room_id"
@@ -109,6 +99,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_062131) do
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
+    t.datetime "deleted_at"
     t.string "name"
     t.string "profile"
     t.string "twitter_address"
@@ -121,6 +112,7 @@ ActiveRecord::Schema.define(version: 2020_01_23_062131) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

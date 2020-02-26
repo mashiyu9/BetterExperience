@@ -35,7 +35,8 @@ RSpec.describe 'systemspec', type: :system do
     it 'ユーザーが募集をすることができる' do
       visit new_game_room_path
       fill_in 'game_room[game_title]', with: "game_title"
-      fill_in 'game_room[start_time]', with: "2033-02-20T03:33"
+      num = Time.now + 100
+      fill_in 'game_room[start_time]', with: num
       click_on 'commit'
       expect(page).to have_content "game_title"
     end
@@ -45,7 +46,8 @@ RSpec.describe 'systemspec', type: :system do
     before do
       visit new_game_room_path
       fill_in 'game_room[game_title]', with: "game_title"
-      fill_in 'game_room[start_time]', with: "2033-02-20T03:33"
+      num = Time.now + 100
+      fill_in 'game_room[start_time]', with: num
       click_on 'commit'
     end
     it '詳細ページを押したときに募集の詳細に飛ぶことができる' do

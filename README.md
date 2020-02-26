@@ -34,8 +34,10 @@ rails 5.2.4.1
 * 募集するとき条件を設定することができる
 * 募集編集機能
 * 自動メール機能
+* 論理削除機能
 ### これからつけたいもの
 * twitter認証
+* facebook認証
 * 募集取り消し機能
 * ブラックリスト機能
 
@@ -76,6 +78,9 @@ https://docs.google.com/spreadsheets/d/1ztr8OBD9sL7bU5GkpFUlQOFSeF0JWYLK9cPFfK5s
 
 ### 検索
 * ransack
+
+###　論理削除
+* paranoia
 
 ### テスト
 * rspec-rails
