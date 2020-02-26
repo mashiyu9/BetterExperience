@@ -37,7 +37,7 @@ end
 end
 
 20.times do |n|
-  game_title = Faker::Game.title
+  game_title = Faker::Games::Pokemon.name
   comment = Faker::Game.genre
   time = Faker::Time.forward(days: 23, period: :morning)
   GameRoom.create!(
@@ -60,11 +60,7 @@ end
     state:0,
   )
 end
-# GameRoom.all.each do |gr|
-#   if tweet.user_id != user_id && rand(4) == 0
-#     favorites_list << { user_id: user_id, tweet_id: tweet.id }
-#   end
-# end
+
 
 
 
