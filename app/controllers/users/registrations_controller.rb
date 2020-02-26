@@ -36,6 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
       resource_updated = update_resource(resource, account_update_params)
       yield resource if block_given?
+      binding.irb
       if resource_updated
         set_flash_message_for_update(resource, prev_unconfirmed_email)
         bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
@@ -44,6 +45,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:room_info])
         @current_user = current_user
         @owner_user = GameRoom.find(params[:room_info]).participants.find_by(state: 0)
+
+
+
+
+
+
+
+
+
+
+
+
         if params[:twitter] == "true" && params[:skype] == "true"
           if params[:user][:skype_id].present? && params[:user][:twitter_address].present?
             if @participant.save
@@ -102,7 +115,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       super
     end
-
   end
 
   # DELETE /resource

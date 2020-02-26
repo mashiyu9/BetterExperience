@@ -1,0 +1,5 @@
+form_for(@participation_form, url: participations_path, html:{ method: :post}) do |f|
+  = f.text_field :skype_id
+  = f.text_field :discord_id
+  = f.text_field :twitter_address
+  = f.submit
