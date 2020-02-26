@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :game_room do
     sequence(:game_title) { |n| "TEST_TITLE#{n}"}
-    start_time {"2029/12/10"}
+    start_time {"2020/12/10"}
     play_time {1}
     play_device {0}
     vc_possible {0}
