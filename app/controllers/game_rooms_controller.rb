@@ -8,7 +8,7 @@ class GameRoomsController < ApplicationController
   def index
     @q = GameRoom.ransack(params[:q])
     @game_rooms = @q.result(distinct: true).where('start_time >= ?', Date.today).page(params[:page]).per(PER)
-    @game_titles = ["Apexlegends","PUBG","Fortnite","FF14","dead by daylight", "ポケモン ソード・シールド", "モンスターハンター World"]
+    @game_titles = [t('game_rooms.index.title1'), t('game_rooms.index.title2'),t('game_rooms.index.title3'),t('game_rooms.index.title4'),t('game_rooms.index.title5'),t('game_rooms.index.title6'),t('game_rooms.index.title7'),t('game_rooms.index.title8')]
   end
 
   def new
