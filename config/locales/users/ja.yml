@@ -44,6 +44,9 @@ ja:
       skype_address: 'スカイプのアカウント'
       discord_id: 'ディスコードのアカウント'
       game_rooms: '参加中、参加予定の募集'
+      game_owner_rooms: 'あなたが募集しているゲームです'
+      game_participants_rooms: '参加中のゲームルームです'
+      game_hope_rooms: '参加希望申請中のゲームルームです'
       room_show: '詳細'
       room_vc_possible: 'ボイスチャットを利用します'
     edit:
