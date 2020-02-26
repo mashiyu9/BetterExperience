@@ -9,6 +9,7 @@ class GameRoomsController < ApplicationController
     @q = GameRoom.ransack(params[:q])
     @game_rooms = @q.result(distinct: true).where('start_time >= ?', Date.today).page(params[:page]).per(PER)
     @game_titles = [t('game_rooms.index.title1'), t('game_rooms.index.title2'),t('game_rooms.index.title3'),t('game_rooms.index.title4'),t('game_rooms.index.title5'),t('game_rooms.index.title6'),t('game_rooms.index.title7'),t('game_rooms.index.title8')]
+
   end
 
   def new
@@ -87,6 +88,34 @@ class GameRoomsController < ApplicationController
       render :edit
     end
   end
+
+  # 一つでも[true,false]の組み合わせがあったらfalseになるメソッド(true,falseの組み合わせになったら、情報が足りていないということ),不足しているものがあるかどうかチェックするメソッド
+  def condition_fullfill(user, gr)
+    [
+      [gr.available_twitter?, user.twitter_address.present?],
+      [gr.available_skype?, user.skype_id.present?],
+      [gr.available_discord?, user.discord_id.present?],
+      [gr.play_device == "PlayStation", user.game_machines.find_by(game_device: "PlayStation").device_id.present?],
+      [gr.play_device == "Nintendo", user.game_machines.find_by(game_device: "Nintendo").device_id.present?],
+      [gr.play_device == "Steam", user.game_machines.find_by(game_device: "Steam").device_id.present?],
+    ].all? do |pair|
+      pair != [true,false]
+    end
+  end
+ # 足りていない情報を出力するメソッド
+  def need_conditions(user, gr)
+    result = {}
+    result.merge!(skype: user.skype_id.blank?) if gr.available_skype?
+    result.merge!(discord: user.discord_id.blank?) if gr.available_discord?
+    result.merge!(twitter: user.twitter_address.blank?) if gr.available_twitter?
+    result.merge!(PlayStation: user.game_machines.find_by(game_device: "PlayStation").device_id.blank?) if gr.play_device == "PlayStation"
+    result.merge!(Nintendo: user.game_machines.find_by(game_device: "Nintendo").device_id.blank?) if gr.play_device == "Nintendo"
+    result.merge!(Steam: user.game_machines.find_by(game_device: "Steam").device_id.blank?) if gr.play_device == "Steam"
+    result.select{|_, v| v == true}.keys
+  end
+
+  helper_method :condition_fullfill
+  helper_method :need_conditions
 
   private
 

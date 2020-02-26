@@ -19,6 +19,17 @@ class GameRoom < ApplicationRecord
     Nintendo: 1,
     Steam: 2,
   }
+
+  # def condition_fullfill(user, gr)
+  #   [
+  #     [gr.available_twitter, user.twitter_address],
+  #     [gr.available_skype, user.skype_id],
+  #     [gr.available_discord, user.discord_id],
+  #   ].all? do |pair|
+  #     pair != [true,false]
+  #   end
+  # end
+
   def date_not_before_today
     errors.add(:start_time, "は今日以降のものを選択してください") if start_time.nil? || start_time < Date.today
   end

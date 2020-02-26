@@ -54,7 +54,6 @@
               p.device_button = gr.play_device
 
             - if gr.participants.find_by(state: 0).participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
-
               - if gr.available_twitter == true
                 - if current_user.twitter_address.present?
                   - if gr.available_skype == true
