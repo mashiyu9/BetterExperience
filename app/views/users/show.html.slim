@@ -1,6 +1,8 @@
 .user_show.container
   .profile.text-align-center
-    h1.mb30 = "#{@user.name}のマイページ"
+    h1.mb30
+      i.fas.fa-user
+      = "#{@user.name}のマイページ"
     .user_item
       p.mb0 = t('users.show.email')
       p = @user.email
@@ -21,23 +23,54 @@
         p.mb0 = gm.game_device
         p = gm.device_id
     = link_to t('layout.profile_change'), edit_user_registration_path, class: "btn btn-primary"
+  .rooms.mt40
+    - if @owner_room.count > 0
+      section#sec.row.container-fluid
+        h2.col-md-12 = t('users.show.game_owner_rooms')
+        ul.container-fluid
+          - @owner_room.each do |gm|
+            li.mypage_game_rooms.col-md-4.col-sm-6.col-lg-4
+              h3.game_room_title = gm.game_title
+              p.pt30 = gm.room_name
+              p = gm.game_title
+              p = gm.close_message
+              p = gm.start_time.strftime("%m月%d日 %H:%M")
+              p = "#{gm.play_time} 時間"
+              - if gm.participants.find_by(state: 0).participant.id == current_user.id
+                p 募集主です
+              = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
 
-  - if @user.game_rooms.count > 0
-    section#sec.row.container-fluid
-      h2.col-md-12 = t('users.show.game_rooms')
-      ul.container-fluid
-        - @user.game_rooms.each do |gm|
-          li.mypage_game_rooms.col-md-4.col-sm-6.col-lg-4
-            h3.game_room_title = gm.game_title
-            p.pt30 = gm.room_name
-            p = gm.game_title
-            p = gm.close_message
-            p = gm.start_time.strftime("%m月%d日 %H:%M")
-            p = "#{gm.play_time} 時間"
-            - if gm.participants.find_by(state: 0).participant.id == current_user.id
-             p 募集主です
-            = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
+    - if @participants_room.count > 0
+      section#sec.row.container-fluid
+        h2.col-md-12 = t('users.show.game_participants_rooms')
+        ul.container-fluid
+          - @participants_room.each do |gm|
+            li.mypage_game_rooms.col-md-4.col-sm-6.col-lg-4
+              h3.game_room_title = gm.game_title
+              p.pt30 = gm.room_name
+              p = gm.game_title
+              p = gm.close_message
+              p = gm.start_time.strftime("%m月%d日 %H:%M")
+              p = "#{gm.play_time} 時間"
+              - if gm.participants.find_by(state: 2).participant.id == current_user.id
+                p 参加中です
+              = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
 
+    - if @hope_room.count > 0
+      section#sec.row.container-fluid
+        h2.col-md-12 = t('users.show.game_participants_rooms')
+        ul.container-fluid
+          - @hope_room.each do |gm|
+            li.mypage_game_rooms.col-md-4.col-sm-6.col-lg-4
+              h3.game_room_title = gm.game_title
+              p.pt30 = gm.room_name
+              p = gm.game_title
+              p = gm.close_message
+              p = gm.start_time.strftime("%m月%d日 %H:%M")
+              p = "#{gm.play_time} 時間"
+              - if gm.participants.find_by(state: 1).participant.id == current_user.id
+                p 参加申請中です
+              = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
 
 
 

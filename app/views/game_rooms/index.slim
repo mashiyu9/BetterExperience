@@ -3,48 +3,38 @@
   = search_form_for @q do |f|
     = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: "ゲームタイトルで検索"
     .game_tag.container.mt6
-      / - @game_titles.each do |title|
-      /   button type="button" class="btn btn-primary mr6 mb6" id="tag_#{"@n"}"
-      /     = title
-
-      button type="button" class="btn btn-primary mr6 mb6" id="tag_1" ApexLegends
-      button type="button" class="btn btn-primary mr6 mb6" id="tag_2" PUBG
-      / button tyep="button" class="btn btn-primary mr6 mb6" id="tag_3" Fortnite
-      button type="button" class="btn btn-primary mr6 mb6" id="tag_3" Fortnite
-      button tyep="button" class="btn btn-primary mr6 mb6" id="tag_4" FF14
-      button type="button" class="btn btn-primary mr6 mb6" id="tag_5" dead by daylight
-      button type="button" class="btn btn-primary mr6 mb6" id="tag_6" ポケモン ソード・シールド
-      button type="button" class="btn btn-primary mr6 mb6" id="tag_7" モンスターハンター World
-      button type="button" class="btn btn-primary mr6 mb6" id="tag_8" 大乱闘スマッシュブラザーズ
+      - @game_titles.each_with_index do |title, x|
+        button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x + 1}"
+          = title
 
       .index_search_zone
         p = f.label t('game_rooms.index.sarch_vc_possible')
-        | #{f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none", checked: true}指定なし
+        | #{f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none", checked: true} #{t('game_rooms.index.no_select')}
         | #{f.radio_button :vc_possible_eq, true, id: "vc_possible_index"} #{t('game_rooms.index.sarch_vc_true')}
         | #{f.radio_button :vc_possible_eq, false, id: "vc_possible_index_no"} #{t('game_rooms.index.sarch_vc_false')}
 
       .layout_none#layout_none
         .index_search_zone
           p = f.label t('game_rooms.index.sarch_skype')
-          | #{f.radio_button :available_skype_eq, '', {:checked => true}}指定なし
+          | #{f.radio_button :available_skype_eq, '', {:checked => true}}#{t('game_rooms.index.no_select')}
           | #{f.radio_button :available_skype_eq, true} #{t('game_rooms.index.sarch_skype_true')}
           | #{f.radio_button :available_skype_eq, false} #{t('game_rooms.index.sarch_skype_false')}
 
         .index_search_zone
           p = f.label t('game_rooms.index.sarch_discord')
-          | #{f.radio_button :available_discord_eq, '', {:checked => true}}指定なし
+          | #{f.radio_button :available_discord_eq, '', {:checked => true}}#{t('game_rooms.index.no_select')}
           | #{f.radio_button :available_discord_eq, true} #{t('game_rooms.index.sarch_discord_true')}
           | #{f.radio_button :available_discord_eq, false} #{t('game_rooms.index.sarch_discord_false')}
 
         .index_search_zone
           p = f.label t('game_rooms.index.sarch_ingame')
-          | #{f.radio_button :available_ingame_vc_eq, '', {:checked => true}}指定なし
+          | #{f.radio_button :available_ingame_vc_eq, '', {:checked => true}}#{t('game_rooms.index.no_select')}
           | #{f.radio_button :available_ingame_vc_eq, true} #{t('game_rooms.index.sarch_ingame_true')}
           | #{f.radio_button :available_ingame_vc_eq, false} #{t('game_rooms.index.sarch_ingame_false')}
 
       .index_search_zone
         p = f.label t('game_rooms.index.play_device')
-        | #{f.radio_button :play_device_eq, '', {:checked => true}}指定なし
+        | #{f.radio_button :play_device_eq, '', {:checked => true}}#{t('game_rooms.index.no_select')}
         | #{f.radio_button :play_device_eq, 0} #{t('game_rooms.index.sarch_device_playstation')}
         | #{f.radio_button :play_device_eq, 1} #{t('game_rooms.index.sarch_device_nintendo')}
         | #{f.radio_button :play_device_eq, 2} #{t('game_rooms.index.sarch_device_steam')}
@@ -52,7 +42,7 @@
       .index_search_zone
         p = f.submit t('game_rooms.index.sarch')
 
-  = sort_link(@q, :start_time, "開始時間")
+  = sort_link(@q, :start_time, t('game_rooms.index.start_time_sort'))
 
   section#sec.mt40
     ul.row.padding-0
@@ -64,57 +54,10 @@
               p.device_button = gr.play_device
 
             - if gr.participants.find_by(state: 0).participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
-
-              - if gr.available_twitter == true
-                - if current_user.twitter_address.present?
-                  - if gr.available_skype == true
-                    - if current_user.skype_id.present?
-                      = render 'index_device_check', gameroom: gr
-                    - else
-                      p = t("game_rooms.index.validate_skype")
-                      = render 'index_input_form', gameroom: gr, device: "skype"
-                  - elsif gr.available_discord == true
-                    - if current_user.discord_id.present?
-                      = render 'index_device_check', gameroom: gr
-                    - else
-                      p = t("game_rooms.index.validate_discord")
-                      = render 'index_input_form', gameroom: gr, device: "discord"
-                  - else
-                    p = render 'index_device_check', gameroom: gr
-
-                - elsif gr.available_discord == true
-                  - if current_user.discord_id.present?
-                    p = t("game_rooms.index.validate_twitter")
-                    = render 'index_input_form', gameroom: gr, device: "twitter"
-                  - else
-                    p = t("game_rooms.index.validate_discord")
-                    p = t("game_rooms.index.validate_twitter")
-                    = render 'index_input_form_params2', gameroom: gr, device: "twitter", device2: "discord"
-                - elsif gr.available_skype == true
-                  - if current_user.skype_id.present?
-                    p = t("game_rooms.index.validate_twitter")
-                    = render 'index_input_form', gameroom: gr, device: "twitter"
-                  - else
-                    p = t("game_rooms.index.validate_skype")
-                    p = t("game_rooms.index.validate_twitter")
-                    = render 'index_input_form_params2', gameroom: gr, device: "twitter", device2: "skype"
-                p = render 'index_device_check', gameroom: gr
-
-              - elsif gr.available_twitter == false
-                - if gr.available_skype == true
-                  - if current_user.skype_id.present?
-                    p = render 'index_device_check', gameroom: gr
-                  - else
-                    p = t("game_rooms.index.validate_skype")
-                    = render 'index_input_form', gameroom: gr, device: "skype"
-                - elsif gr.available_discord == true
-                  - if current_user.discord_id.present?
-                    p = render 'index_device_check', gameroom: gr
-                  - else
-                    p = t("game_rooms.index.validate_discord")
-                    = render 'index_input_form', gameroom: gr, device: "discord"
-                - else
-                  p = render 'index_device_check', gameroom: gr
+              - if condition_fullfill(current_user, gr)
+                p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
+              - else
+                = render 'index_input_form', gameroom: gr
 
             - else gr.participants.where(participant_id: current_user.id).present?
               p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
