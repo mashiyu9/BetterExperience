@@ -6,7 +6,7 @@ div id="testModal#{gameroom.id}" class="modal fade show" aria-hidden="true" aria
   .modal-dialog
     .modal-content
       .modal-header
-        h4 class="modal-title" id="myModalLabel"&gt;ユーザー情報を編集
+        h4 class="modal-title" id="myModalLabel"&gt;必要な情報を登録してください
       .modal-body
         .test
           = form_for(current_user, url: user_registration_path, html: { method: :patch }) do |f|
