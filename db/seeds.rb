@@ -14,6 +14,16 @@
           discord_id: discord_id,
           twitter_address: twitter_address,)
 end
+User.create!(
+  name: "TestUser",
+  email: "testuser@gmail.com",
+  password: "testuser",
+  password_confirmation:"testuser",
+  confirmed_at: Time.zone.now,
+  skype_id:"",
+  discord_id: "",
+  twitter_address: "",)
+
 20.times do |n|
   num = n + 1
   GameMachine.create!(
@@ -35,6 +45,19 @@ end
     game_device:2,
     device_id:Faker::App.name,)
 end
+
+GameMachine.create!(
+    user_id:21,
+    game_device:0,
+    device_id:"",)
+GameMachine.create!(
+    user_id:21,
+    game_device:1,
+    device_id:"",)
+GameMachine.create!(
+    user_id:21,
+    game_device:2,
+    device_id:"",)
 
 20.times do |n|
   game_title = Faker::Games::Pokemon.name
