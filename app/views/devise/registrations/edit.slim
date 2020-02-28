@@ -14,10 +14,16 @@ h2.mb40 = "#{resource.email} #{t('users.edit.top')}"
       span.bar
       label = t('users.new.profile')
     .group
-      = f.text_field :email, required: ""
-      span.highlight
-      span.bar
-      label = t('users.new.email')
+      - if current_user.id == 21
+        = f.hidden_field :email, required: ""
+        span.highlight
+        span.bar
+        label = t('users.new.email')
+      -else
+        = f.text_field :email, required: ""
+        span.highlight
+        span.bar
+        label = t('users.new.email')
     .group
       = f.text_field :twitter_address
       span.highlight

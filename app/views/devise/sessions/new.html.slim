@@ -28,3 +28,15 @@
         p.devise_facebook
           a href="/users/auth/facebook" = t('users.login.facebook_confirment')
         a href="/users/password/new" class="remember_me" = t('users.login.forget_pass')
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form login" }) do |f|
+        .field.form__field
+          = f.hidden_field :email, autofocus: true, autocomplete: "email", value: "testuser@gmail.com"
+          = f.hidden_field :password, autocomplete: "current-password", value: "testuser"
+        .actions.form__field
+          = f.submit "テストユーザーでログイン"
+
+
+
+
+
+
