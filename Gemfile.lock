@@ -175,7 +175,7 @@ GEM
     polyamorous (2.3.2)
       activerecord (>= 5.2.1)
     public_suffix (4.0.3)
-    puma (3.12.2)
+    puma (3.12.3)
     rack (2.2.2)
     rack-proxy (0.6.5)
       rack
@@ -328,7 +328,7 @@ DEPENDENCIES
   omniauth-facebook
   paranoia
   pg (>= 0.18, < 2.0)
-  puma (~> 3.11)
+  puma (~> 3.12)
   rails (~> 5.2.4, >= 5.2.4.1)
   rails-i18n (~> 5.1)
   ransack
