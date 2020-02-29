@@ -12,7 +12,7 @@ class User < ApplicationRecord
   # has_many :active_block, foreign_key: 'user_id', class_name: 'blacklist', dependent: :destroy
   # has_many :passive_block, foreign_key: 'block_user_id', class_name: 'blacklist', dependent: :destroy
   has_many :game_machines, dependent: :destroy
-  has_many :participants, class_name: "Participant", foreign_key: "participant_id", dependent: :destroy
+  has_many :participants, class_name: "Participant", foreign_key: "user_id", dependent: :destroy
   has_many :game_rooms, through: :participants
   has_many :game_room_messages, dependent: :destroy, class_name: 'GameRoomMessage', foreign_key: 'write_user_id'
   has_many :message, dependent: :destroy

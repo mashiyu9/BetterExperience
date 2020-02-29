@@ -86,12 +86,12 @@ ActiveRecord::Schema.define(version: 2020_01_22_073826) do
 
   create_table "participants", force: :cascade do |t|
     t.bigint "game_room_id"
-    t.bigint "participant_id"
+    t.bigint "user_id"
     t.integer "state", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_room_id"], name: "index_participants_on_game_room_id"
-    t.index ["participant_id"], name: "index_participants_on_participant_id"
+    t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -126,5 +126,5 @@ ActiveRecord::Schema.define(version: 2020_01_22_073826) do
   add_foreign_key "messages", "chat_rooms"
   add_foreign_key "messages", "users"
   add_foreign_key "participants", "game_rooms"
-  add_foreign_key "participants", "users", column: "participant_id"
+  add_foreign_key "participants", "users"
 end

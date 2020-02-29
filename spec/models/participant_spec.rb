@@ -2,16 +2,16 @@ require 'rails_helper'
 
 RSpec.describe Participant, type: :model do
   before do
-    @owner = FactoryBot.create(:owner, game_room_id: game_room.id, participant_id: user.id)
+    @owner = FactoryBot.create(:owner, game_room_id: game_room.id, user_id: user.id)
   end
   let(:game_room) {FactoryBot.create(:game_room)}
   let(:user) {FactoryBot.create(:user)}
-  let(:participant) {FactoryBot.create(:participant, game_room_id: game_room.id, participant_id: user.id)}
+  let(:participant) {FactoryBot.create(:participant, game_room_id: game_room.id, user_id: user.id)}
 
   it 'game_room_idが入力されていないといけない' do
     @participant_user = Participant.new(
       game_room_id: 1,
-      participant_id: 1,
+      user_id: 1,
       state: 1,
     )
     expect(@participant_user).not_to be_valid
@@ -20,7 +20,7 @@ RSpec.describe Participant, type: :model do
   it 'participant_idが入力されていないといけない' do
     @participant_user = Participant.new(
       game_room_id: 1,
-      participant_id: 1,
+      user_id: 1,
       state: 1,
     )
     expect(@participant_user).not_to be_valid
@@ -29,7 +29,7 @@ RSpec.describe Participant, type: :model do
   it 'stateが入力されていないといけない' do
     @participant_user = Participant.new(
       game_room_id: 1,
-      participant_id: 1,
+      user_id: 1,
       state: 1,
     )
     expect(@participant_user).not_to be_valid

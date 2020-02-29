@@ -19,7 +19,7 @@ class GameRoomsController < ApplicationController
 
   def create
     @game_room = GameRoom.new(game_room_params)
-    @game_room.participants.build(participant_id: current_user.id, state: 0)
+    @game_room.participants.build(user_id: current_user.id, state: 0)
 
     if @game_room.save
       redirect_to game_rooms_path

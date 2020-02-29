@@ -23,9 +23,8 @@ class GameRoom < ApplicationRecord
     # binding.irb
     # Participant.find_by(game_room_id: gr.id, participant_id: current_user.id).blank?
     # self.participants.user_tied_game_room(self, user).blank?
-    self.participants.find_by(state:0).participant_id == user.id
+    self.participants.find_by(stat:0).user_id == user.id
   end
-
 
   def date_not_before_today
     errors.add(:start_time, "は今日以降のものを選択してください") if start_time.nil? || start_time < Date.today

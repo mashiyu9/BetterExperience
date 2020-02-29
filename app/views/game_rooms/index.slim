@@ -55,11 +55,11 @@
 
             - if can_make_request(gr)
               - if condition_fullfill(current_user, gr)
-                p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
+                p = link_to t('game_rooms.index.hope_to'), participants_path(user_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
               - else
                 = render 'index_input_form', gameroom: gr
 
-            - else gr.participants.where(participant_id: current_user.id).present?
+            - else gr.participants.where(user_id: current_user.id).present?
               p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
             .room_title.room_items
               p = gr.room_name
