@@ -2,14 +2,15 @@ class GameRoomsController < ApplicationController
 
   require 'date'
 
-  before_action :authenticate_user!
+  before_action :set_game_title
+
+  helper_method :condition_fullfill, :need_conditions, :can_make_request
+
 
   PER = 12
   def index
     @q = GameRoom.ransack(params[:q])
     @game_rooms = @q.result(distinct: true).where('start_time >= ?', Date.today).page(params[:page]).per(PER)
-    @game_titles = [t('game_rooms.index.title1'), t('game_rooms.index.title2'),t('game_rooms.index.title3'),t('game_rooms.index.title4'),t('game_rooms.index.title5'),t('game_rooms.index.title6'),t('game_rooms.index.title7'),t('game_rooms.index.title8')]
-
   end
 
   def new
@@ -19,44 +20,6 @@ class GameRoomsController < ApplicationController
   def create
     @game_room = GameRoom.new(game_room_params)
     @game_room.participants.build(participant_id: current_user.id, state: 0)
-
-
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_skype])
-      @game_room.update_attributes(available_skype: true)
-    else
-      @game_room.update_attributes(available_skype: false)
-    end
-
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:vc_possible])
-      @game_room.update_attributes(vc_possible: true)
-    else
-      @game_room.update_attributes(vc_possible: false)
-    end
-
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_discord])
-      @game_room.update_attributes(available_discord: true)
-    else
-      @game_room.update_attributes(available_discord: false)
-    end
-
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_ingame_vc])
-      @game_room.update_attributes(available_ingame_vc: true)
-    else
-      @game_room.update_attributes(available_ingame_vc: false)
-    end
-
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:available_twitter])
-      @game_room.update_attributes(available_twitter: true)
-    else
-      @game_room.update_attributes(available_twitter: false)
-    end
-
-    if ActiveRecord::Type::Boolean.new.cast(params[:game_room][:open_twitter])
-      @game_room.update_attributes(open_twitter: true)
-    else
-      @game_room.update_attributes(open_twitter: false)
-    end
-
 
     if @game_room.save
       redirect_to game_rooms_path
@@ -88,6 +51,11 @@ class GameRoomsController < ApplicationController
       render :edit
     end
   end
+  # ownerではなく、ゲームルームに参加中でもなく参加希望も出していな状態かどうかチェックしている
+  def can_make_request(gr)
+    if gr.user_not_owner(current_user) && gr.participants.user_exists(current_user).blank?
+    end
+  end
 
   # 一つでも[true,false]の組み合わせがあったらfalseになるメソッド(true,falseの組み合わせになったら、情報が足りていないということ),不足しているものがあるかどうかチェックするメソッド
   def condition_fullfill(user, gr)
@@ -114,10 +82,20 @@ class GameRoomsController < ApplicationController
     result.select{|_, v| v == true}.keys
   end
 
-  helper_method :condition_fullfill
-  helper_method :need_conditions
 
   private
+  def set_game_title
+    @game_titles = [
+      t('game_rooms.index.title1'),
+      t('game_rooms.index.title2'),
+      t('game_rooms.index.title3'),
+      t('game_rooms.index.title4'),
+      t('game_rooms.index.title5'),
+      t('game_rooms.index.title6'),
+      t('game_rooms.index.title7'),
+      t('game_rooms.index.title8')
+    ]
+  end
 
   def game_room_params
     params.require(:game_room).permit(:game_title, :comment, :vc_possible, :available_skype, :available_discord, :available_twitter, :available_ingame_vc, :start_time, :play_time, :play_device, :open_twitter, :close_info, :close_message, :room_name)

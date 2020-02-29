@@ -28,7 +28,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def edit
   #   super
   # end
-
   # PUT /resource
   def update
     if params[:room_info]

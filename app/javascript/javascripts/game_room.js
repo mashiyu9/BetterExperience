@@ -7,12 +7,6 @@ $(document).on("turbolinks:load", function() {
     $("#game_title").val("PUBG");
   });
 
-  // $("#tag_3").on("click", function() {
-  //   $("#game_title").val("Fortnite");
-  // });
-  // $("#tag_3").on("click", function() {
-  //   $("#game_title").val("Foraaaaatnite");
-  // });
   $("#tag_3").on("click", function() {
     $("#game_title").val("Fortnite");
   });

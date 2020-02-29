@@ -78,11 +78,12 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'better_errors'
 
   gem 'slim'
   gem 'html2slim'
   gem 'letter_opener_web'
+  gem 'binding_of_caller'
+  gem 'better_errors'
 end
 
 group :test do
