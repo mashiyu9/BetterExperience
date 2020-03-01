@@ -84,6 +84,7 @@ group :development do
   gem 'letter_opener_web'
   gem 'binding_of_caller'
   gem 'better_errors'
+  gem 'bullet'
 end
 
 group :test do

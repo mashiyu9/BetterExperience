@@ -27,8 +27,7 @@ class GameRoom < ApplicationRecord
   end
 
   def user_exists?(current_user_id)
-    # scope :search_current_user, -> (current_user) {find_by(user_id: current_user)}
-    self.participants.search_current_user(current_user_id).present?
+    self.participants.find_by(user_id: current_user_id).present?
   end
 
   def user_not_owner?(user)

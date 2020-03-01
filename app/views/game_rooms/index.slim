@@ -44,56 +44,70 @@
 
   = sort_link(@q, :start_time, t('game_rooms.index.start_time_sort'))
 
-  section#sec.mt40
-    ul.row.padding-0
-      - @game_rooms.each do |gr|
-        li.col-md-4.col-sm-6
-          .testdiv.no_border
-            h3.game_room_title = gr.game_title
-            .room_device.room_items
-              p.device_button = gr.play_device
+hr.my-5/
+section.text-center
+  .row.mb-4.wow.fadeIn
+    - @game_rooms.each do|gr|
+      .col-lg-4.col-md-12.mb-4
+        .card
+          .card-body.testdiv.no_border
+            h4.card-title.font-italic = gr.game_title
             - if user_signed_in?
               - if can_make_request(gr)
                 - if condition_fullfill(current_user, gr)
-                  p = link_to t('game_rooms.index.hope_to'), participants_path(user_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
+                  p = link_to t('game_rooms.index.hope_to'), participants_path(user_id: gr.id), method: :post, class: "inlink btn btn-primary", notice: t('game_rooms.index.hope')
                 - else
                   = render 'index_input_form', gameroom: gr
               - else
-                p = link_to t('game_rooms.index.show'), game_room_path(gr.id), class: "index_show_button"
-            .room_title.room_items
-              p = gr.room_name
-            .room_start_time.room_items
-              p = t('game_rooms.index.start_time')
-              p = gr.start_time.strftime("%y年%m月%d日 %H:%M:%S")
-            .room_play_time.room_items
-              p = t('game_rooms.index.play_time')
-              p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
-            .room_owner_name.room_items
-              p = t('game_rooms.index.owner_name')
-              / p = gr.participants.find_by(state: 0).user.name
-              p = find_owner_info(gr).name
-            - if gr.comment.present?
-              .room_comment.room_items
-                p = t('game_rooms.index.comment')
-                p = gr.comment
-            - if gr.vc_possible == true
-              .room_vc.room_items
-                p = t('game_rooms.index.available_vc')
-            - if gr.available_skype == true
-              .room_skype.room_items
-                p = t('game_rooms.index.available_skype')
-            - if gr.available_discord == true
-              .room_discord.room_items
-                p = t('game_rooms.index.available_discord')
-            - if gr.available_ingame_vc == true
-              .room_ingame_vc.room_items
-                p = t('game_rooms.index.available_ingame')
-            - if gr.available_twitter == true
-              .room_twitter.room_items
-                p = t('game_rooms.index.open_twitter')
-                p = find_owner_info(gr).twitter_address
-            - else gr.open_twitter == true
-              .room_twitter.room_items
-                p = t('game_rooms.index.twitter_all')
-                p = find_owner_info(gr).twitter_address
-    = paginate @game_rooms
+                p = link_to t('game_rooms.index.show'), game_room_path(gr.id), class: "index_show_button btn btn-primary"
+            p.card-text
+              .room_title.room_items
+                p = gr.room_name
+            p.card-text
+              .room_device.room_items
+                p.device_button = gr.play_device
+            p.card-text
+              - if gr.comment.present?
+                .room_comment.room_items
+                  p = t('game_rooms.index.comment')
+                  p = gr.comment
+
+            p.card-text
+              - if gr.vc_possible == true
+                .room_vc.room_items
+                  p = t('game_rooms.index.available_vc')
+            p.card-text
+              - if gr.available_skype == true
+                .room_skype.room_items
+                  p = t('game_rooms.index.available_skype')
+            p.card-text
+              - if gr.available_discord == true
+                .room_discord.room_items
+                  p = t('game_rooms.index.available_discord')
+            p.card-text
+              - if gr.available_ingame_vc == true
+                .room_ingame_vc.room_items
+                  p = t('game_rooms.index.available_ingame')
+            p.card-text
+              .room_start_time.room_items.text-align-left
+                p = t('game_rooms.index.start_time')
+                p = gr.start_time.strftime("%y年%m月%d日 %H:%M:%S")
+            p.card-text
+              .room_play_time.room_items.text-align-left
+                p = t('game_rooms.index.play_time')
+                p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
+            p.card-text
+              .room_owner_name.room_items.text-align-right
+                p = t('game_rooms.index.owner_name')
+                = find_owner_info(gr).name
+            p.card-text
+              - if gr.available_twitter == true
+                .room_twitter.room_items.text-align-right
+                  i.fab.fa-twitter-square.mr8.fa-lg
+                  = find_owner_info(gr).twitter_address
+              - else gr.open_twitter == true
+                .room_twitter.room_items.text-align-right
+                  i.fab.fa-twitter-square.mr8.fa-lg
+                  = find_owner_info(gr).twitter_address
+  = paginate @game_rooms
+

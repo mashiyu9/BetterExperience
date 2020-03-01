@@ -9,7 +9,7 @@ class GameRoomsController < ApplicationController
   PER = 12
 
   def index
-    @q = GameRoom.ransack(params[:q])
+    @q = GameRoom.all.includes([:participants, :users]).ransack(params[:q])
     @game_rooms = @q.result(distinct: true).valid_time_room.page(params[:page]).per(PER)
   end
 
@@ -52,11 +52,11 @@ class GameRoomsController < ApplicationController
     end
   end
   def find_owner_info(gr)
-    gr.participants.owner.user
+    @owner = gr.participants.owner.user
   end
   # ownerではなく、ゲームルームに参加中でもなく参加希望も出していな状態かどうかチェックしている
   def can_make_request(gr)
-    gr.user_not_owner?(current_user) && gr.user_exists?(current_user.id) == nil ? true : false
+    gr.user_not_owner?(current_user) && gr.user_exists?(current_user.id) == false ? true : false
   end
 
   # 一つでも[true,false]の組み合わせがあったらfalseになるメソッド(true,falseの組み合わせになったら、情報が足りていないということ),不足しているものがあるかどうかチェックするメソッド

@@ -6,6 +6,11 @@ html
     link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
     link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet"
     link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.12.0/css/mdb.min.css" rel="stylesheet"
+    link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet"
+    link href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap" rel="stylesheet"
+
+
+
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
@@ -18,7 +23,7 @@ html
 
   body
     header.container-fluid
-      nav.navbar.navbar-expand-lg.navbar-dark.primary-color
+      nav.navbar.navbar-expand-lg.navbar-dark
         = link_to "BetterExperience", game_rooms_path, {class: "navbar-brand"}
         button.navbar-toggler aria-controls="basicExampleNav" aria-expanded="false" aria-label=("Toggle navigation") data-target="#basicExampleNav" data-toggle="collapse" type="button"
           span.navbar-toggler-icon
