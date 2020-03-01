@@ -1,10 +1,10 @@
 
 .index_field
   = search_form_for @q do |f|
-    = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: "ゲームタイトルで検索"
+    = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: t('game_rooms.index.sarch_title')
     .game_tag.container.mt6
       - @game_titles.each_with_index do |title, x|
-        button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x + 1}"
+        button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x}"
           = title
 
       .index_search_zone
@@ -58,8 +58,8 @@
                   p = link_to t('game_rooms.index.hope_to'), participants_path(user_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
                 - else
                   = render 'index_input_form', gameroom: gr
-              - else gr.participants.where(user_id: current_user.id).present?
-                p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
+              - else
+                p = link_to t('game_rooms.index.show'), game_room_path(gr.id), class: "index_show_button"
             .room_title.room_items
               p = gr.room_name
             .room_start_time.room_items
@@ -70,7 +70,8 @@
               p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
             .room_owner_name.room_items
               p = t('game_rooms.index.owner_name')
-              p = gr.participants.find_by(state: 0).user.name
+              / p = gr.participants.find_by(state: 0).user.name
+              p = find_owner_info(gr).name
             - if gr.comment.present?
               .room_comment.room_items
                 p = t('game_rooms.index.comment')
@@ -90,9 +91,9 @@
             - if gr.available_twitter == true
               .room_twitter.room_items
                 p = t('game_rooms.index.open_twitter')
-                p = gr.participants.find_by(state:0).user.twitter_address
+                p = find_owner_info(gr).twitter_address
             - else gr.open_twitter == true
               .room_twitter.room_items
                 p = t('game_rooms.index.twitter_all')
-                p = gr.participants.find_by(state:0).user.twitter_address
+                p = find_owner_info(gr).twitter_address
     = paginate @game_rooms

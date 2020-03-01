@@ -22,6 +22,7 @@ ja:
       4hour: "4時間"
       5hour: "未定,とりあえず長く"
     index:
+      show: "詳細ページ"
       title1: "ApexLegends"
       title2: "PUBG"
       title3: "Fortnite"
@@ -52,6 +53,7 @@ ja:
       sarch_device_playstation: "Playstation"
       sarch_device_nintendo: "Nintendo"
       sarch_device_steam: "Steam"
+      sarch_title: "ゲームタイトルで検索"
       play_device: "遊ぶ機種"
       owner_name: "募集者"
       room_title: "一言メッセージ"

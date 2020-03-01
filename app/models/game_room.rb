@@ -14,17 +14,18 @@ class GameRoom < ApplicationRecord
   validate :date_not_before_today
   validate :date_not_after_one_year_later
 
+  scope :valid_time_room, -> {where('start_time >= ?', Date.today)}
 
   enum play_device:{
     PlayStation: 0,
     Nintendo: 1,
     Steam: 2,
   }
-  def user_exists?(user)
-    self.participants.find_by(user_id: user.id).present?
+  def user_exists?(current_user_id)
+    self.participants.find_by(user_id: current_user_id).present?
   end
 
-  def user_not_owner(user)
+  def user_not_owner?(user)
     self.participants.find_by(state:0).user_id != user.id
   end
 
