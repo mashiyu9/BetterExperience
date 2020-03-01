@@ -21,12 +21,18 @@ class GameRoom < ApplicationRecord
     Nintendo: 1,
     Steam: 2,
   }
+
+  def self.search_owner_info(game_room_id)
+    self.find(game_room_id).participants.owner
+  end
+
   def user_exists?(current_user_id)
-    self.participants.find_by(user_id: current_user_id).present?
+    # scope :search_current_user, -> (current_user) {find_by(user_id: current_user)}
+    self.participants.search_current_user(current_user_id).present?
   end
 
   def user_not_owner?(user)
-    self.participants.find_by(state:0).user_id != user.id
+    self.participants.owner.user_id != user.id
   end
 
   def date_not_before_today

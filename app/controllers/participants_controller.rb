@@ -3,9 +3,9 @@ class ParticipantsController < ApplicationController
   def create
     @participant = Participant.new(user_id: current_user.id, state: 1, game_room_id: params[:user_id])
     @current_user = current_user
-    @owner_user = GameRoom.find(params[:user_id]).participants.owner
+    @owner_user = GameRoom.search_owner_info(params[:user_id])
     if @participant.save
-      redirect_to game_rooms_path, notice: '参加を希望しました！'
+      redirect_to game_rooms_path, notice: '参加を申請しました！'
       GameRoomMailer.request_mail(@current_user, @owner_user).deliver
     else
       redirect_to game_rooms_path
