@@ -3,7 +3,7 @@ class ParticipantsController < ApplicationController
   def create
     @participant = Participant.new(user_id: current_user.id, state: 1, game_room_id: params[:user_id])
     @current_user = current_user
-    @owner_user = GameRoom.find(params[:user_id]).participants.find_by(state: 0)
+    @owner_user = GameRoom.find(params[:user_id]).participants.owner
     if @participant.save
       redirect_to game_rooms_path, notice: '参加を希望しました！'
       GameRoomMailer.request_mail(@current_user, @owner_user).deliver
@@ -16,7 +16,7 @@ class ParticipantsController < ApplicationController
   def update
     @participant = Participant.find(params[:id])
     if @participant.update(state: 2)
-      GameRoomMailer.approval_mail(@participant.participant, @participant.game_room).deliver
+      GameRoomMailer.approval_mail(@participant.user, @participant.game_room).deliver
       redirect_to game_room_path(params[:room_id])
     end
   end

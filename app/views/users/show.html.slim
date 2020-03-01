@@ -36,7 +36,7 @@
               p = gm.close_message
               p = gm.start_time.strftime("%m月%d日 %H:%M")
               p = "#{gm.play_time} 時間"
-              - if gm.participants.find_by(state: 0).participant.id == current_user.id
+              - if gm.participants.find_by(state: 0).user_id == current_user.id
                 p 募集主です
               = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
 
@@ -52,7 +52,7 @@
               p = gm.close_message
               p = gm.start_time.strftime("%m月%d日 %H:%M")
               p = "#{gm.play_time} 時間"
-              - if gm.participants.find_by(state: 2).participant.id == current_user.id
+              - if gm.participants.find_by(state: 2).user.id == current_user.id
                 p 参加中です
               = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
 
@@ -68,7 +68,7 @@
               p = gm.close_message
               p = gm.start_time.strftime("%m月%d日 %H:%M")
               p = "#{gm.play_time} 時間"
-              - if gm.participants.find_by(state: 1).participant.id == current_user.id
+              - if gm.participants.find_by(state: 1).user.id == current_user.id
                 p 参加申請中です
               = link_to t('users.show.room_show'), game_room_path(gm.id), class: "btn btn-primary room_show"
 

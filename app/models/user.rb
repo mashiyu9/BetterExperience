@@ -20,7 +20,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :game_machines
 
-
   # devise facebook認証 自動ログイン
   def self.find_for_oauth(auth)
     user = User.find_by(uid: auth.uid, provider: auth.provider)

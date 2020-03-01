@@ -6,8 +6,8 @@ class GameRoomsController < ApplicationController
 
   helper_method :condition_fullfill, :need_conditions, :can_make_request
 
-
   PER = 12
+
   def index
     @q = GameRoom.ransack(params[:q])
     @game_rooms = @q.result(distinct: true).where('start_time >= ?', Date.today).page(params[:page]).per(PER)
@@ -53,8 +53,7 @@ class GameRoomsController < ApplicationController
   end
   # ownerではなく、ゲームルームに参加中でもなく参加希望も出していな状態かどうかチェックしている
   def can_make_request(gr)
-    if gr.user_not_owner(current_user) && gr.participants.user_exists(current_user).blank?
-    end
+    gr.user_not_owner(current_user) && gr.user_exists?(current_user) == false ? true : false
   end
 
   # 一つでも[true,false]の組み合わせがあったらfalseになるメソッド(true,falseの組み合わせになったら、情報が足りていないということ),不足しているものがあるかどうかチェックするメソッド
@@ -63,7 +62,7 @@ class GameRoomsController < ApplicationController
       [gr.available_twitter?, user.twitter_address.present?],
       [gr.available_skype?, user.skype_id.present?],
       [gr.available_discord?, user.discord_id.present?],
-      [gr.play_device == "PlayStation", user.game_machines.find_by(game_device: "PlayStation").device_id.present?],
+      [gr.play_device == "PlayStation", user.game_machines.check_playstation_id_present],
       [gr.play_device == "Nintendo", user.game_machines.find_by(game_device: "Nintendo").device_id.present?],
       [gr.play_device == "Steam", user.game_machines.find_by(game_device: "Steam").device_id.present?],
     ].all? do |pair|
@@ -93,7 +92,7 @@ class GameRoomsController < ApplicationController
       t('game_rooms.index.title5'),
       t('game_rooms.index.title6'),
       t('game_rooms.index.title7'),
-      t('game_rooms.index.title8')
+      t('game_rooms.index.title8'),
     ]
   end
 

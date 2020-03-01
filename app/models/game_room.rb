@@ -14,16 +14,18 @@ class GameRoom < ApplicationRecord
   validate :date_not_before_today
   validate :date_not_after_one_year_later
 
+
   enum play_device:{
     PlayStation: 0,
     Nintendo: 1,
     Steam: 2,
   }
+  def user_exists?(user)
+    self.participants.find_by(user_id: user.id).present?
+  end
+
   def user_not_owner(user)
-    # binding.irb
-    # Participant.find_by(game_room_id: gr.id, participant_id: current_user.id).blank?
-    # self.participants.user_tied_game_room(self, user).blank?
-    self.participants.find_by(stat:0).user_id == user.id
+    self.participants.find_by(state:0).user_id != user.id
   end
 
   def date_not_before_today

@@ -52,15 +52,14 @@
             h3.game_room_title = gr.game_title
             .room_device.room_items
               p.device_button = gr.play_device
-
-            - if can_make_request(gr)
-              - if condition_fullfill(current_user, gr)
-                p = link_to t('game_rooms.index.hope_to'), participants_path(user_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
-              - else
-                = render 'index_input_form', gameroom: gr
-
-            - else gr.participants.where(user_id: current_user.id).present?
-              p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
+            - if user_signed_in?
+              - if can_make_request(gr)
+                - if condition_fullfill(current_user, gr)
+                  p = link_to t('game_rooms.index.hope_to'), participants_path(user_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
+                - else
+                  = render 'index_input_form', gameroom: gr
+              - else gr.participants.where(user_id: current_user.id).present?
+                p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
             .room_title.room_items
               p = gr.room_name
             .room_start_time.room_items
@@ -71,7 +70,7 @@
               p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
             .room_owner_name.room_items
               p = t('game_rooms.index.owner_name')
-              p = gr.participants.find_by(state: 0).participant.name
+              p = gr.participants.find_by(state: 0).user.name
             - if gr.comment.present?
               .room_comment.room_items
                 p = t('game_rooms.index.comment')
@@ -91,9 +90,9 @@
             - if gr.available_twitter == true
               .room_twitter.room_items
                 p = t('game_rooms.index.open_twitter')
-                p = gr.participants.find_by(state:0).participant.twitter_address
+                p = gr.participants.find_by(state:0).user.twitter_address
             - else gr.open_twitter == true
               .room_twitter.room_items
                 p = t('game_rooms.index.twitter_all')
-                p = gr.participants.find_by(state:0).participant.twitter_address
+                p = gr.participants.find_by(state:0).user.twitter_address
     = paginate @game_rooms
