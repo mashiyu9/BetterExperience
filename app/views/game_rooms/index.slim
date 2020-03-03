@@ -4,7 +4,7 @@
     = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: t('game_rooms.index.sarch_title')
     .game_tag.container.mt6
       - @game_titles.each_with_index do |title, x|
-        button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x}"
+        button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x + 1}"
           = title
 
       .index_search_zone
@@ -12,6 +12,7 @@
         | #{f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none", checked: true} #{t('game_rooms.index.no_select')}
         | #{f.radio_button :vc_possible_eq, true, id: "vc_possible_index"} #{t('game_rooms.index.sarch_vc_true')}
         | #{f.radio_button :vc_possible_eq, false, id: "vc_possible_index_no"} #{t('game_rooms.index.sarch_vc_false')}
+
 
       .layout_none#layout_none
         .index_search_zone
@@ -45,7 +46,7 @@
   = sort_link(@q, :start_time, t('game_rooms.index.start_time_sort'))
 
 hr.my-5/
-section.text-center
+section.text-center.layout-kaminari
   .row.mb-4.wow.fadeIn
     - @game_rooms.each do|gr|
       .col-lg-4.col-md-12.mb-4
@@ -109,5 +110,5 @@ section.text-center
                 .room_twitter.room_items.text-align-right
                   i.fab.fa-twitter-square.mr8.fa-lg
                   = find_owner_info(gr).twitter_address
-  = paginate @game_rooms
+  = paginate @game_rooms, theme: 'twitter-bootstrap-4'
 
