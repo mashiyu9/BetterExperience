@@ -1,5 +1,31 @@
 
 .index_field
+
+
+
+  .content
+    #search-box
+      = form_tag(game_rooms_path, method: :get) do
+        = text_field_tag :good, "",  id: "good_search", name: "keyword", placeholder: "キーワードを打ち込んでください", style: "width: 200px;"
+        button title="検索" type="submit"  検索
+    h2 検索結果
+    #good_list
+      = render partial: 'game_title_list'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   = search_form_for @q do |f|
     = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: t('game_rooms.index.sarch_title')
     .game_tag.container.mt6

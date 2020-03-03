@@ -11,6 +11,10 @@ class GameRoomsController < ApplicationController
   def index
     @q = GameRoom.all.includes([:participants, :users]).ransack(params[:q])
     @game_rooms = @q.result(distinct: true).valid_time_room.page(params[:page]).per(PER)
+
+    if params[:keyword]
+      @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
+    end
   end
 
   def new
@@ -51,6 +55,14 @@ class GameRoomsController < ApplicationController
       render :edit
     end
   end
+
+  def search
+    if params[:keyword]
+      @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
+    end
+
+  end
+
   def find_owner_info(gr)
     @owner = gr.participants.owner.user
   end
