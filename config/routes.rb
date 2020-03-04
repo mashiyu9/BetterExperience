@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   get  "privacy_policy/index"
   resources :users, only: %i!show!
   resources :game_rooms, only: %i!index new create edit update show destroy!
-  get 'rakuten_search' => 'game_rooms#search'
   resources :participants, only: %i! create update destroy!
   resources :game_room_messages, only: %i! create destroy!
 

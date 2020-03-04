@@ -13,7 +13,7 @@ class GameRoomsController < ApplicationController
     @game_rooms = @q.result(distinct: true).valid_time_room.page(params[:page]).per(PER)
 
     if params[:keyword]
-      @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
+      @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword],tag_ids: 1005402)
     end
   end
 
@@ -21,7 +21,7 @@ class GameRoomsController < ApplicationController
     @game_room = GameRoom.new
   end
 
-  def create
+    def creat
     @game_room = GameRoom.new(game_room_params)
     @game_room.participants.build(user_id: current_user.id, state: 0)
 
@@ -54,13 +54,6 @@ class GameRoomsController < ApplicationController
     else
       render :edit
     end
-  end
-
-  def search
-    if params[:keyword]
-      @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword])
-    end
-
   end
 
   def find_owner_info(gr)
@@ -120,7 +113,4 @@ class GameRoomsController < ApplicationController
       redirect_to new_user_session_path
     end
   end
-
-
-
 end

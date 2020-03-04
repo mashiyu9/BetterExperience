@@ -1,5 +1,32 @@
 
 // index
+.horizontal-list {
+  padding: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.item {
+  text-align: center;
+  button{
+    border: none;
+  }
+  /* 横スクロール用 */
+  display: inline-block;
+  width: 300px;
+  /* 見た目調整 */
+  height: 200px;
+  margin: 10px;
+  font-size: 48px;
+  background: rgba(255, 0, 0, 0.4);
+  p {
+  font-size: 14px;
+    a{
+      font-size: 14px;
+    }
+  }
+}
 .card {
   display: flex;
   flex-flow: row wrap;
