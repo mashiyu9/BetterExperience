@@ -51,6 +51,11 @@
       / - @game_titles.each_with_index do |title, x, image_url, sorce|
       /   button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x + 1}"
       /     = title
+      .index_search_zone
+        .custom-control.custom-radio
+          / input#defaultUnchecked.custom-control-input name="defaultExampleRadios" type="radio" /
+          = f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none defaultchecked",class: "custom-control-input", checked: true
+          / label.custom-control-label for="defaultUnchecked"  Default unchecked
 
       .index_search_zone
         p = f.label t('game_rooms.index.sarch_vc_possible')
