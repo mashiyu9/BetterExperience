@@ -67,6 +67,7 @@
       #message_box.mt40
         #comments_area
           = render 'game_room_messages/index'
+          = render @messages
         = render 'game_room_messages/form', room_id: @game_room.id
 
   .show_game_room.mt40

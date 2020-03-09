@@ -41,6 +41,7 @@ class GameRoomsController < ApplicationController
     @participants = @game_room.participants
     @owner = @participants.owner
     @room_message = @game_room.game_room_messages
+    @messages = @game_room.game_room_messages
   end
 
   def edit
