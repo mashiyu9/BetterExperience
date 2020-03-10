@@ -84,6 +84,10 @@
       p = t('game_rooms.show.comment')
       p = @game_room.comment
 
+    .room_comment.room_items.mt15
+      p = t('game_rooms.show.comment')
+      p = @game_room.comment
+
     .room_vc.room_items.mt15
       - if @game_room.vc_possible == true
         p = t('game_rooms.show.available_vc')
