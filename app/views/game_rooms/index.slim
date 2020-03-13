@@ -1,17 +1,72 @@
 
 .index_field
+  / .content
+  /   #search-box
+  /     = form_tag(game_rooms_path, method: :get) do
+  /       = text_field_tag :good, "",  id: "good_search", name: "keyword", placeholder: "キーワードを打ち込んでください", style: "width: 200px;"
+  /       button title="検索" type="submit"  検索
+  /   h2 検索結果
+  /   #good_list
+  /     = render partial: 'game_title_list'
+
   = search_form_for @q do |f|
-    = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: "ゲームタイトルで検索"
+    = f.search_field :game_title_cont, class: "search_box", id: "game_title", placeholder: t('game_rooms.index.sarch_title')
     .game_tag.container.mt6
-      - @game_titles.each_with_index do |title, x|
-        button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x + 1}"
-          = title
+      h4.mb2.mt10 画像をクリックすると検索窓にタイトルが入ります
+      ul.horizontal-list
+        li.item
+          button type="button" id="tag_1" class="image_btn"
+            = image_tag 'https://media.contentapi.ea.com/content/dam/apex-legends/images/2019/01/apex-featured-image-16x9.jpg.adapt.crop191x100.1200w.jpg', size:'300x200'
+          p.text-algin-center = link_to "引用元:Electronic Arts", "https://www.ea.com/"
+        li.item
+          button type="button" id="tag_2" class="image_btn"
+            = image_tag 'https://pubg.dmm.com/images/official/base/pic_thumb_cover.jpg', size:'300x200'
+          p.text-algin-center = link_to "引用元:PUBG DMM", "http://pubg.dmm.com/"
+        li.item
+          button type="button" id="tag_3" class="image_btn"
+            = image_tag 'https://cdn2.unrealengine.com/Fortnite%2Fblog%2Fchapter-2-season-2-update%2F11BR_Evergreens_Blue_NewsHeader-1920x1080-77ade2f5f2bc0312b4978dcd7639adfe00211fe6.jpg', size:'300x200'
+          p.text-algin-center = link_to "引用元:Epic Games", "https://www.epicgames.com/fortnite/ja/home"
+        li.item
+          button type="button" id="tag_4" class="image_btn"
+            = image_tag 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR8RnfbyyTRZMFMOGhgDZabd6hhBVpPaBJu3KIfQtsnAa0rLj30', size:'300x200'
+          p.text-algin-center = link_to "引用元:FF14公式", "https://jp.finalfantasyxiv.com/"
+
+        li.item
+          button type="button" id="tag_5" class="image_btn"
+            = image_tag '', size:'300x200'
+          p.text-algin-center Dead By Daylight
+        li.item
+          button type="button" id="tag_6" class="image_btn"
+            = image_tag 'https://www.pokemon.co.jp/ex/sword_shield/assets/lineup-package01.png', size:'300x200'
+          p.text-algin-center = link_to "引用元:任天堂・クリーチャーズ・ゲームフリーク Arts", "https://www.pokemon.co.jp/"
+        li.item
+          button type="button" id="tag_7" class="image_btn"
+            = image_tag 'https://lh3.googleusercontent.com/proxy/pr5lcZOpR0NbGDiOfzfCCBwURkSinHVgGvFzlEzK-g_1GoWPDXUxvUyQsGmR8hGqvD9I29o5-n8ezyigK6XBgel_cEgc52aUGB6JR_fhgya_JqQLt7OIQ0c', size:'300x200'
+          p.text-algin-center = link_to "引用元: カプコン公式", "http://www.capcom.co.jp/monsterhunter/world/"
+        li.item
+          button type="button" id="tag_8" class="image_btn"
+            = image_tag '', size:'300x200'
+          p.text-algin-center 大乱闘スマッシュブラザーズ
+
+      / - @game_titles.each_with_index do |title, x, image_url, sorce|
+      /   button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x + 1}"
+      /     = title
+      .index_search_zone
+        .custom-control.custom-radio
+          / input#defaultUnchecked.custom-control-input name="defaultExampleRadios" type="radio" /
+          = f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none defaultchecked",class: "custom-control-input", checked: true
+          / label.custom-control-label for="defaultUnchecked"  Default unchecked
 
       .index_search_zone
         p = f.label t('game_rooms.index.sarch_vc_possible')
+        / .custom-control.custom-radio
+        /   input#defaultUnchecked.custom-control-input name="defaultExampleRadios" type="radio" /
+        /   label.custom-control-label for="defaultUnchecked"  Default unchecked
+
         | #{f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none", checked: true} #{t('game_rooms.index.no_select')}
         | #{f.radio_button :vc_possible_eq, true, id: "vc_possible_index"} #{t('game_rooms.index.sarch_vc_true')}
         | #{f.radio_button :vc_possible_eq, false, id: "vc_possible_index_no"} #{t('game_rooms.index.sarch_vc_false')}
+
 
       .layout_none#layout_none
         .index_search_zone
@@ -44,56 +99,70 @@
 
   = sort_link(@q, :start_time, t('game_rooms.index.start_time_sort'))
 
-  section#sec.mt40
-    ul.row.padding-0
-      - @game_rooms.each do |gr|
-        li.col-md-4.col-sm-6
-          .testdiv.no_border
-            h3.game_room_title = gr.game_title
-            .room_device.room_items
-              p.device_button = gr.play_device
-
-            - if gr.participants.find_by(state: 0).participant_id != current_user.id && gr.participants.where(participant_id: current_user.id).blank?
-              - if condition_fullfill(current_user, gr)
-                p = link_to t('game_rooms.index.hope_to'), participants_path(participant_id: gr.id), method: :post, class: "inlink", notice: t('game_rooms.index.hope')
+hr.my-5/
+section.text-center.layout-kaminari
+  .row.mb-4.wow.fadeIn
+    - @game_rooms.each do|gr|
+      .col-lg-4.col-md-12.mb-4
+        .card
+          .card-body.testdiv.no_border
+            h4.card-title.font-italic = gr.game_title
+            - if user_signed_in?
+              - if can_make_request(gr)
+                - if condition_fullfill(current_user, gr)
+                  p = link_to t('game_rooms.index.hope_to'), participants_path(user_id: gr.id), method: :post, class: "inlink btn btn-primary", notice: t('game_rooms.index.hope')
+                - else
+                  = render 'index_input_form', gameroom: gr
               - else
-                = render 'index_input_form', gameroom: gr
+                p = link_to t('game_rooms.index.show'), game_room_path(gr.id), class: "index_show_button btn btn-primary"
+            p.card-text
+              .room_title.room_items
+                p = gr.room_name
+            p.card-text
+              .room_device.room_items
+                p.device_button = gr.play_device
+            p.card-text
+              - if gr.comment.present?
+                .room_comment.room_items
+                  p = t('game_rooms.index.comment')
+                  p = gr.comment
 
-            - else gr.participants.where(participant_id: current_user.id).present?
-              p = link_to "詳細ページへ", game_room_path(gr.id), class: "index_show_button"
-            .room_title.room_items
-              p = gr.room_name
-            .room_start_time.room_items
-              p = t('game_rooms.index.start_time')
-              p = gr.start_time.strftime("%y年%m月%d日 %H:%M:%S")
-            .room_play_time.room_items
-              p = t('game_rooms.index.play_time')
-              p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
-            .room_owner_name.room_items
-              p = t('game_rooms.index.owner_name')
-              p = gr.participants.find_by(state: 0).participant.name
-            - if gr.comment.present?
-              .room_comment.room_items
-                p = t('game_rooms.index.comment')
-                p = gr.comment
-            - if gr.vc_possible == true
-              .room_vc.room_items
-                p = t('game_rooms.index.available_vc')
-            - if gr.available_skype == true
-              .room_skype.room_items
-                p = t('game_rooms.index.available_skype')
-            - if gr.available_discord == true
-              .room_discord.room_items
-                p = t('game_rooms.index.available_discord')
-            - if gr.available_ingame_vc == true
-              .room_ingame_vc.room_items
-                p = t('game_rooms.index.available_ingame')
-            - if gr.available_twitter == true
-              .room_twitter.room_items
-                p = t('game_rooms.index.open_twitter')
-                p = gr.participants.find_by(state:0).participant.twitter_address
-            - else gr.open_twitter == true
-              .room_twitter.room_items
-                p = t('game_rooms.index.twitter_all')
-                p = gr.participants.find_by(state:0).participant.twitter_address
-    = paginate @game_rooms
+            p.card-text
+              - if gr.vc_possible == true
+                .room_vc.room_items
+                  p = t('game_rooms.index.available_vc')
+            p.card-text
+              - if gr.available_skype == true
+                .room_skype.room_items
+                  p = t('game_rooms.index.available_skype')
+            p.card-text
+              - if gr.available_discord == true
+                .room_discord.room_items
+                  p = t('game_rooms.index.available_discord')
+            p.card-text
+              - if gr.available_ingame_vc == true
+                .room_ingame_vc.room_items
+                  p = t('game_rooms.index.available_ingame')
+            p.card-text
+              .room_start_time.room_items.text-align-left
+                p = t('game_rooms.index.start_time')
+                p = gr.start_time.strftime("%y年%m月%d日 %H:%M:%S")
+            p.card-text
+              .room_play_time.room_items.text-align-left
+                p = t('game_rooms.index.play_time')
+                p = "#{gr.play_time} #{t('game_rooms.index.hour')}"
+            p.card-text
+              .room_owner_name.room_items.text-align-right
+                p = t('game_rooms.index.owner_name')
+                = find_owner_info(gr).name
+            p.card-text
+              - if gr.available_twitter == true
+                .room_twitter.room_items.text-align-right
+                  i.fab.fa-twitter-square.mr8.fa-lg
+                  = find_owner_info(gr).twitter_address
+              - else gr.open_twitter == true
+                .room_twitter.room_items.text-align-right
+                  i.fab.fa-twitter-square.mr8.fa-lg
+                  = find_owner_info(gr).twitter_address
+  = paginate @game_rooms, theme: 'twitter-bootstrap-4'
+

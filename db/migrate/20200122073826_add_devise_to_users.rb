@@ -77,7 +77,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[5.2]
   end
   create_table :participants do |t|
       t.references :game_room, foreign_key: true
-      t.references :participant, foreign_key: { to_table: :users }
+      t.references :user, foreign_key: true
       t.integer :state, null: false, default: 0
 
       t.timestamps

@@ -79,7 +79,7 @@ end
   num = n + 1
   Participant.create!(
     game_room_id:num,
-    participant_id:num,
+    user_id:num,
     state:0,
   )
 end

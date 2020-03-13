@@ -10,69 +10,71 @@
 
     - @participants.each do |user|
       .game_room_participants.mt20
-        p = user.participant.name
-        - if current_user.id == @owner.participant_id && user.id != current_user.id && user.state == "参加希望者"
+        p = user.user.name
+        - if current_user.id == @owner.user_id && user.id != current_user.id && user.state == "参加希望者"
           p.mt5 = user.state
           = link_to t('game_rooms.show.submit'), participant_path(user, room_id: @game_room.id), method: :patch
         - else
           p.mt5 = user.state
-        - if current_user.id == @owner.participant_id && @game_room.available_twitter == true
+        - if current_user.id == @owner.user_id && @game_room.available_twitter == true
           p.mt5
             i.fab.fa-twitter-square.mr8.fa-lg
-            = user.participant.twitter_address
+            = user.user.twitter_address
         - elsif @game_room.open_twitter
           p.mt5
             i.fab.fa-twitter-square.mr8.fa-lg
-            = user.participant.twitter_address
+            = user.user.twitter_address
 
         - if @game_room.available_discord == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
           p.mt5
             i.fab.fa-discord.mr8.fa-lg
-            = user.participant.discord_id
+            = user.user.discord_id
 
         - if @game_room.available_skype == true && (user.state == t('game_rooms.show.room_owner') || user.state == t('game_rooms.show.room_ok'))
           p.mt5
             i.fab.fa-skype.mr8.fa-lg
-            = user.participant.skype_id
+            = user.user.skype_id
 
         - if @game_room.play_device == "PlayStation"
           p.mt5
             i.fab.fa-playstation.mr8.fa-lg
-            = user.participant.game_machines.find_by(game_device: "PlayStation").device_id
+            = user.user.game_machines.find_by(game_device: "PlayStation").device_id
 
         - elsif @game_room.play_device == "Nintendo"
           p.mt5
             i.fas.fa-gamepad.mr8.fa-lg
-            = user.participant.game_machines.find_by(game_device: "Nintendo").device_id
+            = user.user.game_machines.find_by(game_device: "Nintendo").device_id
 
         - else @game_room.play_device == "Steam"
           p.mt5
             i.fab.fa-steam-square
-            = user.participant.game_machines.find_by(game_device: "Steam").device_id
+            = user.user.game_machines.find_by(game_device: "Steam").device_id
 
-        - if current_user.id == @owner.participant_id && user.state != t('game_rooms.show.room_owner')
-          p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.participant_id, room_id: @game_room.id), method: :delete
+        - if current_user.id == @owner.user_id && user.state != t('game_rooms.show.room_owner')
+          p = link_to t('game_rooms.show.kick'), participant_path(user_id: user.user_id, room_id: @game_room.id), method: :delete
 
 
 
-  - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0) && @game_room.close_message.present?
+  - if @participants.where("(user_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0) && @game_room.close_message.present?
     h2.mt40
       i.fas.fa-sticky-note.mr8
       = t('game_rooms.show.close_message')
     p.pl20.pr20.mt20= @game_room.close_message
 
-  / - if @participants.where("(participant_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0)
-  - if @participants.find_by(participant_id: current_user.id).state == "募集主" or @participants.find_by(participant_id: current_user.id).state == "参加確定者"
-    #message_box.mt40
-      #comments_area
-        = render 'game_room_messages/index'
-      = render 'game_room_messages/form', room_id: @game_room.id
+  / - if @participants.where("(user_id = ?) OR (state = ?) OR (state = ?)", current_user.id, 2, 0)
+  - if @participants.find_by(user_id: current_user.id).present?
+    - if @participants.find_by(user_id: current_user.id).state == "募集主" or @participants.find_by(user_id: current_user.id).state == "参加確定者"
+      #message_box.mt40
+        #comments_area
+          = render 'game_room_messages/index'
+          = render @messages
+        = render 'game_room_messages/form', room_id: @game_room.id
 
   .show_game_room.mt40
     .room_game_title.room_items
       h2
         = @game_room.game_title
-        - if current_user.id == @owner.participant_id
+        - if current_user.id == @owner.user_id
           span.edit_link= link_to t('game_rooms.show.edit_link'), edit_game_room_path(@game_room)
 
     .room_title.room_items.mt30

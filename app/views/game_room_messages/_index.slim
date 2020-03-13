@@ -1,5 +1,5 @@
 .message
-  - if @participants.find_by(participant_id: current_user.id)
+  - if @participants.find_by(user_id: current_user.id)
     h3.mb20 メッセージ一覧
     - @room_message.each do |m|
       .room_message.mt20

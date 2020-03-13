@@ -4,7 +4,7 @@ class GameRoom < ApplicationRecord
 
   has_many :participants, dependent: :destroy
   has_many :game_room_messages, dependent: :destroy
-  has_many :participant_user, through: :participants
+  has_many :users, through: :participants
 
   validates :game_title, presence: true
   validates :start_time, presence: true
@@ -14,21 +14,25 @@ class GameRoom < ApplicationRecord
   validate :date_not_before_today
   validate :date_not_after_one_year_later
 
+  scope :valid_time_room, -> {where('start_time >= ?', Date.today)}
+
   enum play_device:{
     PlayStation: 0,
     Nintendo: 1,
     Steam: 2,
   }
 
-  # def condition_fullfill(user, gr)
-  #   [
-  #     [gr.available_twitter, user.twitter_address],
-  #     [gr.available_skype, user.skype_id],
-  #     [gr.available_discord, user.discord_id],
-  #   ].all? do |pair|
-  #     pair != [true,false]
-  #   end
-  # end
+  def self.search_owner_info(game_room_id)
+    self.find(game_room_id).participants.owner
+  end
+
+  def user_exists?(current_user_id)
+    self.participants.find_by(user_id: current_user_id).present?
+  end
+
+  def user_not_owner?(user)
+    self.participants.owner.user_id != user.id
+  end
 
   def date_not_before_today
     errors.add(:start_time, "は今日以降のものを選択してください") if start_time.nil? || start_time < Date.today

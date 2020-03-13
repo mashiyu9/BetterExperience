@@ -53,9 +53,17 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
     bindex (0.8.1)
+    binding_of_caller (0.8.0)
+      debug_inspector (>= 0.0.1)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
+    bootstrap4-kaminari-views (1.0.1)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     builder (3.2.4)
+    bullet (6.1.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (11.1.1)
     capybara (3.31.0)
       addressable
@@ -79,6 +87,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.1.6)
     crass (1.0.6)
+    debug_inspector (0.0.3)
     devise (4.7.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -120,9 +129,6 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kaminari-bootstrap (3.0.1)
-      kaminari (>= 0.13.0)
-      rails
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.7.0)
@@ -209,6 +215,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
     rake (13.0.1)
+    rakuten_web_service (1.12.0)
     ransack (2.3.2)
       activerecord (>= 5.2.1)
       activesupport (>= 5.2.1)
@@ -281,6 +288,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.13.0)
     warden (1.2.8)
       rack (>= 2.0.6)
     web-console (3.7.0)
@@ -307,7 +315,10 @@ PLATFORMS
 
 DEPENDENCIES
   better_errors
+  binding_of_caller
   bootsnap (>= 1.1.0)
+  bootstrap4-kaminari-views
+  bullet
   byebug
   capybara (>= 2.15)
   chromedriver-helper
@@ -321,7 +332,6 @@ DEPENDENCIES
   html2slim
   jbuilder (~> 2.5)
   kaminari (~> 0.17.0)
-  kaminari-bootstrap (~> 3.0.1)
   letter_opener_web
   listen (>= 3.0.5, < 3.2)
   omniauth
@@ -331,6 +341,7 @@ DEPENDENCIES
   puma (~> 3.12)
   rails (~> 5.2.4, >= 5.2.4.1)
   rails-i18n (~> 5.1)
+  rakuten_web_service
   ransack
   rspec-rails
   sass-rails (~> 5.0)

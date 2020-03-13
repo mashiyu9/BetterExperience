@@ -28,7 +28,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def edit
   #   super
   # end
-
   # PUT /resource
   def update
     if params[:room_info]
@@ -41,7 +40,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         bypass_sign_in resource, scope: resource_name if sign_in_after_change_password?
 
       ############################ my
-        @participant = Participant.new(participant_id: current_user.id, state: 1, game_room_id: params[:room_info])
+        @participant = Participant.new(user_id: current_user.id, state: 1, game_room_id: params[:room_info])
         @current_user = current_user
         @owner_user = GameRoom.find(params[:room_info]).participants.find_by(state: 0)
         if @participant.save

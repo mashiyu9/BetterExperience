@@ -9,17 +9,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable, :omniauthable, :confirmable
 
-  # has_many :active_block, foreign_key: 'user_id', class_name: 'blacklist', dependent: :destroy
-  # has_many :passive_block, foreign_key: 'block_user_id', class_name: 'blacklist', dependent: :destroy
   has_many :game_machines, dependent: :destroy
-  has_many :participants, class_name: "Participant", foreign_key: "participant_id", dependent: :destroy
+  has_many :participants, class_name: "Participant", foreign_key: "user_id", dependent: :destroy
   has_many :game_rooms, through: :participants
   has_many :game_room_messages, dependent: :destroy, class_name: 'GameRoomMessage', foreign_key: 'write_user_id'
   has_many :message, dependent: :destroy
   has_many :chat_groups, dependent: :destroy
 
   accepts_nested_attributes_for :game_machines
-
 
   # devise facebook認証 自動ログイン
   def self.find_for_oauth(auth)
