@@ -21,7 +21,7 @@ class GameRoomsController < ApplicationController
     @game_room = GameRoom.new
   end
 
-    def creat
+  def create
     @game_room = GameRoom.new(game_room_params)
     @game_room.participants.build(user_id: current_user.id, state: 0)
 
