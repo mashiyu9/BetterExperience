@@ -42,13 +42,14 @@ html
                 span.sr-only (current)
               li.nav-item.active
                 = link_to t('layout.log_in'), new_user_session_path, {class: "nav-link"}
+    .test
 
-    .wrap.container
-      .error
-        p.notice.mt20 = notice
-        p.alert = alert
+      .wrap.container
+        .error
+          p.notice.mt20 = notice
+          p.alert = alert
 
-      = yield
+        = yield
 
     footer.container-fluid
       .footer_content.container
