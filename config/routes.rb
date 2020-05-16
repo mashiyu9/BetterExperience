@@ -1,10 +1,14 @@
 Rails.application.routes.draw do
-  root to: "game_rooms#index"
+  # root to: "game_rooms#index"
+  # root to: "sessions#new"
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
+  devise_scope :user do
+    root "users/sessions#new"
+  end
 
   resources :users, only: %i!show!
   resources :game_rooms, only: %i!index new create edit update show destroy!

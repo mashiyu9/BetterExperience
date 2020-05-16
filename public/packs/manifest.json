@@ -1,7 +1,6 @@
 {
-  "application.js": "/packs/application-184637426062e7b3d4b5.js",
-  "application.js.map": "/packs/application-184637426062e7b3d4b5.js.map",
-  "images/gaming.jpg": "/packs/images/gaming-fee13fd5b81121e3a48e5355150bff2a.jpg",
-  "images/gaming.svg": "/packs/images/gaming-fee13fd5b81121e3a48e5355150bff2a.svg",
-  "images/logo.svg": "/packs/images/logo-d41d8cd98f00b204e9800998ecf8427e.svg"
+  "application.css": "/packs/application-074cdcdc4a60e069b283834c870b7693.css",
+  "application.css.map": "/packs/application-074cdcdc4a60e069b283834c870b7693.css.map",
+  "application.js": "/packs/application-03875973fd5714cfeb7a.js",
+  "application.js.map": "/packs/application-03875973fd5714cfeb7a.js.map"
 }
