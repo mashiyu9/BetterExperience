@@ -33,29 +33,26 @@
 
         li.item
           button type="button" id="tag_5" class="image_btn"
-            = image_tag '', size:'300x200'
-          p.text-algin-center Dead By Daylight
+            = image_tag 'https://sce.scene7.com/is/image/playstation/pljm16320_640x360?$JAcat_BnrS$', size:'300x200'
+          p.text-algin-center = link_to "引用元:DeadByDayLight"
         li.item
           button type="button" id="tag_6" class="image_btn"
             = image_tag 'https://www.pokemon.co.jp/ex/sword_shield/assets/lineup-package01.png', size:'300x200'
           p.text-algin-center = link_to "引用元:任天堂・クリーチャーズ・ゲームフリーク Arts", "https://www.pokemon.co.jp/"
         li.item
           button type="button" id="tag_7" class="image_btn"
-            = image_tag 'https://lh3.googleusercontent.com/proxy/pr5lcZOpR0NbGDiOfzfCCBwURkSinHVgGvFzlEzK-g_1GoWPDXUxvUyQsGmR8hGqvD9I29o5-n8ezyigK6XBgel_cEgc52aUGB6JR_fhgya_JqQLt7OIQ0c', size:'300x200'
-          p.text-algin-center = link_to "引用元: カプコン公式", "http://www.capcom.co.jp/monsterhunter/world/"
+            = image_tag 'https://sce.scene7.com/is/image/playstation/pljm16110_s21?$JAcat_CapL$', size:'300x200'
+          p.text-algin-center = link_to "引用元: モンスターハンター World公式", "http://www.capcom.co.jp/monsterhunter/world/"
         li.item
           button type="button" id="tag_8" class="image_btn"
-            = image_tag '', size:'300x200'
-          p.text-algin-center 大乱闘スマッシュブラザーズ
+            = image_tag 'https://www.smashbros.com/assets_v2/img/top/hero05.jpg', size:'300x200'
+          / p.text-algin-center 大乱闘スマッシュブラザーズ
+          p.text-algin-center = link_to "引用元: 大乱闘スマッシュブラザーズ公式サイト", "https://www.smashbros.com/ja_JP/"
 
       / - @game_titles.each_with_index do |title, x, image_url, sorce|
       /   button type="button" class="btn btn-primary mr6 mb6" id="tag_#{x + 1}"
       /     = title
-      .index_search_zone
-        .custom-control.custom-radio
-          / input#defaultUnchecked.custom-control-input name="defaultExampleRadios" type="radio" /
-          = f.radio_button :vc_possible_eq, '', id: "vc_possible_index_none defaultchecked",class: "custom-control-input", checked: true
-          / label.custom-control-label for="defaultUnchecked"  Default unchecked
+
 
       .index_search_zone
         p = f.label t('game_rooms.index.sarch_vc_possible')
@@ -95,7 +92,7 @@
         | #{f.radio_button :play_device_eq, 2} #{t('game_rooms.index.sarch_device_steam')}
 
       .index_search_zone
-        p = f.submit t('game_rooms.index.sarch')
+        p.sarch_button = f.submit t('game_rooms.index.sarch')
 
   = sort_link(@q, :start_time, t('game_rooms.index.start_time_sort'))
 

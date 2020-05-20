@@ -15,3 +15,4 @@ import "bootstrap/dist/js/bootstrap";
 import "../src/application.scss";
 import "../javascripts/game_room.js";
 import "../javascripts/user.js";
+// const images = require.context("../images/", true);

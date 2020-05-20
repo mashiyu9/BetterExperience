@@ -1,4 +1,5 @@
 class GameRoomsController < ApplicationController
+  before_action :authenticate_user!
 
   require 'date'
 
@@ -11,7 +12,7 @@ class GameRoomsController < ApplicationController
   def index
     @q = GameRoom.all.includes([:participants, :users]).ransack(params[:q])
     @game_rooms = @q.result(distinct: true).valid_time_room.page(params[:page]).per(PER)
-
+    binding.irb
     if params[:keyword]
       @items = RakutenWebService::Ichiba::Item.search(keyword: params[:keyword],tag_ids: 1005402)
     end
@@ -21,7 +22,7 @@ class GameRoomsController < ApplicationController
     @game_room = GameRoom.new
   end
 
-    def creat
+  def create
     @game_room = GameRoom.new(game_room_params)
     @game_room.participants.build(user_id: current_user.id, state: 0)
 
