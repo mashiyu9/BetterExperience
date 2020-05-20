@@ -15,7 +15,5 @@ Rails.application.routes.draw do
   resources :participants, only: %i! create update destroy!
   resources :game_room_messages, only: %i! create destroy!
 
-
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
-
 end
